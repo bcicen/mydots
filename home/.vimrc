@@ -12,6 +12,7 @@ Bundle 'https://github.com/endel/vim-github-colorscheme.git'
 filetype plugin indent on     " required
 " end vundle shit
 set so=7
+set cm=blowfish
 set ic
 set hlsearch
 set incsearch
@@ -30,5 +31,5 @@ inoremap <F5> <C-R>=strftime("%c")<CR>
 nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 " com! FormatJSON %!python -m json.tool
-nmap <F4> <C-R>%!python -m json.tool<CR>
-imap <F4> <C-R>%!python -m json.tool<CR>
+nmap <F4> <C-R>match OverLength /\%7900v.\+/<CR>
+imap <F4> <C-R>match OverLength /\%7900v.\+/<CR>
