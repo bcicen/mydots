@@ -25,7 +25,7 @@ hi Normal   ctermfg=230   ctermbg=15  guifg=#000000   guibg=#F8F8FF
 hi Cursor   ctermfg=239   ctermbg=15  guifg=#444454   guibg=#F8F8FF
 hi Visual   ctermfg=15   ctermbg=61  guifg=#FFFFFF   guibg=#3465a3
 hi VisualNOS   ctermfg=15   ctermbg=24  guifg=#FFFFFF   guibg=#204a87
-hi Search   ctermfg=0   ctermbg=252  guifg=#000000   guibg=#CDCDCD
+hi Search   ctermfg=239   ctermbg=130  guifg=#000000   guibg=#CDCDCD
 hi Folded   ctermfg=8 ctermbg=15 guifg=#808080 guibg=#ECECEC gui=bold cterm=bold
 hi Title    ctermfg=167 guifg=#ef5939
 hi StatusLine ctermfg=238 ctermbg=250 guifg=#404040 guibg=#bbbbbb gui=bold cterm=bold
@@ -39,8 +39,8 @@ hi ErrorMsg ctermbg=15 ctermfg=196 guibg=#f8f8ff guifg=#ff1100 gui=undercurl cte
 
 " {{{ Vim => 7.0 specific colors
 if version >= 700
-    hi CursorLine ctermbg=253 guibg=#D8D8DD
-    hi MatchParen ctermfg=0 ctermbg=252 guifg=#000000 guibg=#cdcdfd
+    hi CursorLine   ctermbg=253 guibg=#D8D8DD
+    hi MatchParen   ctermfg=55 ctermbg=30 guifg=#000000 guibg=#cdcdfd
     hi Pmenu        ctermfg=15 ctermbg=8 guifg=#ffffff guibg=#808080 gui=bold   cterm=bold
     hi PmenuSel     ctermfg=0 ctermbg=252 guifg=#000000 guibg=#cdcdfd  gui=italic cterm=italic
     hi PmenuSbar    ctermfg=238 ctermbg=0 guifg=#444444 guibg=#000000

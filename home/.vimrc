@@ -9,6 +9,9 @@ Bundle 'gmarik/vundle'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'rodjek/vim-puppet'
 Bundle 'https://github.com/endel/vim-github-colorscheme.git'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'tpope/vim-fugitive'
+Bundle 'gregsexton/gitv'
 filetype plugin indent on     " required
 " end vundle shit
 set so=7
@@ -25,11 +28,11 @@ colorscheme github
 set background=dark
 " highlight Normal ctermbg=darkgrey
 highlight OverLength ctermbg=red ctermfg=white guibg=#59292
-match OverLength /\%79v.\+/
+" match OverLength /\%79v.\+/
 nnoremap <F5> "=strftime("%c")<CR>P
 inoremap <F5> <C-R>=strftime("%c")<CR>
 nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
-" com! FormatJSON %!python -m json.tool
-nmap <F4> <C-R>match OverLength /\%7900v.\+/<CR>
-imap <F4> <C-R>match OverLength /\%7900v.\+/<CR>
+" for python
+autocmd FileType py setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+set nu
