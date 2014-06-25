@@ -11,6 +11,7 @@ Bundle 'rodjek/vim-puppet'
 Bundle 'https://github.com/endel/vim-github-colorscheme.git'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-unimpaired'
 Bundle 'gregsexton/gitv'
 filetype plugin indent on     " required
 " end vundle shit
@@ -29,10 +30,14 @@ set background=dark
 " highlight Normal ctermbg=darkgrey
 highlight OverLength ctermbg=red ctermfg=white guibg=#59292
 " match OverLength /\%79v.\+/
-nnoremap <F5> "=strftime("%c")<CR>P
-inoremap <F5> <C-R>=strftime("%c")<CR>
+nnoremap <F5> g:nf_map_next <CR>
+inoremap <F5> <C-R> g:nf_map_next <CR>
 nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 " for python
-autocmd FileType py setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 set nu
+nmap <silent> <A-Up> :wincmd k<CR>
+nmap <silent> <A-Down> :wincmd j<CR>
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
