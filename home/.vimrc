@@ -1,43 +1,70 @@
 syntax on
+set nu
+" set lazyredraw
+set mat=2
+set showmatch
 set history=700
-set nocompatible              " be iMproved, required
-filetype off                  " required
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'rodjek/vim-puppet'
-Bundle 'https://github.com/endel/vim-github-colorscheme.git'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'gregsexton/gitv'
-filetype plugin indent on     " required
-" end vundle shit
+set nocompatible
 set so=7
 set cm=blowfish
 set ic
 set hlsearch
 set incsearch
-" set lazyredraw
-set showmatch
-set mat=2
+set foldmethod=indent
+set foldlevel=99
+setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
+filetype off                  " required
+
+" #Vundle
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+" Bundle 'nanotech/jellybeans.vim'
+Bundle 'rodjek/vim-puppet'
+Bundle 'https://github.com/endel/vim-github-colorscheme.git'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-unimpaired'
+" #snipmate 
+" Bundle 'garbas/vim-snipmate'
+" Bundle "MarcWeber/vim-addon-mw-utils"
+" Bundle "tomtom/tlib_vim"
+" Bundle "honza/vim-snippets"
+" #
+" Bundle 'gregsexton/gitv'
+Bundle 'vim-scripts/pep8'
+Bundle 'ivanov/vim-ipython'
+" Bundle 'python-rope/ropevim'
+filetype plugin indent on " required
+" # 
+
+" #Theme
 " colorscheme desert
 " colorscheme jellybeans
 colorscheme github
 set background=dark
 " highlight Normal ctermbg=darkgrey
+" #
+
+" #overlength
 highlight OverLength ctermbg=red ctermfg=white guibg=#59292
 " match OverLength /\%79v.\+/
+" #
+
+" #Mappings
 nnoremap <F5> g:nf_map_next <CR>
 inoremap <F5> <C-R> g:nf_map_next <CR>
 nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
-" for python
-setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
-set nu
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+map <c-Down> <c-w>j
+map <c-Up> <c-w>k
+map <c-Right> <c-w>l
+map <c-Left> <c-w>h
+map <leader>j :RopeGotoDefinition<CR>
+let g:pep8_map='<leader>8' "pep8
+" #
