@@ -13,6 +13,7 @@ set incsearch
 set foldmethod=indent
 set foldlevel=99
 setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
+set t_Co=256
 filetype off                  " required
 
 " #Vundle
@@ -26,6 +27,7 @@ Bundle 'https://github.com/endel/vim-github-colorscheme.git'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'zefei/cake16'
 " #snipmate 
 " Bundle 'garbas/vim-snipmate'
 " Bundle "MarcWeber/vim-addon-mw-utils"
@@ -42,9 +44,9 @@ filetype plugin indent on " required
 " #Theme
 " colorscheme desert
 " colorscheme jellybeans
-colorscheme github
-set background=dark
-" highlight Normal ctermbg=darkgrey
+" colorscheme github
+" set background=dark
+colorscheme cake16
 " #
 
 " #overlength
