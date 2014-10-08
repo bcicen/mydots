@@ -27,7 +27,9 @@ Bundle 'https://github.com/endel/vim-github-colorscheme.git'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-unimpaired'
-Bundle 'zefei/cake16'
+Bundle 'whatyouhide/vim-gotham'
+" Bundle 'zefei/cake16'
+Bundle 'scrooloose/nerdtree'
 " #snipmate 
 " Bundle 'garbas/vim-snipmate'
 " Bundle "MarcWeber/vim-addon-mw-utils"
@@ -46,11 +48,11 @@ filetype plugin indent on " required
 " colorscheme jellybeans
 " colorscheme github
 " set background=dark
-colorscheme cake16
+colorscheme gotham
 " #
 
 " #overlength
-highlight OverLength ctermbg=red ctermfg=white guibg=#59292
+" highlight OverLength ctermbg=red ctermfg=white guibg=#59292
 " match OverLength /\%79v.\+/
 " #
 
@@ -69,4 +71,11 @@ map <c-Right> <c-w>l
 map <c-Left> <c-w>h
 map <leader>j :RopeGotoDefinition<CR>
 let g:pep8_map='<leader>8' "pep8
+" #
+
+" #autocmd stuff
+"autocmd vimenter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " #
