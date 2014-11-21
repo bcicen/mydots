@@ -4,7 +4,7 @@ source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 PATH=$PATH:$HOME/.gem/ruby/2.1.0/bin
 
 #PS1
-PS1="\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] [\u@\h \W]\$ "
+PS1="\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] [${debian_chroot:+($debian_chroot)}\u@\h \W]\$ "
 #super toolish ps1
 #PS1="┌─\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\]─\[\033[34m\][${debian_chroot:+($debian_chroot)}\u@\h]\[\033[m\]─\[\033[34m\][\w]\[\033[m\]\n└──[\[\033[32m\]\!\[\033[m\]] \$ "
 
