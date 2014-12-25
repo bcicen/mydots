@@ -27,7 +27,8 @@ Bundle 'https://github.com/endel/vim-github-colorscheme.git'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-unimpaired'
-Bundle 'whatyouhide/vim-gotham'
+" Bundle 'whatyouhide/vim-gotham'
+Bundle 'ajh17/Spacegray.vim'
 " Bundle 'zefei/cake16'
 Bundle 'scrooloose/nerdtree'
 " #snipmate 
@@ -48,12 +49,13 @@ filetype plugin indent on " required
 " colorscheme jellybeans
 " colorscheme github
 " set background=dark
-colorscheme gotham
+" colorscheme gotham
+colorscheme spacegray
 " #
 
 " #overlength
-" highlight OverLength ctermbg=red ctermfg=white guibg=#59292
-" match OverLength /\%79v.\+/
+highlight OverLength ctermbg=red ctermfg=white guibg=#59292
+match OverLength /\%79v.\+/
 " #
 
 " #Mappings
