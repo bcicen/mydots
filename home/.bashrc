@@ -1,4 +1,5 @@
 export PYTHONSTARTUP=~/.pythonrc
+export GOPATH=~/gocode
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 PATH=$PATH:$HOME/.gem/ruby/2.1.0/bin
