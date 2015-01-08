@@ -1,0 +1,10 @@
+[user]
+	email = bradley.cicenas@gmail.com
+	name = Bradley Cicenas
+[core]
+	editor = vim
+	pager = cat
+[push]
+	default = simple
+[alias]
+	pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
