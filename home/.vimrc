@@ -4,6 +4,7 @@ set nu
 set mat=2
 set showmatch
 set history=700
+set tabpagemax=30
 set nocompatible
 set so=7
 set cm=blowfish
@@ -45,10 +46,8 @@ filetype plugin indent on " required
 " # 
 
 " #Theme
-" colorscheme desert
-" colorscheme jellybeans
-" colorscheme github
 " set background=dark
+" colorscheme github
 " colorscheme gotham
 colorscheme spacegray
 " #
