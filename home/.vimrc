@@ -7,7 +7,6 @@ set history=700
 set tabpagemax=30
 set nocompatible
 set so=7
-set cm=blowfish
 set ic
 set hlsearch
 set incsearch
@@ -15,23 +14,25 @@ set foldmethod=indent
 set foldlevel=99
 setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 set t_Co=256
+set cm=blowfish
 filetype off                  " required
 
 " #Vundle
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+"
 Bundle 'gmarik/vundle'
-" Bundle 'nanotech/jellybeans.vim'
 Bundle 'rodjek/vim-puppet'
-Bundle 'https://github.com/endel/vim-github-colorscheme.git'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-unimpaired'
-" Bundle 'whatyouhide/vim-gotham'
-Bundle 'ajh17/Spacegray.vim'
-" Bundle 'zefei/cake16'
 Bundle 'scrooloose/nerdtree'
+" #Colorschemes
+Bundle 'whatyouhide/vim-gotham'
+Bundle 'zefei/cake16'
+Bundle 'ajh17/spacegray.vim'
+Bundle 'endel/vim-github-colorscheme' 
 " #snipmate 
 " Bundle 'garbas/vim-snipmate'
 " Bundle "MarcWeber/vim-addon-mw-utils"
@@ -46,8 +47,7 @@ filetype plugin indent on " required
 " # 
 
 " #Theme
-" set background=dark
-" colorscheme github
+" colorscheme cake16
 " colorscheme gotham
 colorscheme spacegray
 " #
