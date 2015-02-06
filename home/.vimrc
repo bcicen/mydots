@@ -48,8 +48,8 @@ filetype plugin indent on " required
 
 " #Theme
 " colorscheme cake16
-" colorscheme gotham
-colorscheme spacegray
+" colorscheme spacegray
+colorscheme gotham
 " #
 
 " #overlength

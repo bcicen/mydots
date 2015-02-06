@@ -1,8 +1,10 @@
-export PYTHONSTARTUP=~/.pythonrc
-export GOPATH=~/gocode
+#homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
-PATH=$PATH:$HOME/.gem/ruby/2.1.0/bin
+
+export PYTHONSTARTUP=~/.pythonrc
+export GOPATH=~/gocode
+PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
 
 #PS1
 PS1="\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] [${debian_chroot:+($debian_chroot)}\u@\h \W]\$ "
