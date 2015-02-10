@@ -2,6 +2,7 @@
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 
+export HISTFILESIZE=10000
 export PYTHONSTARTUP=~/.pythonrc
 export GOPATH=~/gocode
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
