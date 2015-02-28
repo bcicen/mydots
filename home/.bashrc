@@ -43,3 +43,6 @@ function tsdocker() {
             ;;
     esac
 }
+
+#ssh autocomplete
+complete -W "$(cat ~/.ssh/known_hosts | cut -f1 -d ':' | sed 's/\[//g;s/\]//g' | tr '\n' ' ')" ssh
