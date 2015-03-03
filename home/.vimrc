@@ -14,6 +14,8 @@ set foldmethod=indent
 set foldlevel=99
 setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 set t_Co=256
+set relativenumber
+set number
 set cm=blowfish
 filetype off                  " required
 
