@@ -73,6 +73,8 @@ map <c-Up> <c-w>k
 map <c-Right> <c-w>l
 map <c-Left> <c-w>h
 map <leader>j :RopeGotoDefinition<CR>
+"get rid of 80 char overlength highlighting for odd files:
+nmap <F4> :match OverLength /\%7900v.\+/<CR>
 let g:pep8_map='<leader>8' "pep8
 " #
 
