@@ -7,6 +7,9 @@ export PYTHONSTARTUP=~/.pythonrc
 export GOPATH=~/gocode
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
 
+#default to local docker over tcp
+export DOCKER_HOST=tcp://127.0.0.1:4243
+
 #PS1
 PS1="\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] [${debian_chroot:+($debian_chroot)}\u@\h \W]\$ "
 #super toolish ps1
