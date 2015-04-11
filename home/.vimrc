@@ -1,4 +1,4 @@
-syntax on
+filetype plugin indent off
 set nu
 " set lazyredraw
 set mat=2
@@ -41,12 +41,14 @@ Bundle 'endel/vim-github-colorscheme'
 " Bundle "tomtom/tlib_vim"
 " Bundle "honza/vim-snippets"
 " #
+Bundle 'fatih/vim-go'
 " Bundle 'gregsexton/gitv'
 Bundle 'vim-scripts/pep8'
 Bundle 'ivanov/vim-ipython'
 " Bundle 'python-rope/ropevim'
-filetype plugin indent on " required
-" # 
+" #
+filetype plugin indent on 
+syntax on
 
 " #Theme
 " colorscheme cake16
