@@ -1,31 +1,57 @@
 filetype off
-set nu
+
 " set lazyredraw
-set list
+
 set mat=2
 set showmatch
 set history=700
+
+set t_Co=256
+set nu
+set relativenumber
 set tabpagemax=30
 set nocompatible
-set so=7
+set so=7 "scrolloff
+set foldmethod=indent
+set foldlevel=99
+
 set ic
 set hlsearch
 set incsearch
-set foldmethod=indent
-set foldlevel=99
-setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
-set t_Co=256
-set relativenumber
-set number
+
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set noexpandtab 
+
 set cm=blowfish
 
 " #Vundle
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
 Plugin 'gmarik/Vundle.vim'
+
+Plugin 'rodjek/vim-puppet'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'scrooloose/nerdtree'
+Plugin 'fatih/vim-go'
+" Plugin 'vim-scripts/pep8'
+
+" #Colorschemes
+Plugin 'whatyouhide/vim-gotham'
+Plugin 'zefei/cake16'
+Plugin 'ajh17/spacegray.vim'
+Plugin 'endel/vim-github-colorscheme' 
+
+" Plugin 'garbas/vim-snipmate'
+
+" #Git
+Plugin 'tpope/vim-fugitive'
+" Plugin 'gregsexton/gitv'
 call vundle#end() 
-" #
+
 filetype plugin indent on
 syntax on
 
