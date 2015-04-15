@@ -1,6 +1,7 @@
-filetype plugin indent off
+filetype off
 set nu
 " set lazyredraw
+set list
 set mat=2
 set showmatch
 set history=700
@@ -17,37 +18,15 @@ set t_Co=256
 set relativenumber
 set number
 set cm=blowfish
-filetype off                  " required
 
 " #Vundle
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-"
-Bundle 'gmarik/vundle'
-Bundle 'rodjek/vim-puppet'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'scrooloose/nerdtree'
-" #Colorschemes
-Bundle 'whatyouhide/vim-gotham'
-Bundle 'zefei/cake16'
-Bundle 'ajh17/spacegray.vim'
-Bundle 'endel/vim-github-colorscheme' 
-" #snipmate 
-" Bundle 'garbas/vim-snipmate'
-" Bundle "MarcWeber/vim-addon-mw-utils"
-" Bundle "tomtom/tlib_vim"
-" Bundle "honza/vim-snippets"
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+call vundle#end() 
 " #
-Bundle 'fatih/vim-go'
-" Bundle 'gregsexton/gitv'
-Bundle 'vim-scripts/pep8'
-Bundle 'ivanov/vim-ipython'
-" Bundle 'python-rope/ropevim'
-" #
-filetype plugin indent on 
+filetype plugin indent on
 syntax on
 
 " #Theme
