@@ -67,6 +67,8 @@ match OverLength /\%79v.\+/
 " #
 
 " #Mappings
+let mapleader = "\<Space>"
+nnoremap <Leader>w :w<CR>
 nnoremap <F5> g:nf_map_next <CR>
 inoremap <F5> <C-R> g:nf_map_next <CR>
 nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
