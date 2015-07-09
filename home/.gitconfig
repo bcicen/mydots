@@ -9,3 +9,4 @@
 [alias]
 	pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
 	statusall = "submodule status --recursive"
+	diffall = "!f(){ git diff \"$@\"; }; f"
