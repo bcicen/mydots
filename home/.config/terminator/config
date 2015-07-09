@@ -27,7 +27,7 @@
     foreground_color = "#98d1ce"
     background_image = None
     show_titlebar = False
-    font = Droid Sans Mono 7
+    font = Inconsolata Bold 16
     background_color = "#0a0f14"
     allow_bold = False
 [layouts]
