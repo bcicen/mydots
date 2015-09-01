@@ -50,5 +50,28 @@ function tsdocker() {
     esac
 }
 
+wmfiles="${HOME}/.config/terminator/config \
+         ${HOME}/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
+
+function wmfont() {
+  [ $# != 1 ] && {
+    echo "no arg provided"
+    return
+  }
+
+  size=$1
+
+  for file in $wmfiles; do
+
+    [ ! -f ${file}-${size} ] && {
+      echo "${file}-${size} not found, aborting"
+      return
+    }
+
+    ln -nsvf ${file}-large $file
+
+done
+}
+
 #ssh autocomplete
 complete -W "$(cat ~/.ssh/known_hosts | cut -f1 -d ':' | sed 's/\[//g;s/\]//g' | tr '\n' ' ')" ssh
