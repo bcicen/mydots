@@ -24,6 +24,7 @@ alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
 
 #functions
 function vimp() { /usr/bin/vim -p $@; }
+function rgrep() { find . -type f -exec grep -Hi "$@" {} \;; }
 function ttitle() { titletext=$@; }
 function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi $@ {} \; ; }
 function tsdocker() {
@@ -68,7 +69,7 @@ function wmfont() {
       return
     }
 
-    ln -nsvf ${file}-large $file
+    ln -nsvf ${file}-${size} $file
 
 done
 }
