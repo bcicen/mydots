@@ -17,7 +17,7 @@ PS1="\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] [${d
 
 #aliases
 alias ll='ls -ltrha'
-alias fssh='ssh -CXo GSSAPIAuthentication=no'
+alias glog='git log --oneline --name-status'
 alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
 alias vundle_install="vim +BundleInstall +qall"
 alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
