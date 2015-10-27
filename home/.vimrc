@@ -27,30 +27,29 @@ set noexpandtab
 set cm=blowfish
 
 " #Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set rtp+=~/.vim/vundle.git/
+call vundle#rc()
 
-Plugin 'gmarik/Vundle.vim'
+Bundle 'gmarik/Vundle.vim'
 
-Plugin 'rodjek/vim-puppet'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'scrooloose/nerdtree'
-Plugin 'fatih/vim-go'
-" Plugin 'vim-scripts/pep8'
+Bundle 'rodjek/vim-puppet'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'scrooloose/nerdtree'
+Bundle 'fatih/vim-go'
+" Bundle 'vim-scripts/pep8'
 
 " #Colorschemes
-Plugin 'whatyouhide/vim-gotham'
-Plugin 'zefei/cake16'
-Plugin 'ajh17/spacegray.vim'
-Plugin 'endel/vim-github-colorscheme' 
+Bundle 'whatyouhide/vim-gotham'
+Bundle 'zefei/cake16'
+Bundle 'ajh17/spacegray.vim'
+Bundle 'endel/vim-github-colorscheme'
 
-" Plugin 'garbas/vim-snipmate'
+" Bundle 'garbas/vim-snipmate'
 
 " #Git
-Plugin 'tpope/vim-fugitive'
-" Plugin 'gregsexton/gitv'
-call vundle#end() 
+Bundle 'tpope/vim-fugitive'
+" Bundle 'gregsexton/gitv'
 
 filetype plugin indent on
 syntax on
