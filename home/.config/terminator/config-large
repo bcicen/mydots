@@ -1,42 +1,42 @@
 [global_config]
-  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
-  title_transmit_fg_color = "#98d1ce"
-  title_inactive_fg_color = "#98d1ce"
   borderless = True
-  title_receive_bg_color = "#33859d"
-  title_transmit_bg_color = "#093748"
-  title_receive_fg_color = "#98d1ce"
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   inactive_color_offset = 0.89
   title_inactive_bg_color = "#062835"
+  title_inactive_fg_color = "#98d1ce"
+  title_receive_bg_color = "#33859d"
+  title_receive_fg_color = "#98d1ce"
+  title_transmit_bg_color = "#093748"
+  title_transmit_fg_color = "#98d1ce"
 [keybindings]
-  toggle_zoom = <Primary><Shift>s
   scaled_zoom = None
-  split_vert = <Primary><Shift>a
   split_horiz = <Primary><Shift>z
+  split_vert = <Primary><Shift>a
   toggle_scrollbar = None
-[profiles]
-  [[default]]
-    scrollbar_position = hidden
-    palette = "#0a0f14:#c33027:#26a98b:#edb54b:#195465:#4e5165:#33859d:#98d1ce:#000f21:#d26939:#004169:#245361:#093748:#888ba5:#599caa:#d3ebe9"
-    login_shell = True
-    use_system_font = False
-    background_darkness = 0.94
-    scrollback_lines = 20000
-    active_encodings = ANSI_X3.4-1968, UTF-8, ISO-8859-1
-    cursor_color = "#7b7b7b"
-    foreground_color = "#98d1ce"
-    background_image = None
-    show_titlebar = False
-    font = Inconsolata Bold 16
-    background_color = "#0a0f14"
-    allow_bold = False
+  toggle_zoom = <Primary><Shift>s
 [layouts]
   [[default]]
     [[[child1]]]
-      type = Terminal
       parent = window0
       profile = default
+      type = Terminal
     [[[window0]]]
-      type = Window
       parent = ""
+      type = Window
 [plugins]
+[profiles]
+  [[default]]
+    active_encodings = ANSI_X3.4-1968, UTF-8, ISO-8859-1
+    allow_bold = False
+    background_color = "#0a0f14"
+    background_darkness = 0.94
+    background_image = None
+    cursor_color = "#7b7b7b"
+    font = Droid Sans Mono 16
+    foreground_color = "#98d1ce"
+    login_shell = True
+    palette = "#0a0f14:#c33027:#26a98b:#edb54b:#195465:#4e5165:#33859d:#98d1ce:#000f21:#d26939:#004169:#245361:#093748:#888ba5:#599caa:#d3ebe9"
+    scrollback_lines = 20000
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False
