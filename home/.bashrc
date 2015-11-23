@@ -24,7 +24,15 @@ alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
 
 #functions
 function vimp() { /usr/bin/vim -p $@; }
-function rgrep() { find . -type f -exec grep -Hi "$@" {} \;; }
+function rgrep() {
+  if [ $# -eq 2 ]; then
+    rgx=$1
+    shift
+    find . -type f -iname "$rgx" -exec grep -Hi "$@" {} \;
+  else
+    find . -type f -exec grep -Hi "$@" {} \;
+  fi
+}
 function dusort() { du -hs $@/* | sort -h; }
 function ttitle() { titletext=$@; }
 function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi $@ {} \; ; }
@@ -41,7 +49,7 @@ function tsdocker() {
             fi
             ;;
         "")
-            echo "usage: tsdocker <hostname> dockercommandto run"
+            echo "usage: tsdocker <hostname> docker command to run"
             echo "OR tsdocker set <hostname>"
             ;;
         *)
