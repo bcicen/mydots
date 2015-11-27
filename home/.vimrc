@@ -22,7 +22,7 @@ set incsearch
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-set noexpandtab 
+" set noexpandtab 
 
 set cm=blowfish
 
@@ -62,7 +62,7 @@ colorscheme gotham
 
 " #overlength
 highlight OverLength ctermbg=red ctermfg=white guibg=#59292
-match OverLength /\%79v.\+/
+au BufRead,BufNewFile *.py match OverLength /\%79v.\+/
 " #
 
 " #Mappings
