@@ -28,7 +28,7 @@ function rgrep() {
   if [ $# -eq 2 ]; then
     rgx=$1
     shift
-    find . -type f -iname "$rgx" -exec grep -Hi "$@" {} \;
+    find . -type f -iname "*.${rgx}" -exec grep -Hi "$@" {} \;
   else
     find . -type f -exec grep -Hi "$@" {} \;
   fi
