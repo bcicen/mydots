@@ -5,7 +5,7 @@ source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 export HISTFILESIZE=10000
 export PYTHONSTARTUP=~/.pythonrc
 export GOPATH=~/go
-PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
+PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin
 
 #default to local docker over tcp
 export DOCKER_HOST=tcp://127.0.0.1:4243
