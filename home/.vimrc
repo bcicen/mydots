@@ -36,16 +36,15 @@ Bundle 'rodjek/vim-puppet'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'fatih/vim-go'
 " Bundle 'vim-scripts/pep8'
 
 " #Colorschemes
 Bundle 'whatyouhide/vim-gotham'
-Bundle 'zefei/cake16'
-Bundle 'ajh17/spacegray.vim'
-Bundle 'endel/vim-github-colorscheme'
-
-" Bundle 'garbas/vim-snipmate'
+" Bundle 'zefei/cake16'
+" Bundle 'ajh17/spacegray.vim'
+" Bundle 'endel/vim-github-colorscheme'
 
 " #Git
 Bundle 'tpope/vim-fugitive'
