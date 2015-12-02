@@ -66,11 +66,8 @@ au BufRead,BufNewFile *.py match OverLength /\%79v.\+/
 
 " #Mappings
 let mapleader = "\<Space>"
+let g:pep8_map='<leader>8' "pep8
 nnoremap <Leader>w :w<CR>
-nnoremap <F5> g:nf_map_next <CR>
-inoremap <F5> <C-R> g:nf_map_next <CR>
-nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
-imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
@@ -80,9 +77,16 @@ map <c-Up> <c-w>k
 map <c-Right> <c-w>l
 map <c-Left> <c-w>h
 map <leader>j :RopeGotoDefinition<CR>
-"get rid of 80 char overlength highlighting for odd files:
+"insert timestamp under cursor
+nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+"clear 80 char overlength highlighting:
 nmap <F4> :match OverLength /\%7900v.\+/<CR>
-let g:pep8_map='<leader>8' "pep8
+"for gitv
+nnoremap <F5> g:nf_map_next <CR>
+inoremap <F5> <C-R> g:nf_map_next <CR>
+"make json pretty
+nnoremap <F6> :%!python -m json.tool<CR>:w<CR>
 " #
 
 " #autocmd stuff
