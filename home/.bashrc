@@ -16,7 +16,8 @@ PS1="\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] [${d
 #PS1="┌─\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\]─\[\033[34m\][${debian_chroot:+($debian_chroot)}\u@\h]\[\033[m\]─\[\033[34m\][\w]\[\033[m\]\n└──[\[\033[32m\]\!\[\033[m\]] \$ "
 
 #aliases
-alias ll='ls -ltrha'
+alias ll='ls --color -ltrha'
+alias ls='ls --color'
 alias glog='git log --oneline --name-status'
 alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
 alias vundle_install="vim +BundleInstall +qall"
