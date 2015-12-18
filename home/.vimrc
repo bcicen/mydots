@@ -4,6 +4,7 @@ filetype off
 
 set mat=2
 set showmatch
+set showcmd
 set history=700
 
 set t_Co=256
@@ -87,6 +88,8 @@ nnoremap <F5> g:nf_map_next <CR>
 inoremap <F5> <C-R> g:nf_map_next <CR>
 "make json pretty
 nnoremap <F6> :%!python -m json.tool<CR>:w<CR>
+"quote single word
+nnoremap qw :silent! normal mpea"<Esc>bi"<Esc>`pl
 " #
 
 " #autocmd stuff
