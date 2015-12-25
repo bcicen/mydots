@@ -4,6 +4,7 @@ source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 
 export HISTFILESIZE=10000
 export PYTHONSTARTUP=~/.pythonrc
+export PYTHONPATH=~/.mypy/
 export GOPATH=~/go
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin
 

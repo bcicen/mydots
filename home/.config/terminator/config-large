@@ -9,6 +9,7 @@
   title_transmit_bg_color = "#093748"
   title_transmit_fg_color = "#98d1ce"
 [keybindings]
+  help = None
   scaled_zoom = None
   split_horiz = <Primary><Shift>z
   split_vert = <Primary><Shift>a
