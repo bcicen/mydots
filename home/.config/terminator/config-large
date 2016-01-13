@@ -37,7 +37,7 @@
     foreground_color = "#98d1ce"
     icon_bell = False
     login_shell = True
-    palette = "#0a0f14:#c33027:#26a98b:#edb54b:#195465:#4e5165:#33859d:#98d1ce:#000f21:#d26939:#004169:#245361:#093748:#888ba5:#599caa:#d3ebe9"
+    palette = "#0a0f14:#c33027:#26a98b:#edb54b:#195465:#4e5165:#33859d:#98d1ce:#000f21:#d26939:#004169:#245361:#03516e:#888ba5:#599caa:#d3ebe9"
     scrollback_lines = 20000
     scrollbar_position = hidden
     show_titlebar = False
