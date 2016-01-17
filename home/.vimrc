@@ -1,7 +1,5 @@
 filetype off
 
-" set lazyredraw
-
 set mat=2
 set showmatch
 set showcmd
@@ -37,33 +35,23 @@ Bundle 'rodjek/vim-puppet'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'fatih/vim-go'
-" Bundle 'vim-scripts/pep8'
 
 " #Colorschemes
 Bundle 'whatyouhide/vim-gotham'
-" Bundle 'zefei/cake16'
-" Bundle 'ajh17/spacegray.vim'
-" Bundle 'endel/vim-github-colorscheme'
 
 " #Git
 Bundle 'tpope/vim-fugitive'
-" Bundle 'gregsexton/gitv'
 
 filetype plugin indent on
 syntax on
 
 " #Theme
-" colorscheme cake16
-" colorscheme spacegray
 colorscheme gotham
-" #
 
 " #overlength
 highlight OverLength ctermbg=red ctermfg=white guibg=#59292
 au BufRead,BufNewFile *.py match OverLength /\%79v.\+/
-" #
 
 " #Mappings
 let mapleader = "\<Space>"
@@ -90,16 +78,13 @@ inoremap <F5> <C-R> g:nf_map_next <CR>
 nnoremap <F6> :%!python -m json.tool<CR>:w<CR>
 "quote single word
 nnoremap qw :silent! normal mpea"<Esc>bi"<Esc>`pl
-" #
 
 " #autocmd stuff
 "autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" #
 
 " #Custom commands
 "enables to search in all open buffers with :Search <pattern>
 command! -nargs=1 Search call setqflist([]) | silent cex [] | bufdo vimgrepadd /<args>/g %
-" #
