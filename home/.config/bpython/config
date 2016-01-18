@@ -1,0 +1,5 @@
+[general]
+editor = vim
+hist_length = 5000
+save_append_py = True
+#color_scheme = custom
