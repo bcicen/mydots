@@ -24,6 +24,7 @@ alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
 alias vundle_install="vim +BundleInstall +qall"
 alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
 alias i3l='i3lock -c 000000'
+alias hugoserv='hugo server -v --watch --buildDrafts'
 
 #functions
 function vimp() { /usr/bin/vim -p $@; }
