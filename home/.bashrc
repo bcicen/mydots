@@ -28,6 +28,22 @@ alias hugoserv='hugo server -v --watch --buildDrafts'
 
 #functions
 function vimp() { /usr/bin/vim -p $@; }
+function servethis() {
+  ls index.htm* 1> /dev/null 2>&1 || {
+    echo "no index found in current directory"
+    return
+  }
+  cname="${PWD##*/}_nginx"
+  echo "starting container ${cname}..."
+  docker run -d \
+             -p 80 \
+             --name=${cname} \
+             -v ~/.resources/nginx.conf:/etc/nginx/nginx.conf \
+             -v ${PWD}:/srv/www \
+             vektorlab/nginx:latest
+  docker port ${cname}
+}
+
 function rgrep() {
   if [ $# -eq 2 ]; then
     rgx=$1
