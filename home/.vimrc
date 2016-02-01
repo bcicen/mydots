@@ -23,6 +23,7 @@ set shiftwidth=2
 set softtabstop=2
 " set noexpandtab 
 
+set directory=~/.vim/swap
 set cm=blowfish
 
 " #Vundle

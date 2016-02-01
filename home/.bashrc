@@ -20,6 +20,7 @@ PS1="\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] [${d
 alias ll='ls --color -ltrha'
 alias ls='ls --color'
 alias glog='git log --oneline --name-status'
+alias gcommit='git commit -a -m'.' && git push'
 alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
 alias vundle_install="vim +BundleInstall +qall"
 alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
