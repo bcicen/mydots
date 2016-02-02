@@ -6,7 +6,7 @@ export HISTFILESIZE=10000
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=~/.mypy/
 export GOPATH=~/go
-PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin
+PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin:$HOME/.pub-cache/bin
 
 #default to local docker over tcp
 export DOCKER_HOST=tcp://127.0.0.1:4243
