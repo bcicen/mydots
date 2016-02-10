@@ -2,10 +2,11 @@
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 
-export HISTFILESIZE=10000
+export GOPATH=~/go
+export VISUAL=vim
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=~/.mypy/
-export GOPATH=~/go
+export HISTFILESIZE=10000
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin:$HOME/.pub-cache/bin
 
 #default to local docker over tcp
