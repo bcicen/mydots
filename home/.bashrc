@@ -21,7 +21,6 @@ PS1="\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] [${d
 alias ll='ls --color -ltrha'
 alias ls='ls --color'
 alias glog='git log --oneline --name-status'
-alias gcommit='git commit -a -m'.' && git push'
 alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
 alias vundle_install="vim +BundleInstall +qall"
 alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
@@ -29,6 +28,18 @@ alias i3l='i3lock -c 000000'
 alias hugoserv='hugo server -v --watch --buildDrafts'
 
 #functions
+function gcommit() {
+  git status -s
+  [ $# -lt 1 ] && {
+    echo "no commit message provided"
+    return
+  }
+	git commit -a -m "$(echo $@)"
+  read -n1 -p"push?(y/N)" do_push
+  [ "$do_push" == "y" ] && {
+    git push
+  }
+}
 function vimp() { /usr/bin/vim -p $@; }
 function servethis() {
 #  ls index.htm* 1> /dev/null 2>&1 || {
