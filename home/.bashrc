@@ -116,6 +116,9 @@ function wmfont() {
 done
 }
 
-#ssh autocomplete
+#autocomplete
 complete -W "$(cat ~/.ssh/known_hosts | cut -f1 -d ':' | sed 's/\[//g;s/\]//g' | tr '\n' ' ')" ssh
 complete -W "$(cat ~/.ssh/known_hosts | cut -f1 -d ':' | sed 's/\[//g;s/\]//g' | tr '\n' ' ')" scp
+source ~/.docker-completion
+
+source ~/.bashrcx
