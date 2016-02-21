@@ -39,35 +39,38 @@ set softtabstop=2
 set directory=~/.vim/swap
 set cm=blowfish
 
-" #Vundle
-set rtp+=~/.vim/vundle.git/
-call vundle#rc()
+" Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
-Bundle 'rodjek/vim-puppet'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'scrooloose/nerdtree'
-Bundle 'fatih/vim-go'
+" Autocomplete / Syntax Highlighting
+Plugin 'rodjek/vim-puppet'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'fatih/vim-go'
 
-" #Colorschemes
-Bundle 'whatyouhide/vim-gotham'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'scrooloose/nerdtree'
 
-" #Git
-Bundle 'tpope/vim-fugitive'
+" Colorschemes
+Plugin 'whatyouhide/vim-gotham'
 
+" Git
+Plugin 'tpope/vim-fugitive'
+
+call vundle#end()
 filetype plugin indent on
 syntax on
 
-" #Theme
+" Theme
 colorscheme gotham
 
-" #overlength
+" overlength
 highlight OverLength ctermbg=red ctermfg=white guibg=#59292
 au BufRead,BufNewFile *.py match OverLength /\%79v.\+/
 
-" #Mappings
+" Mappings
 let mapleader = "\<Space>"
 let g:pep8_map='<leader>8' "pep8
 nnoremap <Leader>w :w<CR>
@@ -93,12 +96,12 @@ nnoremap <F6> :%!python -m json.tool<CR>:w<CR>
 "quote single word
 nnoremap qw :silent! normal mpea"<Esc>bi"<Esc>`pl
 
-" #autocmd stuff
+" autocmd stuff
 "autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" #Custom commands
+" Custom commands
 "enables to search in all open buffers with :Search <pattern>
 command! -nargs=1 Search call setqflist([]) | silent cex [] | bufdo vimgrepadd /<args>/g %
