@@ -30,11 +30,17 @@ alias hugoserv='hugo server -v --watch --buildDrafts'
 #functions
 function gcommit() {
   git status -s
-  [ $# -lt 1 ] && {
+  [ $# -gt 1 ] && {
+	  commit_msg="$@"
+	} || {
+    read -p "commit msg> " commit_msg
+	}
+	echo $commit_msg
+	[ $(echo $commit_msg| wc -w) -lt 1 ] && {
     echo "no commit message provided"
     return
   }
-	git commit -a -m "$(echo $@)"
+	git commit -a -m "$commit_msg)"
   read -n1 -p"push?(y/N)" do_push
   [ "$do_push" == "y" ] && {
     git push
