@@ -2,6 +2,8 @@
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 
+source "$HOME/.bash_colors"
+
 export GOPATH=~/go
 export VISUAL=vim
 export PYTHONSTARTUP=~/.pythonrc
@@ -30,18 +32,20 @@ alias hugoserv='hugo server -v --watch --buildDrafts'
 #functions
 function gcommit() {
   git status -s
+	echo 
   [ $# -gt 1 ] && {
 	  commit_msg="$@"
 	} || {
-    read -p "commit msg> " commit_msg
+  	prompt=$(clr_green "commit msg> ")
+    read -p "$prompt" commit_msg
 	}
-	echo $commit_msg
 	[ $(echo $commit_msg| wc -w) -lt 1 ] && {
     echo "no commit message provided"
     return
   }
-	git commit -a -m "$commit_msg)"
-  read -n1 -p"push?(y/N)" do_push
+	git commit -a -m "$commit_msg"
+	prompt=$(clr_green "push?(y/N)")
+  read -n1 -p "$prompt" do_push
   [ "$do_push" == "y" ] && {
     git push
   }
