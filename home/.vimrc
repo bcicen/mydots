@@ -49,6 +49,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'rodjek/vim-puppet'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
+Plugin 'Glench/Vim-Jinja2-Syntax'
 
 Plugin 'tpope/vim-unimpaired'
 Plugin 'scrooloose/nerdtree'
