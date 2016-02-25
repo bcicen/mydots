@@ -23,19 +23,22 @@ PS1="\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] [${d
 alias ll='ls --color -ltrha'
 alias ls='ls --color'
 alias glog='git log --oneline --name-status'
-alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
-alias vundle_install="vim +PluginInstall +qall"
 alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
 alias i3l='i3lock -c 000000'
 alias hugoserv='hugo server -v --watch --buildDrafts'
+#vim aliases
+alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
+alias vundle_install="vim +PluginInstall +qall"
+function vimp() { /usr/bin/vim -p $@; }
+function vimdir() { /usr/bin/vim -p $(find $@ -type f); }
 
 #functions
+function ctof() { echo "scale=4; ($1*9) / 5 + 32" | bc; }
+function ftoc() { echo "scale=4; ($1 - 32) / 1.8" | bc; }
 function gcommit() {
+  commit_msg=$@
   git status -s
-	echo 
-  [ $# -gt 1 ] && {
-	  commit_msg="$@"
-	} || {
+	[ $(echo $commit_msg| wc -w) -lt 1 ] && {
   	prompt=$(clr_green "commit msg> ")
     read -p "$prompt" commit_msg
 	}
@@ -47,10 +50,10 @@ function gcommit() {
 	prompt=$(clr_green "push?(y/N)")
   read -n1 -p "$prompt" do_push
   [ "$do_push" == "y" ] && {
+	  echo
     git push
   }
 }
-function vimp() { /usr/bin/vim -p $@; }
 function servethis() {
 #  ls index.htm* 1> /dev/null 2>&1 || {
 #    echo "no index found in current directory"
