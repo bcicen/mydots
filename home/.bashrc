@@ -67,7 +67,9 @@ function servethis() {
              -v ~/.resources/nginx.conf:/etc/nginx/nginx.conf \
              -v ${PWD}:/srv/www \
              vektorlab/nginx:latest
-  docker port ${cname}
+	hostport=$(docker port ${cname} | cut -f2 -d\>)
+	echo "nginx listening on $hostport"
+	google-chrome-stable $hostport
 }
 
 function rgrep() {
