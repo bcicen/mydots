@@ -30,7 +30,7 @@ alias hugoserv='hugo server -v --watch --buildDrafts'
 alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
 alias vundle_install="vim +PluginInstall +qall"
 function vimp() { /usr/bin/vim -p $@; }
-function vimdir() { /usr/bin/vim -p $(find $@ -type f); }
+function vimdir() { /usr/bin/vim -p $(find $@ -type f ! -ipath "*.git/*"); }
 
 #functions
 function ctof() { echo "scale=4; ($1*9) / 5 + 32" | bc; }
