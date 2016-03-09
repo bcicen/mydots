@@ -34,7 +34,7 @@ set incsearch
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-" set noexpandtab 
+set expandtab
 
 set directory=~/.vim/swap
 set cm=blowfish
@@ -50,6 +50,7 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'pangloss/vim-javascript'
 
 Plugin 'tpope/vim-unimpaired'
 Plugin 'scrooloose/nerdtree'
@@ -63,6 +64,7 @@ Plugin 'tpope/vim-fugitive'
 call vundle#end()
 filetype plugin indent on
 syntax on
+let g:ycm_python_binary_path = '/usr/bin/python3
 
 " Theme
 colorscheme gotham
