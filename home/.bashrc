@@ -28,6 +28,7 @@ alias i3l='i3lock -c 000000'
 alias hugoserv='hugo server -v --watch --buildDrafts'
 #vim aliases
 alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
+alias jlog="vim $HOME/work/notes/jobs.log"
 alias vundle_install="vim +PluginInstall +qall"
 function vimp() { /usr/bin/vim -p $@; }
 function vimdir() { /usr/bin/vim -p $(find $@ -type f ! -ipath "*.git/*"); }
@@ -59,15 +60,13 @@ function servethis() {
 #    echo "no index found in current directory"
 #    return
 #  }
-  cname="${PWD##*/}_nginx"
-  echo "starting container ${cname}..."
-  docker run -d \
+  echo "starting container..."
+  cid=$(docker run -d \
              -p 80 \
-             --name=${cname} \
              -v ~/.resources/nginx.conf:/etc/nginx/nginx.conf \
-             -v ${PWD}:/srv/www \
-             vektorlab/nginx:latest
-	hostport=$(docker port ${cname} | cut -f2 -d\>)
+             -v "${PWD}":/srv/www \
+             vektorlab/nginx:latest)
+	hostport=$(docker port $cid | cut -f2 -d\>)
 	echo "nginx listening on $hostport"
 	google-chrome-stable $hostport
 }
@@ -129,6 +128,11 @@ function wmfont() {
     ln -nsvf ${file}-${size} $file
 
 done
+}
+
+# clipboard functions/aliases
+function clip-parse-email() {
+clipit $(echo $@ | grep -o "[[:alnum:][:graph:]]*@[[:alnum:][:graph:]]*" | sed 's/mailto://g')
 }
 
 #autocomplete

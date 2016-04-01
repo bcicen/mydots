@@ -64,7 +64,7 @@ Plugin 'tpope/vim-fugitive'
 call vundle#end()
 filetype plugin indent on
 syntax on
-let g:ycm_python_binary_path = '/usr/bin/python3
+let g:ycm_python_binary_path = '/usr/bin/python3'
 
 " Theme
 colorscheme gotham
