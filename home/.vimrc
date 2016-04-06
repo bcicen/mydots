@@ -14,13 +14,12 @@ set nocompatible
 set foldmethod=indent
 set foldlevel=99
 set laststatus=2
-set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
-"              | | | | |  |   |      |  |     |    |
-"              | | | | |  |   |      |  |     |    + current column
-"              | | | | |  |   |      |  |     +-- current line
-"              | | | | |  |   |      |  +-- current % into file
-"              | | | | |  |   |      +-- current syntax in square brackets
-"              | | | | |  |   +-- current fileformat
+set statusline=%F%m%r%h%w[%L][%p%%][%04l,%04v]-%{fugitive#statusline()}
+"              | | | | |  |   |     |    |       |
+"              | | | | |  |   |     |    |       + current git branch
+"              | | | | |  |   |     |    + current column
+"              | | | | |  |   |     +-- current line
+"              | | | | |  |   +-- current % into file
 "              | | | | |  +-- number of lines
 "              | | | | +-- preview flag in square brackets
 "              | | | +-- help flag in square brackets
