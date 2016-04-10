@@ -88,13 +88,30 @@ map <leader>j :RopeGotoDefinition<CR>
 "insert timestamp under cursor
 nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+
 "clear 80 char overlength highlighting:
 nmap <F4> :match OverLength /\%7900v.\+/<CR>
-"for gitv
+
+" gitv/fugitive mappings
 nnoremap <F5> g:nf_map_next <CR>
 inoremap <F5> <C-R> g:nf_map_next <CR>
+nnoremap <space>ga :Git add %:p<CR><CR>
+nnoremap <space>gs :Gstatus<CR>
+nnoremap <space>gc :Gcommit -v -q<CR>
+nnoremap <space>gt :Gcommit -v -q %:p<CR>
+nnoremap <space>gd :Gdiff<CR>
+nnoremap <space>ge :Gedit<CR>
+nnoremap <space>gr :Gread<CR>
+nnoremap <space>gw :Gwrite<CR><CR>
+nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <space>gp :Ggrep<Space>
+nnoremap <space>gm :Gmove<Space>
+nnoremap <space>gb :Git branch<Space>
+nnoremap <space>go :Git checkout<Space>
+
 "make json pretty
 nnoremap <F6> :%!python -m json.tool<CR>:w<CR>
+
 "quote single word
 nnoremap qw :silent! normal mpea"<Esc>bi"<Esc>`pl
 
