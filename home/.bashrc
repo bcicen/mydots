@@ -109,7 +109,6 @@ function tsdocker() {
 
 wmfiles="${HOME}/.config/terminator/config \
          ${HOME}/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
-
 function wmfont() {
   [ $# != 1 ] && {
     echo "no arg provided"
@@ -127,17 +126,24 @@ function wmfont() {
 
     ln -nsvf ${file}-${size} $file
 
-done
+  done
 }
 
 # clipboard functions/aliases
 function clip-parse-email() {
-clipit $(echo $@ | grep -o "[[:alnum:][:graph:]]*@[[:alnum:][:graph:]]*" | sed 's/mailto://g')
+  clipit $(echo $@ | grep -o "[[:alnum:][:graph:]]*@[[:alnum:][:graph:]]*" | sed 's/mailto://g')
+}
+
+function cbar() {
+  if (pgrep -x conky); then
+    killall conky
+  else
+    nohup conky -c ~/.conky/Wonky/Wonky &> /dev/null &
+  fi
 }
 
 #autocomplete
 complete -W "$(cat ~/.ssh/known_hosts | cut -f1 -d ':' | sed 's/\[//g;s/\]//g' | tr '\n' ' ')" ssh
 complete -W "$(cat ~/.ssh/known_hosts | cut -f1 -d ':' | sed 's/\[//g;s/\]//g' | tr '\n' ' ')" scp
-source ~/.docker-completion
 
 source ~/.bashrcx
