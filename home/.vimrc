@@ -45,20 +45,22 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Autocomplete / Syntax Highlighting
+Plugin 'fatih/vim-go'
 Plugin 'rodjek/vim-puppet'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'fatih/vim-go'
-Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'pangloss/vim-javascript'
-
-Plugin 'tpope/vim-unimpaired'
-Plugin 'scrooloose/nerdtree'
+Plugin 'Glench/Vim-Jinja2-Syntax'
 
 " Colorschemes
 Plugin 'whatyouhide/vim-gotham'
 
 " Git
 Plugin 'tpope/vim-fugitive'
+
+" Misc
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'severin-lemaignan/vim-minimap'
 
 call vundle#end()
 filetype plugin indent on
@@ -92,22 +94,14 @@ imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 "clear 80 char overlength highlighting:
 nmap <F4> :match OverLength /\%7900v.\+/<CR>
 
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <leader>gr <Plug>(go-run)
+
 " gitv/fugitive mappings
 nnoremap <F5> g:nf_map_next <CR>
 inoremap <F5> <C-R> g:nf_map_next <CR>
-nnoremap <space>ga :Git add %:p<CR><CR>
-nnoremap <space>gs :Gstatus<CR>
-nnoremap <space>gc :Gcommit -v -q<CR>
-nnoremap <space>gt :Gcommit -v -q %:p<CR>
-nnoremap <space>gd :Gdiff<CR>
-nnoremap <space>ge :Gedit<CR>
-nnoremap <space>gr :Gread<CR>
-nnoremap <space>gw :Gwrite<CR><CR>
 nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
-nnoremap <space>gp :Ggrep<Space>
-nnoremap <space>gm :Gmove<Space>
-nnoremap <space>gb :Git branch<Space>
-nnoremap <space>go :Git checkout<Space>
 
 "make json pretty
 nnoremap <F6> :%!python -m json.tool<CR>:w<CR>
