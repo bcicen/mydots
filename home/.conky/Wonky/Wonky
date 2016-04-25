@@ -31,11 +31,12 @@ cpu_avg_samples 2
 net_avg_samples 1
 override_utf8_locale yes
 use_spacer yes
+temperature_unit fahrenheit
 
 
 minimum_size 0 0
 TEXT
 ${voffset 10}${color EAEAEA}${font GE Inspira:pixelsize=70}${time %H:%M}${font}${voffset -34}${offset 20}${color FFA300}${font GE Inspira:pixelsize=22}${time %d} ${voffset -15}${color EAEAEA}${font GE Inspira:pixelsize=12}${time  %B} ${time %Y}${font}${voffset 20}${font GE Inspira:pixelsize=28}${offset -55}${time %A}${font}
-${voffset 20}${font Ubuntu:pixelsize=12}${offset 25}${color FFA300}CPU ${offset 9}$color${cpu cpu0}%${offset 9}${cpubar cpu0 5,80}${offset 30}${color FFA300}MEM ${offset 9}$color${memperc}%${offset 9}${membar 5,80}${offset 30}${color FFA300}IP: ${offset 9}$color${execi 3600 curl icanhazip.com}${offset 20}${color FFA300}Link: ${offset 9}$color${wireless_link_qual wlp2s0}% ${offset 9}${wireless_link_bar 5,80 wlp2s0}${offset 9}(${wireless_essid})${offset 20}${color FFA300}Charge: ${offset 9}$color${battery_percent BAT1}% ${alignr}${battery_bar 5,80 BAT1}
+${voffset 20}${font Ubuntu:pixelsize=12}${offset 25}${color FFA300}CPU ${offset 9}$color${cpu cpu0}%${offset 9}${cpubar cpu0 5,80}${offset 30}${color FFA300}MEM ${offset 9}$color${memperc}%${offset 9}${membar 5,80}${offset 30}${color FFA300}IP: ${offset 9}$color${execi 3600 curl icanhazip.com}${offset 20}${color FFA300}Link: ${offset 9}$color${wireless_link_qual wlp2s0}% ${offset 9}${wireless_link_bar 5,80 wlp2s0}${offset 9}(${wireless_essid})${offset 20}${color FFA300}Charge: ${offset 9}$color${battery_percent BAT1}% ${offset 9}${battery_bar 5,80 BAT1}${offset 20}${color FFA300}Temp: ${offset 9}$color${hwmon temp 1}F
 
 
