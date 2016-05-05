@@ -114,6 +114,9 @@ nnoremap qw :silent! normal mpea"<Esc>bi"<Esc>`pl
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" automatically save and load views/folds
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
 
 " Custom commands
 "enables to search in all open buffers with :Search <pattern>
