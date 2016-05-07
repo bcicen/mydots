@@ -9,10 +9,8 @@ export VISUAL=vim
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=~/.mypy/
 export HISTFILESIZE=10000
-PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin:$HOME/.pub-cache/bin
-
-#default to local docker over tcp
 export DOCKER_HOST=tcp://127.0.0.1:4243
+PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin:$HOME/.pub-cache/bin
 
 #PS1
 PS1="\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] [${debian_chroot:+($debian_chroot)}\u@\h \W]\$ "
@@ -26,6 +24,7 @@ alias glog='git log --oneline --name-status'
 alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
 alias i3l='i3lock -c 000000'
 alias hugoserv='hugo server -v --watch --buildDrafts'
+
 #vim aliases
 alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
 alias jlog="vim $HOME/work/notes/jobs.log"
@@ -36,39 +35,40 @@ function vimdir() { /usr/bin/vim -p $(find $@ -type f ! -ipath "*.git/*"); }
 #functions
 function ctof() { echo "scale=4; ($1*9) / 5 + 32" | bc; }
 function ftoc() { echo "scale=4; ($1 - 32) / 1.8" | bc; }
+function dusort() { du -hs $@/* | sort -h; }
+function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi "$@" {} \; ; }
+
 function gcommit() {
   commit_msg=$@
   git status -s
-	[ $(echo $commit_msg| wc -w) -lt 1 ] && {
-  	prompt=$(clr_green "commit msg> ")
+  [ $(echo $commit_msg| wc -w) -lt 1 ] && {
+    prompt=$(clr_green "commit msg> ")
     read -p "$prompt" commit_msg
-	}
-	[ $(echo $commit_msg| wc -w) -lt 1 ] && {
+  }
+  [ $(echo $commit_msg| wc -w) -lt 1 ] && {
     echo "no commit message provided"
     return
   }
-	git commit -a -m "$commit_msg"
-	prompt=$(clr_green "push?(y/N)")
+  git commit -a -m "$commit_msg"
+
+  prompt=$(clr_green "push?(y/N)")
   read -n1 -p "$prompt" do_push
   [ "$do_push" == "y" ] && {
-	  echo
+    echo
     git push
   }
 }
+
 function servethis() {
-#  ls index.htm* 1> /dev/null 2>&1 || {
-#    echo "no index found in current directory"
-#    return
-#  }
   echo "starting container..."
   cid=$(docker run -d \
              -p 80 \
              -v ~/.resources/nginx.conf:/etc/nginx/nginx.conf \
              -v "${PWD}":/srv/www \
              vektorlab/nginx:latest)
-	hostport=$(docker port $cid | cut -f2 -d\>)
-	echo "nginx listening on $hostport"
-	google-chrome-stable $hostport
+  hostport=$(docker port $cid | cut -f2 -d\>)
+  echo "nginx listening on $hostport"
+  google-chrome-stable $hostport
 }
 
 function rgrep() {
@@ -80,53 +80,29 @@ function rgrep() {
     find . -type f -exec grep -Hi "$@" {} \;
   fi
 }
-function dusort() { du -hs $@/* | sort -h; }
-function ttitle() { titletext=$@; }
-function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi $@ {} \; ; }
+
 function tsdocker() {
-    case "$1" in 
-        set)
-            [ -z "$oldps1" ] || export PS1=$oldps1 
-            export oldps1=$PS1
-            if [ -z "$2" ];then 
-                unset DOCKER_HOST
-            else
-                export DOCKER_HOST="tcp://$2:4243"
-                export PS1="${PS1:0:-3}(docker-$2)${oldps1:(-2)}"
-            fi
-            ;;
-        "")
-            echo "usage: tsdocker <hostname> docker command to run"
-            echo "OR tsdocker set <hostname>"
-            ;;
-        *)
-            h="$1"
-            shift
-            docker -H "tcp://$h:4243" $@
-            ;;
-    esac
-}
-
-wmfiles="${HOME}/.config/terminator/config \
-         ${HOME}/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml"
-function wmfont() {
-  [ $# != 1 ] && {
-    echo "no arg provided"
-    return
-  }
-
-  size=$1
-
-  for file in $wmfiles; do
-
-    [ ! -f ${file}-${size} ] && {
-      echo "${file}-${size} not found, aborting"
-      return
-    }
-
-    ln -nsvf ${file}-${size} $file
-
-  done
+  case "$1" in
+    set)
+      [ -z "$oldps1" ] || export PS1=$oldps1
+      export oldps1=$PS1
+      if [ -z "$2" ];then
+        unset DOCKER_HOST
+      else
+        export DOCKER_HOST="tcp://$2:4243"
+        export PS1="${PS1:0:-3}(docker-$2)${oldps1:(-2)}"
+      fi
+      ;;
+    "")
+      echo "usage: tsdocker <hostname> docker command to run"
+      echo "OR tsdocker set <hostname>"
+      ;;
+    *)
+      h="$1"
+      shift
+      docker -H "tcp://$h:4243" $@
+      ;;
+  esac
 }
 
 # clipboard functions/aliases
