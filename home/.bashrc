@@ -27,7 +27,7 @@ alias hugoserv='hugo server -v --watch --buildDrafts'
 
 #vim aliases
 alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
-alias jlog="vim $HOME/work/notes/jobs.log"
+alias wlog="vim $HOME/work/notes/worklog.md"
 alias vundle_install="vim +PluginInstall +qall"
 function vimp() { /usr/bin/vim -p $@; }
 function vimdir() { /usr/bin/vim -p $(find $@ -type f ! -ipath "*.git/*"); }
