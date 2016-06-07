@@ -3,6 +3,7 @@ source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 
 source "$HOME/.bash_colors"
+source /usr/share/git/completion/git-prompt.sh
 
 export GOPATH=~/go
 export VISUAL=vim
@@ -13,7 +14,7 @@ export DOCKER_HOST=tcp://127.0.0.1:4243
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin:$HOME/.pub-cache/bin
 
 #PS1
-PS1="\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] [${debian_chroot:+($debian_chroot)}\u@\h \W]\$ "
+PS1='\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] $(clr_green $(__git_ps1 "[%s]"))[${debian_chroot:+($debian_chroot)}\u@\h \W]\$ '
 #super toolish ps1
 #PS1="┌─\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\]─\[\033[34m\][${debian_chroot:+($debian_chroot)}\u@\h]\[\033[m\]─\[\033[34m\][\w]\[\033[m\]\n└──[\[\033[32m\]\!\[\033[m\]] \$ "
 
@@ -37,6 +38,7 @@ function ctof() { echo "scale=4; ($1*9) / 5 + 32" | bc; }
 function ftoc() { echo "scale=4; ($1 - 32) / 1.8" | bc; }
 function dusort() { du -hs $@/* | sort -h; }
 function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi "$@" {} \; ; }
+function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 
 function gcommit() {
   commit_msg=$@
