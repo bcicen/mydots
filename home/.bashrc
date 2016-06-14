@@ -25,6 +25,8 @@ alias glog='git log --oneline --name-status'
 alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
 alias i3l='i3lock -c 000000'
 alias hugoserv='hugo server -v --watch --buildDrafts'
+alias xflux-est='killall xflux 2> /dev/null; xflux -l 40.712784 -g -74.005941'
+alias xflux-sgn='killall xflux 2> /dev/null; xflux -l 40.712784 -g -74.005941'
 
 #vim aliases
 alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
