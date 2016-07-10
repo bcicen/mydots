@@ -33,7 +33,7 @@
     background_darkness = 0.94
     background_image = None
     cursor_color = "#7b7b7b"
-    font = Droid Sans Mono 10
+    font = Droid Sans Mono 9
     foreground_color = "#98d1ce"
     icon_bell = False
     login_shell = True

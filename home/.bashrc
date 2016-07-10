@@ -27,6 +27,7 @@ alias i3l='i3lock -c 000000'
 alias hugoserv='hugo server -v --watch --buildDrafts'
 alias xflux-est='killall xflux 2> /dev/null; xflux -l 40.712784 -g -74.005941'
 alias xflux-sgn='killall xflux 2> /dev/null; xflux -l 40.712784 -g -74.005941'
+alias get-scmver='python -c "from setuptools_scm import get_version; print(get_version())"'
 alias tsdocker-cleanup-containers='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "status=exited")'
 
 #vim aliases
