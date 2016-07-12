@@ -15,8 +15,6 @@ PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin:$HOME/.pub-cache/bin
 
 #PS1
 PS1='\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] $(clr_green $(__git_ps1 "[%s]"))[${debian_chroot:+($debian_chroot)}\u@\h \W]\$ '
-#super toolish ps1
-#PS1="┌─\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\]─\[\033[34m\][${debian_chroot:+($debian_chroot)}\u@\h]\[\033[m\]─\[\033[34m\][\w]\[\033[m\]\n└──[\[\033[32m\]\!\[\033[m\]] \$ "
 
 #aliases
 alias ll='ls --color -ltrha'
@@ -28,6 +26,7 @@ alias hugoserv='hugo server -v --watch --buildDrafts'
 alias xflux-est='killall xflux 2> /dev/null; xflux -l 40.712784 -g -74.005941'
 alias xflux-sgn='killall xflux 2> /dev/null; xflux -l 40.712784 -g -74.005941'
 alias get-scmver='python -c "from setuptools_scm import get_version; print(get_version())"'
+alias pypi-publish='pandoc README.md -o README.rst && python2 setup.py sdist upload'
 alias tsdocker-cleanup-containers='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "status=exited")'
 
 #vim aliases
