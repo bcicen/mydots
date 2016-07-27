@@ -36,7 +36,7 @@ set softtabstop=2
 set expandtab
 
 set directory=~/.vim/swap
-set cm=blowfish
+set cm=blowfish2
 
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -50,6 +50,7 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
 Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'scrooloose/nerdcommenter'
 
 " Colorschemes
 Plugin 'whatyouhide/vim-gotham'
@@ -71,7 +72,7 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 colorscheme gotham
 
 " overlength
-highlight OverLength ctermbg=red ctermfg=white guibg=#59292
+highlight OverLength ctermbg=red ctermfg=white
 au BufRead,BufNewFile *.py match OverLength /\%79v.\+/
 
 " Mappings
