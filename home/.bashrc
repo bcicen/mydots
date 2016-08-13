@@ -31,8 +31,9 @@ alias pypi-publish='pandoc README.md -o README.rst && python2 setup.py sdist upl
 alias tsdocker-cleanup-containers='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "status=exited")'
 
 #vim aliases
-alias flog="vim $HOME/work/notes/$(date +%m-%d-%Y).log"
-alias wlog="vim $HOME/work/notes/worklog.md"
+alias flog="vim ${HOME}/work/notes/$(date +%m-%d-%Y).log"
+alias tlog="vim ${HOME}/work/notes/$(date +%Y-%m).log"
+alias wlog="vim ${HOME}/work/notes/worklog.md"
 alias vundle_install="vim +PluginInstall +qall"
 function vimp() { /usr/bin/vim -p $@; }
 function vimdir() { /usr/bin/vim -p $(find $@ -type f ! -ipath "*.git/*"); }

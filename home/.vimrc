@@ -79,6 +79,7 @@ au BufRead,BufNewFile *.py match OverLength /\%79v.\+/
 let mapleader = "\<Space>"
 let g:pep8_map='<leader>8' "pep8
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>n :n<CR>
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
