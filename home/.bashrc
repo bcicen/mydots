@@ -15,7 +15,7 @@ export DOCKER_HOST=tcp://127.0.0.1:4243
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin:$HOME/.pub-cache/bin
 
 #PS1
-PS1='\[\033[34m\][\[\033[m\]\[\033[35m\]\t\[\033[m\]\[\033[34m\]]\[\033[m\] $(clr_green $(__git_ps1 "[%s]"))[${debian_chroot:+($debian_chroot)}\u@\h \W]\$ '
+PS1='$(clr_blue [)$(clr_magenta \t)$(clr_blue ])$(clr_green $(__git_ps1 "[%s]"))[${debian_chroot:+($debian_chroot)}\u@\h \W]\$ '
 
 #aliases
 alias ll='ls --color -ltrha'

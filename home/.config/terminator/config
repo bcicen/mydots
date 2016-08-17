@@ -29,15 +29,15 @@
   [[default]]
     active_encodings = ANSI_X3.4-1968, UTF-8, ISO-8859-1
     allow_bold = False
-    background_color = "#0a0f14"
+    background_color = "#2b2b2b"
     background_darkness = 0.94
     background_image = None
     cursor_color = "#7b7b7b"
     font = Droid Sans Mono 9
-    foreground_color = "#98d1ce"
+    foreground_color = "#fdfdfd"
     icon_bell = False
     login_shell = True
-    palette = "#0a0f14:#c33027:#26a98b:#edb54b:#dfdfdf:#4e5165:#33859d:#98d1ce:#000f21:#d26939:#004169:#245361:#03516e:#888ba5:#599caa:#d3ebe9"
+    palette = "#000000:#e53b3b:#afffd7:#cdcd00:#875faf:#ffafdf:#59cfcf:#e5e5e5:#7f7f7f:#f85959:#afffd7:#ffff00:#afffd7:#ffafdf:#afffff:#ffffff"
     scrollback_lines = 20000
     scrollbar_position = hidden
     show_titlebar = False
