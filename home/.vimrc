@@ -53,7 +53,8 @@ Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'scrooloose/nerdcommenter'
 
 " Colorschemes
-Plugin 'bcicen/vim-miami'
+Plugin 'bcicen/vim-vice'
+Plugin 'whatyouhide/vim-gotham'
 
 " Git
 Plugin 'tpope/vim-fugitive'
@@ -69,10 +70,9 @@ syntax on
 let g:ycm_python_binary_path = '/usr/bin/python3'
 
 " Theme
-colorscheme miami
+colorscheme vice
 
 " overlength
-highlight OverLength ctermbg=red ctermfg=white
 au BufRead,BufNewFile *.py match OverLength /\%79v.\+/
 
 " Mappings

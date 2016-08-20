@@ -2,12 +2,12 @@
   borderless = True
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   inactive_color_offset = 0.89
-  title_inactive_bg_color = "#062835"
-  title_inactive_fg_color = "#98d1ce"
-  title_receive_bg_color = "#33859d"
-  title_receive_fg_color = "#98d1ce"
-  title_transmit_bg_color = "#093748"
-  title_transmit_fg_color = "#98d1ce"
+  title_inactive_bg_color = "#444444"
+  title_inactive_fg_color = "#878787"
+  title_receive_bg_color = "#444444"
+  title_receive_fg_color = "#87ffff"
+  title_transmit_bg_color = "#444444"
+  title_transmit_fg_color = "#afffd7"
 [keybindings]
   help = None
   scaled_zoom = None
@@ -33,11 +33,11 @@
     background_darkness = 0.94
     background_image = None
     cursor_color = "#7b7b7b"
-    font = Droid Sans Mono 9
+    font = Inconsolata Medium 9
     foreground_color = "#fdfdfd"
     icon_bell = False
     login_shell = True
-    palette = "#000000:#e53b3b:#afffd7:#cdcd00:#875faf:#ffafdf:#59cfcf:#e5e5e5:#7f7f7f:#f85959:#afffd7:#ffff00:#afffd7:#ffafdf:#afffff:#ffffff"
+    palette = "#000000:#e53b3b:#afffd7:#f0a54d:#875faf:#ffafdf:#59cfcf:#e5e5e5:#7f7f7f:#f85959:#afffd7:#ffff63:#afffd7:#ffafdf:#afffff:#ffffff"
     scrollback_lines = 20000
     scrollbar_position = hidden
     show_titlebar = False
