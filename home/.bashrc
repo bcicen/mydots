@@ -28,7 +28,8 @@ alias xflux-est='killall xflux 2> /dev/null; xflux -l 40.712784 -g -74.005941'
 alias xflux-sgn='killall xflux 2> /dev/null; xflux -l 40.712784 -g -74.005941'
 alias get-scmver='python -c "from setuptools_scm import get_version; print(get_version())"'
 alias pypi-publish='pandoc README.md -o README.rst && python2 setup.py sdist upload'
-alias tsdocker-cleanup-containers='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "status=exited")'
+alias docker-cleanup='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "status=exited")'
+alias stripws="sed -i.bak 's/[[:blank:]]*$//'"
 
 #vim aliases
 alias flog="vim ${HOME}/work/notes/$(date +%m-%d-%Y).log"
