@@ -29,7 +29,7 @@
   [[default]]
     active_encodings = ANSI_X3.4-1968, UTF-8, ISO-8859-1
     allow_bold = False
-    background_color = "#2b2b2b"
+    background_color = "#303030"
     background_darkness = 0.94
     background_image = None
     cursor_color = "#7b7b7b"
@@ -37,7 +37,7 @@
     foreground_color = "#fdfdfd"
     icon_bell = False
     login_shell = True
-    palette = "#000000:#e53b3b:#afffd7:#f0a54d:#875faf:#ffafdf:#59cfcf:#e5e5e5:#7f7f7f:#f85959:#afffd7:#ffff63:#afffd7:#ffafdf:#afffff:#ffffff"
+    palette = "#303030:#ff00ff:#a3d4a3:#ffffaf:#87ffff:#afafd7:#87ffff:#878787:#878787:#ff87d7:#afffd7:#ffffaf:#afffff:#ffafdf:#afffff:#ffffff"
     scrollback_lines = 20000
     scrollbar_position = hidden
     show_titlebar = False
