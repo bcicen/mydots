@@ -30,6 +30,7 @@ alias get-scmver='python -c "from setuptools_scm import get_version; print(get_v
 alias pypi-publish='pandoc README.md -o README.rst && python2 setup.py sdist upload'
 alias docker-cleanup='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "status=exited")'
 alias stripws="sed -i.bak 's/[[:blank:]]*$//'"
+alias pbcopy='xsel --clipboard --input'
 
 #vim aliases
 alias flog="vim ${HOME}/work/notes/$(date +%m-%d-%Y).log"
@@ -40,8 +41,8 @@ function vimp() { /usr/bin/vim -p $@; }
 function vimdir() { /usr/bin/vim -p $(find $@ -type f ! -ipath "*.git/*"); }
 
 #functions
-function ctof() { echo "scale=4; ($1*9) / 5 + 32" | bc; }
-function ftoc() { echo "scale=4; ($1 - 32) / 1.8" | bc; }
+function ctof() { echo "scale=1; ($1*9) / 5 + 32" | bc; }
+function ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
 function dusort() { du -hs $@/* | sort -h; }
 function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi "$@" {} \; ; }
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
