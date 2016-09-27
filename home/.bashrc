@@ -58,7 +58,7 @@ function gcommit() {
     echo "no commit message provided"
     return
   }
-  git commit -a -m "$commit_msg"
+  git commit --date="$(TZ=:UTC date --rfc-2822)" -a -m "$commit_msg"
 
   prompt=$(clr_green "push?(y/N)")
   read -n1 -p "$prompt" do_push
