@@ -15,7 +15,9 @@ export DOCKER_HOST=tcp://127.0.0.1:4243
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin:$HOME/.pub-cache/bin
 
 #PS1
-PS1='$(clr_blue [)$(clr_magenta \t)$(clr_blue ]) $(clr_green $(__git_ps1 "[%s]")) [${debian_chroot:+($debian_chroot)}\u@\h \W]\$ '
+_clrline=$(clr_magenta '─')
+function _clrbrkt() { echo "$(clr_magenta '[')$@$(clr_magenta ']')"; }
+PS1='$(clr_magenta ┌─=)$(_clrbrkt $(clr_white \t))${_clrline}$(_clrbrkt $(clr_white ${debian_chroot:+($debian_chroot)}\u@\h))${_clrline}$(_clrbrkt \W)$(clr_green $(__git_ps1 "${_clrline}$(_clrbrkt $(clr_green %s))"))\n$(clr_magenta └[) '
 
 #aliases
 alias ll='ls --color -ltrha'
@@ -132,3 +134,4 @@ complete -W "$(cat ~/.ssh/known_hosts | cut -f1 -d ':' | sed 's/\[//g;s/\]//g' |
 complete -W "$(cat ~/.ssh/known_hosts | cut -f1 -d ':' | sed 's/\[//g;s/\]//g' | tr '\n' ' ')" scp
 
 source ~/.bashrcx
+source ~/.tptrc
