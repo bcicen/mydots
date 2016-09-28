@@ -21,9 +21,17 @@ function _clrbrkt() { echo "$(clr_magenta '[')$@$(clr_magenta ']')"; }
 function ps1t() {
   let PS1_CONCAT++
   if (($PS1_CONCAT % 2)); then
-    PS1='$(clr_magenta ┌─=)$(_clrbrkt $(clr_white \t))${_clrline}$(_clrbrkt $(clr_white ${debian_chroot:+($debian_chroot)}\u@\h))${_clrline}$(_clrbrkt \W)$(clr_green $(__git_ps1 "${_clrline}$(_clrbrkt $(clr_green %s))"))\n$(clr_magenta └[) '
+    PS1='$(clr_magenta ┌─=)$(_clrbrkt $(clr_white \t))${_clrline}$(_clrbrkt $(clr_white \u@\h))${_clrline}$(_clrbrkt \W)$(clr_green $(__git_ps1 "${_clrline}$(_clrbrkt $(clr_green %s))"))'
+    PS1+='\n\[$FG_MAGENTA\]└[\[$CLR_RST\] '
   else
-    PS1=' $(_clrbrkt $(clr_white \t))${_clrline}$(_clrbrkt \W)$(clr_magenta ─[) '
+    PS1=' \[$FG_MAGENTA\][\[$CLR_RST\]'
+    PS1+='\[$FG_WHITE\]\t\[$CLR_RST\]'
+    PS1+='\[$FG_MAGENTA\]]\[$CLR_RST\]'
+    PS1+='\[$FG_MAGENTA\]─\[$CLR_RST\]'
+    PS1+=' \[$FG_MAGENTA\][\[$CLR_RST\]'
+    PS1+='\[$FG_WHITE\]\W\[$CLR_RST\]'
+    PS1+='\[$FG_MAGENTA\]]\[$CLR_RST\]'
+    PS1+='\[$FG_MAGENTA\]─[\[$CLR_RST\] '
   fi
 }
 ps1t
