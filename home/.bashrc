@@ -9,12 +9,16 @@ export GOPATH=~/go
 export VISUAL=vim
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=~/.mypy/
-export HISTFILESIZE=10000
 export AMQP_URL=amqp://127.0.0.1:5672
 export DOCKER_HOST=tcp://127.0.0.1:4243
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin:$HOME/.pub-cache/bin
 
-#PS1
+# history
+export HISTFILESIZE=10000
+export HISTCONTROL=ignoredups
+bind "set completion-ignore-case on"
+
+# prompt
 export PS1_CONCAT=0
 _clrline=$(clr_magenta '─')
 function _clrbrkt() { echo "$(clr_magenta '[')$@$(clr_magenta ']')"; }
