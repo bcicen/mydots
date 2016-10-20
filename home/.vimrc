@@ -65,6 +65,8 @@ Plugin 'bcicen/vim-vice'
 Plugin 'tpope/vim-fugitive'
 
 " Misc
+Plugin 'vektorlab/slackcat', {'rtp': 'contrib/vim-slackcat' }
+let g:slackcat_default_channel = "nam"
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'severin-lemaignan/vim-minimap'
@@ -128,4 +130,3 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " Custom commands
 "enables to search in all open buffers with :Search <pattern>
 command! -nargs=1 Search call setqflist([]) | silent cex [] | bufdo vimgrepadd /<args>/g %
-
