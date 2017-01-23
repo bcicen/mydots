@@ -51,6 +51,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'vimwiki/vimwiki'
 
 " Status line
 " Plugin 'vim-airline/vim-airline'
