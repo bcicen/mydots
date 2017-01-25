@@ -118,12 +118,19 @@ function servethis() {
 }
 
 function rgrep() {
+  local grepopts="-H"
+
+  [ $1 == "-i" ] && {
+    grepopts+=" -i"
+    shift
+  }
+
   if [ $# -eq 2 ]; then
     rgx=$1
     shift
-    find . -type f -iname "*.${rgx}" -exec grep -Hi "$@" {} \;
+    find . -type f -iname "*.${rgx}" -exec grep $grepopts "$@" {} \;
   else
-    find . -type f -exec grep -Hi "$@" {} \;
+    find . -type f -exec grep $grepopts "$@" {} \;
   fi
 }
 
