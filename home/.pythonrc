@@ -1,2 +1,20 @@
 import rlcompleter, readline
 readline.parse_and_bind('tab:complete')
+
+def jprint(d):
+    print(json.dumps(d, indent=2, sort_keys=True))
+
+def stddev(nset):
+    import math
+    mean = sum(nset) / len(nset)
+    vset = [ (x - mean)**2 for x in nset ]
+    sd = math.sqrt(sum(vset) / (len(nset) - 1))
+    print('sd     : %s' % sd)
+    print('min sd : %s' % (mean - sd))
+    print('max sd : %s' % (mean + sd))
+
+def getsoup(url):
+    import requests
+    from bs4 import BeautifulSoup
+    r = requests.get(url)
+    return BeautifulSoup(r.text, 'html.parser')
