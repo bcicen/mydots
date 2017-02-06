@@ -47,8 +47,6 @@ alias ls='ls --color'
 alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
 alias i3l='i3lock -c 000000'
 alias hugoserv='hugo server -v --watch --buildDrafts'
-alias xflux-est='killall xflux 2> /dev/null; xflux -l 40.712784 -g -74.005941'
-alias xflux-sgn='killall xflux 2> /dev/null; xflux -l 40.712784 -g -74.005941'
 alias get-scmver='python -c "from setuptools_scm import get_version; print(get_version())"'
 alias pypi-publish='pandoc README.md -o README.rst && python2 setup.py sdist upload'
 alias docker-cleanup='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "status=exited")'
@@ -172,8 +170,9 @@ function cbar() {
 }
 
 #autocomplete
-complete -W "$(cat ~/.ssh/known_hosts | cut -f1 -d ':' | sed 's/\[//g;s/\]//g' | tr '\n' ' ')" ssh
-complete -W "$(cat ~/.ssh/known_hosts | cut -f1 -d ':' | sed 's/\[//g;s/\]//g' | tr '\n' ' ')" scp
+known_hosts=$(awk '{print $1}' ~/.ssh/known_hosts | tr ',' '\n' | cut -f1 -d\: | sed 's/\[//g;s/\]//g' | tr '\n' ' ')
+complete -W "$known_hosts" ssh
+complete -W "$known_hosts" scp
 
 source ~/.bashrcx
 source ~/.tptrc
