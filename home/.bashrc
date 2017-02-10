@@ -68,6 +68,14 @@ function dusort() { du -hs $@/* | sort -h; }
 function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi "$@" {} \; ; }
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 
+# add new remote for forked gh repo
+function ghfork() {
+  #local branch=$(git rev-parse --abbrev-ref HEAD)
+  local reponame=$(git remote -v | grep fetch  | awk '{print $2}' | cut -f5 -d\/)
+  git remote add bcicen git@github.com:bcicen/$reponame
+  git remote -v
+}
+
 function gcommit() {
   commit_msg=$@
   git status -s
