@@ -2,6 +2,7 @@ import rlcompleter, readline
 readline.parse_and_bind('tab:complete')
 
 def jprint(d):
+    import json
     print(json.dumps(d, indent=2, sort_keys=True))
 
 def stddev(nset):
