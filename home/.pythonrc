@@ -19,3 +19,7 @@ def getsoup(url):
     from bs4 import BeautifulSoup
     r = requests.get(url)
     return BeautifulSoup(r.text, 'html.parser')
+
+def chromeopen(url):
+    from subprocess import call
+    call(['google-chrome-stable', '--incognito', url])
