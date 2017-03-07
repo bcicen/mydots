@@ -13,6 +13,7 @@ set tabpagemax=30
 set nocompatible
 set foldmethod=indent
 set foldlevel=99
+"set foldmarker={,} foldlevel=0 foldmethod=manual
 set laststatus=2
 set statusline=%F%m%r%h%w[%L][%p%%][%04l,%04v]-%{fugitive#statusline()}
 "              | | | | |  |   |     |    |       |
@@ -81,7 +82,7 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 colorscheme vice
 
 " overlength
-au BufRead,BufNewFile *.py match OverLength /\%79v.\+/
+" au BufRead,BufNewFile *.py match OverLength /\%79v.\+/
 
 " Mappings
 let mapleader = "\<Space>"
@@ -102,7 +103,7 @@ nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
 "clear 80 char overlength highlighting:
-nmap <F4> :match OverLength /\%7900v.\+/<CR>
+nmap <F4> :match OverLength /\%79v.\+/<CR>
 
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
