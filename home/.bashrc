@@ -111,18 +111,6 @@ glog() {
   done
 }
 
-function servethis() {
-  echo "starting container..."
-  cid=$(docker run -d \
-             -p 80 \
-             -v ~/.resources/nginx.conf:/etc/nginx/nginx.conf \
-             -v "${PWD}":/srv/www \
-             vektorlab/nginx:latest)
-  hostport=$(docker port $cid | cut -f2 -d\>)
-  echo "nginx listening on $hostport"
-  google-chrome-stable $hostport
-}
-
 function rgrep() {
   local grepopts="-H"
 
@@ -138,30 +126,6 @@ function rgrep() {
   else
     find . -type f -exec grep $grepopts "$@" {} \;
   fi
-}
-
-function tsdocker() {
-  case "$1" in
-    set)
-      [ -z "$oldps1" ] || export PS1=$oldps1
-      export oldps1=$PS1
-      if [ -z "$2" ];then
-        unset DOCKER_HOST
-      else
-        export DOCKER_HOST="tcp://$2:4243"
-        export PS1="${PS1:0:-3}(docker-$2)${oldps1:(-2)}"
-      fi
-      ;;
-    "")
-      echo "usage: tsdocker <hostname> docker command to run"
-      echo "OR tsdocker set <hostname>"
-      ;;
-    *)
-      h="$1"
-      shift
-      docker -H "tcp://$h:4243" $@
-      ;;
-  esac
 }
 
 # clipboard functions/aliases
