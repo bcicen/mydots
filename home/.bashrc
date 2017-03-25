@@ -148,4 +148,3 @@ complete -W "$known_hosts" scp
 
 source ~/.bashrcx
 source ~/.tptrc
-#source ~/.completion/*
