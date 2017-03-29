@@ -3,7 +3,7 @@ source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 
 source "$HOME/.bash_colors"
-source "$HOME/.fzf.bash"
+[ -e "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
 source /usr/share/git/completion/git-prompt.sh
 
 export GOPATH=~/go
