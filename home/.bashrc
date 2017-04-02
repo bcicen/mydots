@@ -128,6 +128,11 @@ function rgrep() {
   fi
 }
 
+function pyclean() {
+  find . -type f -iname "*.pyc" -exec rm -vf {} \;
+  find . -type d -name "__pycache__" -exec rmdir -v {} \;
+}
+
 # clipboard functions/aliases
 function clip-parse-email() {
   clipit $(echo $@ | grep -o "[[:alnum:][:graph:]]*@[[:alnum:][:graph:]]*" | sed 's/mailto://g')
