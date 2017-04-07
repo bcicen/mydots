@@ -1,0 +1,41 @@
+use_xft yes
+xftfont GE Inspira:pixelsize=20
+xftalpha 0.1
+update_interval 1
+total_run_times 0
+
+own_window yes
+own_window_type panel
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_colour 000000
+own_window_argb_visual no
+own_window_argb_value 0
+
+double_buffer yes
+#minimum_size 250 5
+#maximum_width 500
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+default_color white
+default_shade_color red
+default_outline_color green
+alignment top_middle
+gap_x 10
+gap_y 0
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 1
+override_utf8_locale yes
+use_spacer yes
+temperature_unit fahrenheit
+
+
+minimum_size 0 0
+TEXT
+${voffset 10}${color e36c96}LAX ${offset 9}$color${tztime America/Los_Angeles %a  %H:%M}${offset 30}${color e36c96}NYC ${offset 9}$color${tztime America/New_York %a  %H:%M}${offset 30}${color e36c96}LON ${offset 9}$color${tztime Europe/London %a  %H:%M}${offset 30}${color e36c96}SEL ${offset 9}$color${tztime Asia/Seoul %a  %H:%M}
+
+
