@@ -23,3 +23,9 @@ def getsoup(url):
 def chromeopen(url):
     from subprocess import call
     call(['google-chrome-stable', '--incognito', url])
+
+def iterfiles(d):
+    import os
+    for root, dirs, files in os.walk(d):
+        for fname in files:
+            yield os.path.join(root, fname)
