@@ -3,6 +3,8 @@ readline.parse_and_bind('tab:complete')
 
 def jprint(d):
     import json
+    if isinstance(d, str):
+        d = json.loads(d)
     print(json.dumps(d, indent=2, sort_keys=True))
 
 def stddev(nset):
