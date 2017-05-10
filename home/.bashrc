@@ -67,6 +67,7 @@ function ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
 function dusort() { du -hs $@/* | sort -h; }
 function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi "$@" {} \; ; }
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
+function _echoerr() { echo "$(clr_red "stderr: ") $@"; }
 
 # add new remote for forked gh repo
 function ghfork() {
