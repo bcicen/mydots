@@ -47,7 +47,6 @@ alias ls='ls --color'
 alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
 alias i3l='i3lock -c 000000'
 alias hugoserv='hugo server -v --watch --buildDrafts'
-alias get-scmver='python -c "from setuptools_scm import get_version; print(get_version())"'
 alias pypi-publish='pandoc README.md -o README.rst && python2 setup.py sdist upload'
 alias docker-cleanup='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "status=exited")'
 alias stripws="sed -i.bak 's/[[:blank:]]*$//'"
@@ -55,8 +54,6 @@ alias pbcopy='xsel --clipboard --input'
 
 #vim aliases
 alias flog="vim ${HOME}/work/notes/$(date +%m-%d-%Y).log"
-alias tlog="vim ${HOME}/work/notes/$(date +%Y-%m).log"
-alias wlog="vim ${HOME}/work/notes/worklog.md"
 alias vundle_install="vim +PluginInstall +qall"
 function vimp() { /usr/bin/vim -p $@; }
 function vimdir() { /usr/bin/vim -p $(find $@ -type f ! -ipath "*.git/*"); }
