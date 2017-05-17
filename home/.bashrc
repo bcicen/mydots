@@ -74,6 +74,24 @@ function ghfork() {
   git remote -v
 }
 
+function rclone() {
+  local base_dir=${HOME}/repos
+  [ $# != 1 ] && {
+    echo "usage: rclone <user>/<repo>"
+    return
+  }
+  target=($(echo $1 | sed 's/\//\ /g'))
+  user_dir=${base_dir}/${target[0]}
+  repo_dir=${user_dir}/${target[1]}
+  [ -d $user_dir ] || mkdir -v $user_dir
+  [ -d $repo_dir ] && {
+    _echoerr "$repo_dir exists"
+    return
+  }
+  git clone https://github.com/${target[0]}/${target[1]} $repo_dir
+  cd $repo_dir
+}
+
 function gcommit() {
   commit_msg=$@
   git status -s
