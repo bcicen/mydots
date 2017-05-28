@@ -29,7 +29,7 @@
   [[default]]
     active_encodings = ANSI_X3.4-1968, UTF-8, ISO-8859-1
     allow_bold = False
-    background_color = "#303030"
+    background_color = "#2c2c2c"
     background_darkness = 0.94
     cursor_color = "#7b7b7b"
     font = Inconsolata Medium 9
