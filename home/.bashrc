@@ -80,7 +80,11 @@ function rclone() {
     echo "usage: rclone <user>/<repo>"
     return
   }
-  target=($(echo $1 | sed 's/\//\ /g'))
+
+  # parse repo url
+  target=($(_rclone_parse $1))
+  [[ ${#target[@]} != 2 ]] && return
+
   user_dir=${base_dir}/${target[0]}
   repo_dir=${user_dir}/${target[1]}
   [ -d $user_dir ] || mkdir -v $user_dir
@@ -91,6 +95,25 @@ function rclone() {
   git clone https://github.com/${target[0]}/${target[1]} $repo_dir
   cd $repo_dir
 }
+
+function _rclone_parse() {
+  url=$1
+  case $url in
+    https://github.com*)
+      echo $url | cut -f4-5 -d\/ | _rclone_strip
+      return
+      ;;
+    git@github.com*)
+      echo $url | cut -f2 -d\: | _rclone_strip
+      return
+      ;;
+    *)
+      _echoerr "failed to parse repo url: $url"
+      ;;
+  esac
+}
+
+function _rclone_strip() { read x; echo $x | sed 's/.git//g;s/\//\ /g'; }
 
 function gcommit() {
   commit_msg=$@
