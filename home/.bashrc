@@ -47,7 +47,6 @@ alias ls='ls --color'
 alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
 alias i3l='i3lock -c 000000'
 alias hugoserv='hugo server -v --watch --buildDrafts'
-alias pypi-publish='pandoc README.md -o README.rst && python2 setup.py sdist upload'
 alias docker-cleanup='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "status=exited")'
 alias stripws="sed -i.bak 's/[[:blank:]]*$//'"
 alias pbcopy='xsel --clipboard --input'
@@ -65,6 +64,13 @@ function dusort() { du -hs $@/* | sort -h; }
 function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi "$@" {} \; ; }
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 function _echoerr() { echo "$(clr_red "stderr: ") $@"; }
+
+function pypi-publish() {
+  pandoc README.md -o README.rst && \
+  python setup.py sdist && \
+  python setup.py bdist_wheel --universal && \
+  twine upload dist/*
+}
 
 # add new remote for forked gh repo
 function ghfork() {
@@ -169,7 +175,12 @@ function rgrep() {
 
 function pyclean() {
   find . -type f -iname "*.pyc" -exec rm -vf {} \;
-  find . -type d -name "__pycache__" -exec rmdir -v {} \;
+  find . -type d -name "__pycache__" -exec rmdir -v {} +;
+}
+
+function pyclean2() {
+  pyclean
+  rm -Rvf build/ dist/ *.egg-info
 }
 
 # clipboard functions/aliases
@@ -193,3 +204,5 @@ complete -W "$known_hosts" scp
 
 source ~/.bashrcx
 source ~/.tptrc
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
