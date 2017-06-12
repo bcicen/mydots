@@ -157,20 +157,25 @@ glog() {
 }
 
 function rgrep() {
-  local grepopts="-H"
+  local opts args
 
-  [ $1 == "-i" ] && {
-    grepopts+=" -i"
-    shift
-  }
+  for a in $@; do
+  case $a in
+    -*) opts+=($a) ;;
+    *) args+=($a) ;;
+  esac
+  done
 
-  if [ $# -eq 2 ]; then
-    rgx=$1
-    shift
-    find . -type f -iname "*.${rgx}" -exec grep $grepopts "$@" {} \;
-  else
-    find . -type f -exec grep $grepopts "$@" {} \;
+  if [ ${#args[@]} -eq 2 ]; then
+    ftype=${args[0]}
+    opts+=("-t${ftype}")
+    args=(${args[1]})
   fi
+
+  #echo "opts: ${opts[@]}"
+  #echo "args: ${args[@]}"
+
+  rg ${opts[@]} -g '!vendor/*' -g '!.git/*' ${args[@]}
 }
 
 function pyclean() {
