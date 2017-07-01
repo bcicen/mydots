@@ -87,8 +87,6 @@ colorscheme vice
 " Mappings
 let mapleader = "\<Space>"
 let g:pep8_map='<leader>8' "pep8
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>n :n<CR>
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
@@ -98,6 +96,10 @@ map <c-Up> <c-w>k
 map <c-Right> <c-w>l
 map <c-Left> <c-w>h
 map <leader>j :RopeGotoDefinition<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>n :n<CR>
+nnoremap gb :ls<CR>:b<Space>
+
 "insert timestamp under cursor
 nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
