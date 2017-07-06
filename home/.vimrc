@@ -53,6 +53,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vimwiki/vimwiki'
+Plugin 'jeetsukumaran/vim-buffersaurus'
 
 " Status line
 " Plugin 'vim-airline/vim-airline'
