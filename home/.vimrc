@@ -101,6 +101,9 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>n :n<CR>
 nnoremap gb :ls<CR>:b<Space>
 
+" yank current selection to command line
+vnoremap : y:Bsgrep <C-r>"<C-b>
+
 "insert timestamp under cursor
 nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
