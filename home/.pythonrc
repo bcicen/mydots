@@ -6,10 +6,21 @@ def logdebug():
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger(__name__).debug('debug logging enabled')
 
+def jwrite(d, path):
+    import json
+    if isinstance(d, str):
+        d = json.loads(d)
+    with open(path, 'w') as of:
+        of.write(json.dumps(d, indent=2, sort_keys=True))
+
 def jread(path):
     import json
     with open(path) as of:
         return json.loads(of.read())
+
+def lprint(l):
+    for idx, v in enumerate(l):
+        print(f'{idx}: {v}')
 
 def jprint(d):
     import json
