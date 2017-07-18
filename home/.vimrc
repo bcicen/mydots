@@ -8,6 +8,7 @@ set history=700
 set nu
 set so=7 "scrolloff
 set t_Co=256
+set hidden
 set relativenumber
 set tabpagemax=30
 set nocompatible
@@ -79,6 +80,9 @@ filetype plugin indent on
 syntax on
 let g:ycm_python_binary_path = '/usr/bin/python3'
 
+" Custom filetype extensions
+au BufNewFile,BufRead Dockerfile_* set filetype=dockerfile
+
 " Theme
 colorscheme vice
 
@@ -100,6 +104,7 @@ map <leader>j :RopeGotoDefinition<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>n :n<CR>
 nnoremap gb :ls<CR>:b<Space>
+nnoremap gv :ls<CR>:vert belowright sb<Space>
 
 " yank current selection to command line
 vnoremap : y:Bsgrep <C-r>"<C-b>
