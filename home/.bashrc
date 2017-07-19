@@ -83,24 +83,24 @@ function ghfork() {
 function rclone() {
   local base_dir=${HOME}/repos
   [ $# != 1 ] && {
-    echo "usage: rclone <user>/<repo>"
+    echo "usage: rclone <url>"
     return
   }
 
   # parse repo url
-  target=($(_rclone_parse $1))
-  [[ ${#target[@]} != 2 ]] && return
-
-  user_dir=${base_dir}/${target[0]}
-  repo_dir=${user_dir}/${target[1]}
-  [ -d $user_dir ] || mkdir -v $user_dir
+  url=$1
+  repo_name=$(_parse_reponame $url)
+  repo_dir=${base_dir}/${repo_name}
   [ -d $repo_dir ] && {
     _echoerr "$repo_dir exists"
+    cd $repo_dir
     return
   }
-  git clone https://github.com/${target[0]}/${target[1]} $repo_dir
-  cd $repo_dir
+
+  git clone $url $repo_dir && cd $repo_dir
 }
+
+function _parse_reponame() { python -c 'import sys; print(sys.argv[1].split("/")[-1])' $@; }
 
 function _rclone_parse() {
   url=$1
