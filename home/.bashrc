@@ -100,7 +100,7 @@ function rclone() {
   git clone $url $repo_dir && cd $repo_dir
 }
 
-function _parse_reponame() { python -c 'import sys; print(sys.argv[1].split("/")[-1])' $@; }
+function _parse_reponame() { python -c 'import sys; print(sys.argv[1].split("/")[-1].replace(".git",""))' $@; }
 
 function _rclone_parse() {
   url=$1

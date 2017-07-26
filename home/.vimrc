@@ -48,6 +48,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Autocomplete / Syntax Highlighting
 Plugin 'fatih/vim-go'
+Plugin 'udalov/kotlin-vim'
 Plugin 'rodjek/vim-puppet'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
