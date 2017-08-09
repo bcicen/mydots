@@ -11,7 +11,7 @@ export VISUAL=vim
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=~/.mypy/
 export AMQP_URL=amqp://127.0.0.1:5672
-export DOCKER_HOST=tcp://127.0.0.1:4243
+export DOCKER_HOST=tcp://127.0.0.1:2375
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin:$HOME/.pub-cache/bin
 
 # history
@@ -50,6 +50,7 @@ alias hugoserv='hugo server -v --watch --buildDrafts'
 alias docker-cleanup='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "status=exited")'
 alias stripws="sed -i.bak 's/[[:blank:]]*$//'"
 alias pbcopy='xsel --clipboard --input'
+alias drun='docker run --rm -ti'
 
 #vim aliases
 alias flog="vim ${HOME}/work/notes/$(date +%m-%d-%Y).log"
