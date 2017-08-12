@@ -82,6 +82,7 @@ syntax on
 let g:ycm_python_binary_path = '/usr/bin/python3'
 
 " Custom filetype extensions
+au BufNewFile,BufRead *.geojson set filetype=json
 au BufNewFile,BufRead Dockerfile_* set filetype=dockerfile
 
 " Theme
