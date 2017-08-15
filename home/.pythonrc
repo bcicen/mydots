@@ -28,6 +28,17 @@ def jprint(d):
         d = json.loads(d)
     print(json.dumps(d, indent=2, sort_keys=True))
 
+def CamelCase2lower_case(s):
+    chars = [ x for x in s ]
+    newname = chars.pop(0).lower()
+    for c in chars:
+        if c.isupper():
+            newname += '_'
+            newname += c.lower()
+        else:
+            newname += c
+    return newname
+
 def stddev(nset):
     import math
     mean = sum(nset) / len(nset)
