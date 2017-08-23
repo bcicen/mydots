@@ -24,8 +24,14 @@ def lprint(l):
 
 def jprint(d):
     import json
+    from collections.abc import KeysView, ValuesView
+
     if isinstance(d, str):
         d = json.loads(d)
+
+    if isinstance(d, (KeysView, ValuesView)):
+        d = list(d)
+
     print(json.dumps(d, indent=2, sort_keys=True))
 
 def CamelCase2lower_case(s):
