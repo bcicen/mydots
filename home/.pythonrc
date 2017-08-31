@@ -34,6 +34,17 @@ def jprint(d):
 
     print(json.dumps(d, indent=2, sort_keys=True))
 
+def fcount(items, key):
+    # count unique values for field in list of dicts
+    from collections import defaultdict
+    counter = defaultdict(int)
+    for x in items:
+        if key in x:
+            counter[x[key]] += 1
+        else:
+            counter['MISSING_FIELD'] += 1
+    jprint(counter)
+
 def CamelCase2lower_case(s):
     chars = [ x for x in s ]
     newname = chars.pop(0).lower()

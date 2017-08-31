@@ -199,6 +199,7 @@ function cbar() {
     killall conky
   else
     nohup conky -c ~/.conky/Wonky/Wonky &> /dev/null &
+    sleep 1
     nohup conky -c ~/.conky/Wonky/WorldClock &> /dev/null &
   fi
 }
