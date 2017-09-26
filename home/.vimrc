@@ -56,6 +56,8 @@ Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vimwiki/vimwiki'
 Plugin 'jeetsukumaran/vim-buffersaurus'
+Plugin 'bcicen/vim-jfmt'
+Plugin 'tpope/vim-jdaddy'
 
 " Status line
 " Plugin 'vim-airline/vim-airline'
@@ -135,6 +137,7 @@ nnoremap qw :silent! normal mpea"<Esc>bi"<Esc>`pl
 
 " autocmd stuff
 "autocmd vimenter * NERDTree
+
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
