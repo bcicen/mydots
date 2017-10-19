@@ -58,6 +58,15 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'jeetsukumaran/vim-buffersaurus'
 Plugin 'bcicen/vim-jfmt'
 Plugin 'tpope/vim-jdaddy'
+Plugin 'diepm/vim-rest-console'
+"let g:vrc_curl_opts = {
+  "\ '--connect-timeout' : 10,
+  "\ '-L': '',
+  "\ '-i': '',
+  "\ '--max-time': 60,
+  "\ '--ipv4': '',
+  "\ '-k': '',
+"\}
 
 " Status line
 " Plugin 'vim-airline/vim-airline'
