@@ -61,7 +61,7 @@ function vimdir() { /usr/bin/vim -p $(find $@ -type f ! -ipath "*.git/*"); }
 #functions
 function ctof() { echo "scale=1; ($1*9) / 5 + 32" | bc; }
 function ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
-function dusort() { du -hs $@/* | sort -h; }
+function dusort() { path=$@; du -hs ${path:=.}/* | sort -h; }
 function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi "$@" {} \; ; }
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 function _echoerr() { echo "$(clr_red "stderr: ") $@"; }

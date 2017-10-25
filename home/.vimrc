@@ -157,3 +157,5 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " Custom commands
 "enables to search in all open buffers with :Search <pattern>
 command! -nargs=1 Search call setqflist([]) | silent cex [] | bufdo vimgrepadd /<args>/g %
+
+let g:jfmt_on_save = 1
