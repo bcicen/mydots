@@ -73,6 +73,16 @@ function pypi-publish() {
   twine upload dist/*
 }
 
+# open working gh repo in browser
+function ghopen() {
+  arg=$1
+  remote=$(git remote get-url ${arg:=origin})
+  [[ $? -eq 0 ]] && {
+    url=$(echo $remote | sed 's/https:\/\///g;s/git@//g;s/:/\//g')
+    xdg-open https://${url}
+  }
+}
+
 # add new remote for forked gh repo
 function ghfork() {
   #local branch=$(git rev-parse --abbrev-ref HEAD)
