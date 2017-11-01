@@ -59,6 +59,8 @@ Plugin 'jeetsukumaran/vim-buffersaurus'
 Plugin 'bcicen/vim-jfmt'
 Plugin 'tpope/vim-jdaddy'
 Plugin 'diepm/vim-rest-console'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 "let g:vrc_curl_opts = {
   "\ '--connect-timeout' : 10,
   "\ '-L': '',
@@ -159,3 +161,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 command! -nargs=1 Search call setqflist([]) | silent cex [] | bufdo vimgrepadd /<args>/g %
 
 let g:jfmt_on_save = 1
+
+let g:rg_command = '
+  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+  \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
+  \ -g "!{.git,node_modules,vendor}/*" '
+
+command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
