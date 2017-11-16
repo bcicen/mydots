@@ -132,6 +132,8 @@ function _rclone_parse() {
 
 function _rclone_strip() { read x; echo $x | sed 's/.git//g;s/\//\ /g'; }
 
+function gdiff() { git diff --color $@ | diff-so-fancy; }
+
 function gcommit() {
   commit_msg=$@
   git status -s
