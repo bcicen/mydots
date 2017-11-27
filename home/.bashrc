@@ -65,6 +65,11 @@ function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness
 function _echoout() { echo "$(clr_cyan "stdout: ") $@" > /dev/stdout; }
 function _echoerr() { echo "$(clr_red "stderr: ") $@" > /dev/stderr; }
 
+function gh-gosearch() {
+  q=$@
+  xdg-open "https://github.com/search?l=go&q=${q// /+}&type=Repositories&utf8=✓" 1> /dev/null
+}
+
 function pypi-publish() {
   pandoc README.md -o README.rst && \
   python setup.py sdist && \
