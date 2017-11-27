@@ -61,6 +61,8 @@ Plugin 'tpope/vim-jdaddy'
 Plugin 'diepm/vim-rest-console'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'yuttie/comfortable-motion.vim'
+Plugin 'majutsushi/tagbar'
 "let g:vrc_curl_opts = {
   "\ '--connect-timeout' : 10,
   "\ '-L': '',
@@ -140,8 +142,8 @@ nnoremap <F5> g:nf_map_next <CR>
 inoremap <F5> <C-R> g:nf_map_next <CR>
 nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
 
-"make json pretty
-nnoremap <F6> :%!python -m json.tool<CR>:w<CR>
+nmap <F8> :TagbarToggle<CR>
+nmap <F9> :TagbarOpenAutoClose<CR>
 
 "quote single word
 nnoremap qw :silent! normal mpea"<Esc>bi"<Esc>`pl
@@ -168,3 +170,6 @@ let g:rg_command = '
   \ -g "!{.git,node_modules,vendor}/*" '
 
 command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+
+let g:comfortable_motion_friction = 200.0
+let g:comfortable_motion_air_drag = 0.5
