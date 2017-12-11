@@ -1,4 +1,4 @@
-#homeshick
+# homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 
@@ -6,16 +6,23 @@ source "$HOME/.bash_colors"
 [ -e "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
 source /usr/share/git/completion/git-prompt.sh
 
+# internal helper fn
+function _echoout() { echo "$(clr_cyan "stdout: ") $@" > /dev/stdout; }
+function _echoerr() { echo "$(clr_red "stderr: ") $@" > /dev/stderr; }
+# idempotent add path helper
+function _pathadd() { [[ ! "$PATH" == *${1}* ]] && export PATH="$PATH:${1}"; }
+
 export GOPATH=~/go
 export VISUAL=vim
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=~/.mypy/
 export AMQP_URL=amqp://127.0.0.1:5672
-PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:$HOME/go/bin:$HOME/.pub-cache/bin
+_pathadd ${HOME}/go/bin
 
 # history
 export HISTFILESIZE=10000
 export HISTCONTROL=ignoredups
+
 bind "set completion-ignore-case on"
 
 # prompt
@@ -62,8 +69,6 @@ function ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
 function dusort() { path=$@; du -hs ${path:=.}/* | sort -h; }
 function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi "$@" {} \; ; }
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
-function _echoout() { echo "$(clr_cyan "stdout: ") $@" > /dev/stdout; }
-function _echoerr() { echo "$(clr_red "stderr: ") $@" > /dev/stderr; }
 
 function gh-gosearch() {
   q=$@
@@ -201,6 +206,7 @@ function pyclean() {
 }
 
 function pyclean2() {
+  sudo chown -Rcf ${USER}. .
   pyclean
   rm -Rvf build/ dist/ *.egg-info
 }
