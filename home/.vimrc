@@ -142,6 +142,7 @@ nnoremap <F5> g:nf_map_next <CR>
 inoremap <F5> <C-R> g:nf_map_next <CR>
 nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
 
+nmap <F6> :tab sball<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F9> :TagbarOpenAutoClose<CR>
 
@@ -162,8 +163,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 "enables to search in all open buffers with :Search <pattern>
 command! -nargs=1 Search call setqflist([]) | silent cex [] | bufdo vimgrepadd /<args>/g %
 
-let g:jfmt_on_save = 1
-
 let g:rg_command = '
   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
   \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
@@ -173,3 +172,5 @@ command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>),
 
 let g:comfortable_motion_friction = 200.0
 let g:comfortable_motion_air_drag = 0.5
+
+" let g:jfmt_autofmt = 1
