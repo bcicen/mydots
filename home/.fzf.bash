@@ -28,3 +28,17 @@ glog() {
     done < <(sed '1d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
   done
 }
+
+# jump to go src dir
+function cdgo() {
+  srcdir="${GOPATH}/src/"
+
+  out=$(find $srcdir -maxdepth 3 -mindepth 3 -xtype d ! -path '*/.*' | sort | sed "s|${srcdir}||g" | while read line; do
+    parts=($(echo $line | sed 's|/|\n|g'))
+    echo -e "\033[32m${parts[0]}\033[0m ${parts[1]}/${parts[2]}"
+  done |  fzf --header=${srcdir} --height ${FZF_TMUX_HEIGHT:-40%} --ansi --multi --reverse --no-sort -e)
+  [[ ! -z "$out" ]] && {
+    path="${srcdir}$(echo $out | sed 's| |/|g')"
+    cd $path
+  }
+}
