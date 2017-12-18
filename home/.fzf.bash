@@ -46,6 +46,8 @@ function cdgo() {
 # browser for large json objects or arrays
 function fzf-json() {
   path=$1
+  [[ -z "${path}" ]] && echo "usage: fzf-json <path>" && return
+
   filter='to_entries| .[] | { (.key): .value }' # object filter (default)
   [[ $(jq -r type < $path) == "array" ]] && filter='.[]'
 
