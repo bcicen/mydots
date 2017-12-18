@@ -42,3 +42,14 @@ function cdgo() {
     cd $path
   }
 }
+
+# browser for large json objects or arrays
+function fzf-json() {
+  path=$1
+  filter='to_entries| .[] | { (.key): .value }' # object filter (default)
+  [[ $(jq -r type < $path) == "array" ]] && filter='.[]'
+
+  while out=$(jq -Cc "$filter" $path | fzf --ansi --multi --no-sort --reverse -e); do
+    jq -C . <<< "$out" | less -Rc
+  done
+}
