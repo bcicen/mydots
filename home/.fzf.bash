@@ -55,3 +55,34 @@ function fzf-json() {
     jq -C . <<< "$out" | less -Rc
   done
 }
+
+BM_PATH="${HOME}/.bm"
+
+# simple bookmarking
+function _bm-add() {
+  (grep -q "^${PWD}$" $BM_PATH) || echo $PWD >> $BM_PATH
+  echo "bookmark added"
+}
+
+function _bm-rm() {
+  sed "/^${PWD//\//\\/}$/d" $BM_PATH
+  echo "bookmark removed"
+}
+
+function bm() {
+  [[ ! -f ${BM_PATH} ]] && {
+    echo "initializing bookmark file at $BM_PATH"
+    touch $BM_PATH
+  }
+
+  [[ ! -z "$1" ]] && {
+    case $1 in
+      add) _bm-add; return ;;
+      rm) _bm-rm; return ;;
+      *) echo "unknown command"; return 1 ;;
+    esac
+  }
+
+  out=$(cat $BM_PATH | fzf --ansi --multi --reverse -e)
+  [[ ! -z "$out" ]] && cd $out
+}
