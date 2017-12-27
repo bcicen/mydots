@@ -143,6 +143,7 @@ inoremap <F5> <C-R> g:nf_map_next <CR>
 nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
 
 nmap <F6> :tab sball<CR>
+nmap <F7> :vertical sball<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F9> :TagbarOpenAutoClose<CR>
 
