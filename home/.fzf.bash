@@ -65,9 +65,21 @@ function _bm-add() {
 }
 
 function _bm-rm() {
-  sed "/^${PWD//\//\\/}$/d" $BM_PATH
-  echo "bookmark removed"
+  out=$(_bm-search)
+  [[ ! -z "$out" ]] && {
+    for path in $out; do
+      sed -i "/^${path//\//\\/}$/d" $BM_PATH
+      echo "bookmark removed: $path"
+    done
+  }
 }
+
+function __bm_short_path() { echo ${@//$HOME/\~} ; }
+
+function _bm-search() {
+  cat $BM_PATH | fzf --ansi --multi --reverse -e
+}
+
 
 function bm() {
   [[ ! -f ${BM_PATH} ]] && {
@@ -83,6 +95,8 @@ function bm() {
     esac
   }
 
-  out=$(cat $BM_PATH | fzf --ansi --multi --reverse -e)
+  out=$(_bm-search)
   [[ ! -z "$out" ]] && cd $out
 }
+
+bind '"\C-b": " `_bm-search`\e\C-e\e^\er"'
