@@ -59,13 +59,13 @@ function fzf-json() {
 BM_PATH="${HOME}/.bm"
 
 # simple bookmarking
-function _bm-add() {
+function __bm_add__() {
   (grep -q "^${PWD}$" $BM_PATH) || echo $PWD >> $BM_PATH
   echo "bookmark added"
 }
 
-function _bm-rm() {
-  out=$(_bm-search)
+function __bm_rm__() {
+  out=$(__bm_search__)
   [[ ! -z "$out" ]] && {
     for path in $out; do
       sed -i "/^${path//\//\\/}$/d" $BM_PATH
@@ -74,12 +74,11 @@ function _bm-rm() {
   }
 }
 
-function __bm_short_path() { echo ${@//$HOME/\~} ; }
-
-function _bm-search() {
+function __bm_search__() {
   cat $BM_PATH | fzf --ansi --multi --reverse -e
 }
 
+function __bm_short_path() { echo ${@//$HOME/\~} ; }
 
 function bm() {
   [[ ! -f ${BM_PATH} ]] && {
@@ -89,14 +88,14 @@ function bm() {
 
   [[ ! -z "$1" ]] && {
     case $1 in
-      add) _bm-add; return ;;
-      rm) _bm-rm; return ;;
+      add) __bm_add__; return ;;
+      rm) __bm_rm__; return ;;
       *) echo "unknown command"; return 1 ;;
     esac
   }
 
-  out=$(_bm-search)
+  out=$(__bm_search__)
   [[ ! -z "$out" ]] && cd $out
 }
 
-bind '"\C-b": " `_bm-search`\e\C-e\e^\er"'
+bind '"\C-b": " `__bm_search__`\e\C-e\e^\er"'
