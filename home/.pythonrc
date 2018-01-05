@@ -85,8 +85,13 @@ def chromeopen(url):
     from subprocess import call
     call(['google-chrome-stable', '--incognito', url])
 
-def iterfiles(d):
+def iterfiles(d, maxdepth=None):
     import os
+
+    depth = lambda x: x.strip('./').count('/') + 1 # get depth from root path
+
     for root, dirs, files in os.walk(d):
         for fname in files:
+            if maxdepth and depth(root) > maxdepth:
+                break
             yield os.path.join(root, fname)
