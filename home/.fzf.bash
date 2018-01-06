@@ -51,7 +51,7 @@ function fzf-json() {
   filter='to_entries| .[] | { (.key): .value }' # object filter (default)
   [[ $(jq -r type < $path) == "array" ]] && filter='.[]'
 
-  while out=$(jq -Cc "$filter" $path | fzf --ansi --multi --no-sort --reverse -e); do
+  while out=$(jq -Cc "$filter" $path | fzf --ansi --multi --no-sort --reverse -e --preview='jq -C . <<< {}' --preview-window right:45%:wrap); do
     jq -C . <<< "$out" | less -Rc
   done
 }
