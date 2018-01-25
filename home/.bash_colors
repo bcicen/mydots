@@ -11,14 +11,14 @@ FG_MAGENTA=$(tput setaf 5)
 FG_CYAN=$(tput setaf 6)
 FG_WHITE=$(tput setaf 7)
 
-BG_BLACK=$(tput setaf 0)
-BG_BLUE=$(tput setaf 1)
-BG_GREEN=$(tput setaf 2)
-BG_CYAN=$(tput setaf 3)
-BG_RED=$(tput setaf 4)
-BG_MAGENTA=$(tput setaf 5)
-BG_BROWN=$(tput setaf 6)
-BG_WHITE=$(tput setaf 7)
+BG_BLACK=$(tput setab 0)
+BG_BLUE=$(tput setab 1)
+BG_GREEN=$(tput setab 2)
+BG_CYAN=$(tput setab 3)
+BG_RED=$(tput setab 4)
+BG_MAGENTA=$(tput setab 5)
+BG_BROWN=$(tput setab 6)
+BG_WHITE=$(tput setab 7)
 
 function _clr() {
   clr=$1; shift
