@@ -7,8 +7,8 @@ source "$HOME/.bash_colors"
 source /usr/share/git/completion/git-prompt.sh
 
 # internal helper fn
-function _echoout() { echo "$(clr_cyan "stdout: ") $@" > /dev/stdout; }
-function _echoerr() { echo "$(clr_red "stderr: ") $@" > /dev/stderr; }
+function _echoout() { echo "$(clr_cyan "stdout:") $@" > /dev/stdout; }
+function _echoerr() { echo "$(clr_red "stderr:") $@" > /dev/stderr; }
 # idempotent add path helper
 function _pathadd() { [[ ! "$PATH" == *${1}* ]] && export PATH="$PATH:${1}"; }
 
@@ -21,7 +21,8 @@ _pathadd ${HOME}/go/bin
 
 # history
 export HISTFILESIZE=10000
-export HISTCONTROL=ignoredups
+export HISTCONTROL=ignoredups:erasedups
+# export histchars='@^#'
 
 bind "set completion-ignore-case on"
 
@@ -187,14 +188,15 @@ function rgrep() {
 }
 
 function pyclean() {
-  find . -type f -iname "*.pyc" -exec rm -vf {} \;
-  find . -type d -name "__pycache__" -exec rmdir -v {} +;
+  count=$(wc -l <(find . -type f -iname "*.pyc" -exec rm -vf {} \;) | awk '{print $1}')
+  let count+=$(wc -l <(find . -type d -name "__pycache__" -exec rmdir -v {} +;) | awk '{print $1}')
+  _echoout "removed ${count} pycache files"
 }
 
 function pyclean2() {
   sudo chown -Rcf ${USER}. .
   pyclean
-  rm -Rvf build/ dist/ *.egg-info
+  rm -Rf build/ dist/ *.egg-info
 }
 
 # clipboard functions/aliases
@@ -219,3 +221,5 @@ complete -W "$known_hosts" scp
 
 source ~/.bashrcx
 source ~/.tptrc
+
+PATH=$PATH:${HOME}/.local/bin
