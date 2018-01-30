@@ -18,6 +18,7 @@ export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=~/.mypy/
 export AMQP_URL=amqp://127.0.0.1:5672
 _pathadd ${HOME}/go/bin
+_pathadd ${HOME}/.local/bin
 
 # history
 export HISTFILESIZE=10000
@@ -184,7 +185,7 @@ function rgrep() {
   #echo "opts: ${opts[@]}"
   #echo "args: ${args[@]}"
 
-  rg ${opts[@]} -g '!vendor/*' -g '!.git/*' ${args[@]}
+  rg ${opts[@]} -g '!vendor/*' -g '!.git/*' "${args[@]}"
 }
 
 function pyclean() {
@@ -221,5 +222,3 @@ complete -W "$known_hosts" scp
 
 source ~/.bashrcx
 source ~/.tptrc
-
-PATH=$PATH:${HOME}/.local/bin

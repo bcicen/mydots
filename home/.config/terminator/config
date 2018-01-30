@@ -38,8 +38,18 @@
     foreground_color = "#fdfdfd"
     icon_bell = False
     login_shell = True
-    palette = "#444444:#ff00ff:#a3d4a3:#ffffaf:#87ffff:#7fdad0:#87ffff:#878787:#878787:#ff87d7:#afffd7:#ffffaf:#afffff:#ffafdf:#afffff:#ffffff"
+    palette = "#444444:#ff00ff:#a3d4a3:#ffffaf:#87ffff:#7fdad0:#87ffff:#d7d7d7:#878787:#ff87d7:#afffd7:#ffffaf:#afffff:#ffafdf:#afffff:#ffffff"
     scrollback_lines = 20000
     scrollbar_position = hidden
     show_titlebar = False
     use_system_font = False
+  [[defaultColors]]
+    background_color = "#282828"
+    cursor_color = "#aaaaaa"
+    foreground_color = "#ebdbb2"
+    palette = "#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#ebdbb2"
+  [[lightColors]]
+    background_color = "#fbf1c7"
+    cursor_color = "#aaaaaa"
+    foreground_color = "#3c3836"
+    palette = "#fbf1c7:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#7c6f64:#928374:#9d0006:#79740e:#b57614:#076678:#8f3f71:#427b58:#3c3836"

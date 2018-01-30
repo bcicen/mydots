@@ -61,7 +61,6 @@ Plugin 'tpope/vim-jdaddy'
 Plugin 'diepm/vim-rest-console'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
-Plugin 'yuttie/comfortable-motion.vim'
 Plugin 'majutsushi/tagbar'
 "let g:vrc_curl_opts = {
   "\ '--connect-timeout' : 10,
@@ -98,7 +97,7 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 
 " Custom filetype extensions
 au BufNewFile,BufRead *.geojson set filetype=json
-au BufNewFile,BufRead Dockerfile_* set filetype=dockerfile
+au BufNewFile,BufRead Dockerfile* set filetype=dockerfile
 
 " Theme
 colorscheme vice
@@ -134,7 +133,7 @@ imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 nmap <F4> :match OverLength /\%79v.\+/<CR>
 
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+"au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 au FileType go nmap <leader>gr <Plug>(go-run)
 
 " gitv/fugitive mappings
@@ -170,8 +169,5 @@ let g:rg_command = '
   \ -g "!{.git,node_modules,vendor}/*" '
 
 command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
-
-let g:comfortable_motion_friction = 200.0
-let g:comfortable_motion_air_drag = 0.5
 
 " let g:jfmt_autofmt = 1
