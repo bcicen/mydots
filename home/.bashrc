@@ -71,6 +71,7 @@ function ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
 function dusort() { path=$@; du -hs ${path:=.}/* | sort -h; }
 function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi "$@" {} \; ; }
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
+function isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
 
 function gh-gosearch() {
   q=$@
