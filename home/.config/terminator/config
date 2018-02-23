@@ -3,12 +3,14 @@
   custom_url_handler = google-chrome-stable
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler
   inactive_color_offset = 0.89
+  title_font = InconsolataGo Nerd Font Mono 9
   title_inactive_bg_color = "#444444"
   title_inactive_fg_color = "#878787"
   title_receive_bg_color = "#444444"
   title_receive_fg_color = "#87ffff"
   title_transmit_bg_color = "#444444"
   title_transmit_fg_color = "#afffd7"
+  title_use_system_font = False
   use_custom_url_handler = True
 [keybindings]
   help = None
@@ -51,5 +53,7 @@
   [[lightColors]]
     background_color = "#fbf1c7"
     cursor_color = "#aaaaaa"
+    font = Monospace 11
     foreground_color = "#3c3836"
     palette = "#fbf1c7:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#7c6f64:#928374:#9d0006:#79740e:#b57614:#076678:#8f3f71:#427b58:#3c3836"
+    use_system_font = False

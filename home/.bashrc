@@ -134,25 +134,6 @@ function rclone() {
 
 function _parse_reponame() { python -c 'import sys; print(sys.argv[1].split("/")[-1].replace(".git",""))' $@; }
 
-function _rclone_parse() {
-  url=$1
-  case $url in
-    https://github.com*)
-      echo $url | cut -f4-5 -d\/ | _rclone_strip
-      return
-      ;;
-    git@github.com*)
-      echo $url | cut -f2 -d\: | _rclone_strip
-      return
-      ;;
-    *)
-      _echoerr "failed to parse repo url: $url"
-      ;;
-  esac
-}
-
-function _rclone_strip() { read x; echo $x | sed 's/.git//g;s/\//\ /g'; }
-
 function gdiff() { git diff --color $@ | diff-so-fancy; }
 
 function gcommit() {
@@ -166,7 +147,10 @@ function gcommit() {
     echo "no commit message provided"
     return
   }
-  git commit --date="$(TZ=:UTC date --rfc-2822)" -a -m "$commit_msg"
+  ts="$(TZ=:UTC date --rfc-2822)"
+  export GIT_AUTHOR_DATE="$ts"
+  export GIT_COMMITTER_DATE="$ts"
+  git commit -a -m "$commit_msg"
 
   prompt=$(clr_green "push?(y/N)")
   read -n1 -p "$prompt" do_push
