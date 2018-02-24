@@ -103,6 +103,15 @@ function ghfork() {
   git remote -v
 }
 
+function golnsrc() {
+  url=$(git config --get remote.origin.url)
+  path=$(echo $url | sed 's/\.git//;s/https:\/\///;s/:/\//g' | cut -f2 -d@)
+  tgt=${GOPATH}/src/${path}
+  [[ -d "$(dirname $tgt)" ]] || mkdir -v "$(dirname $tgt)"
+  [[ -e "${tgt}" ]] && { _echoerr "${tgt} exists"; return; }
+  ln -sv $(git rev-parse --show-toplevel) ${tgt}
+}
+
 function rclone() {
   local base_dir=${HOME}/repos
   [ $# != 1 ] && {
