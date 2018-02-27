@@ -148,9 +148,9 @@ function gcommit() {
     return
   }
   ts="$(TZ=:UTC date --rfc-2822)"
-  export GIT_AUTHOR_DATE="$ts"
-  export GIT_COMMITTER_DATE="$ts"
+  export GIT_AUTHOR_DATE="$ts" GIT_COMMITTER_DATE="$ts"
   git commit -a -m "$commit_msg"
+  unset GIT_COMMITTER_DATE GIT_AUTHOR_DATE
 
   prompt=$(clr_green "push?(y/N)")
   read -n1 -p "$prompt" do_push
