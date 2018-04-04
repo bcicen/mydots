@@ -158,6 +158,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " automatically save and load views/folds
 "autocmd BufWinLeave *.* mkview
 "autocmd BufWinEnter *.* silent loadview
+" open at last known cursor position, if possible
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
 
 " Custom commands
 "enables to search in all open buffers with :Search <pattern>
