@@ -209,6 +209,18 @@ function cbar() {
   fi
 }
 
+function gorunloop() {
+  target=$1
+  while :; do
+    go run $target &
+    p=$!
+    inotifywait -q -e modify $target
+    _echoout "reload"
+    kill $p $(pgrep -P $p)
+    wait
+  done
+}
+
 #autocomplete
 known_hosts=$(awk '{print $1}' ~/.ssh/known_hosts | tr ',' '\n' | cut -f1 -d\: | sed 's/\[//g;s/\]//g' | tr '\n' ' ')
 complete -W "$known_hosts" ssh
