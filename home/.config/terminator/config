@@ -31,29 +31,22 @@
 [plugins]
 [profiles]
   [[default]]
-    active_encodings = ANSI_X3.4-1968, UTF-8, ISO-8859-1
     allow_bold = False
-    background_color = "#2c2c2c"
-    background_darkness = 0.94
-    cursor_color = "#7b7b7b"
-    font = Inconsolata Medium 9
-    foreground_color = "#fdfdfd"
-    icon_bell = False
-    login_shell = True
-    palette = "#444444:#ff00ff:#a3d4a3:#ffffaf:#87ffff:#7fdad0:#87ffff:#d7d7d7:#878787:#ff87d7:#afffd7:#ffffaf:#afffff:#ffafdf:#afffff:#ffffff"
+    background_color = "#363737"
+    cursor_color = "#25C3DC"
+    font = Inconsolata Nerd Font Mono Medium 9
+    foreground_color = "#f2f2f2"
+    palette = "#2c2c2c:#c62828:#558b2e:#f9a825:#1565c1:#6a1e9a:#00838f:#ffffff:#969694:#f15250:#86bd47:#f8e63a:#77b2f6:#b963c8:#25c3dc:#ffffff"
     scrollback_lines = 20000
     scrollbar_position = hidden
     show_titlebar = False
     use_system_font = False
-  [[defaultColors]]
-    background_color = "#282828"
-    cursor_color = "#aaaaaa"
-    foreground_color = "#ebdbb2"
-    palette = "#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#ebdbb2"
-  [[lightColors]]
-    background_color = "#fbf1c7"
-    cursor_color = "#aaaaaa"
-    font = Monospace 11
-    foreground_color = "#3c3836"
-    palette = "#fbf1c7:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#7c6f64:#928374:#9d0006:#79740e:#b57614:#076678:#8f3f71:#427b58:#3c3836"
+  [[material-light]]
+    background_color = "#eeeeee"
+    cursor_color = "#25C3DC"
+    font = Inconsolata Nerd Font Mono Medium 9
+    foreground_color = "#3c3c3b"
+    palette = "#f8f8f8:#d7005f:#718c00:#ff8f01:#005f87:#6a1e9a:#3e999f:#2c2c2c:#2c2c2c:#ef5251:#90c94d:#ffa000:#4271ae:#c774c1:#3e999f:#f5f5f5"
+    scrollbar_position = hidden
+    show_titlebar = False
     use_system_font = False
