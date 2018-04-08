@@ -1,0 +1,58 @@
+[colors]
+background = #ee3d4b57
+background-alt = #444
+foreground = #dfdfdf
+foreground-alt = #b8f2ec
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[bar/worldclock]
+width = 27%
+height = 41
+offset-x = 47%
+;offset-y = 2.9%
+;radius = 4.0
+
+background = #11ffffff
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 0
+border-color = #fff
+
+module-margin = 3
+
+font-0 = "GE Inspira:pixelsize=16;1"
+
+modules-center = lax nyc lon sel
+
+[module/lax]
+type = custom/script
+exec = TZ=America/Los_Angeles date +"%a  %H:%M"
+interval = 5
+format-prefix = "LAX  "
+format-prefix-foreground = ${colors.foreground-alt}
+
+[module/nyc]
+type = custom/script
+exec = TZ=America/New_York date +"%a  %H:%M"
+interval = 5
+format-prefix = "NYC  "
+format-prefix-foreground = ${colors.foreground-alt}
+
+[module/lon]
+type = custom/script
+exec = TZ=Europe/London date +"%a  %H:%M"
+interval = 5
+format-prefix = "LON  "
+format-prefix-foreground = ${colors.foreground-alt}
+
+[module/sel]
+type = custom/script
+exec = TZ=Asia/Seoul date +"%a  %H:%M"
+interval = 5
+format-prefix = "SEL  "
+format-prefix-foreground = ${colors.foreground-alt}

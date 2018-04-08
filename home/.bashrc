@@ -29,13 +29,13 @@ bind "set completion-ignore-case on"
 
 # prompt
 export PS1_CONCAT=0
-_clrline=$(clr_magenta '─')
-function _clrbrkt() { echo "$(clr_magenta '[')$@$(clr_magenta ']')"; }
+_clrline=$(clr_ps1 '─')
+function _clrbrkt() { echo "$(clr_ps1 '[')$@$(clr_ps1 ']')"; }
 function ps1t() {
   let PS1_CONCAT++
   if (($PS1_CONCAT % 2)); then
-    PS1='$(clr_magenta ┌─=)$(_clrbrkt $(clr_white \t))${_clrline}$(_clrbrkt $(clr_white \u@\h))${_clrline}$(_clrbrkt \W)$(clr_green $(__git_ps1 "${_clrline}$(_clrbrkt $(clr_green %s))"))'
-    PS1+='\n\[$FG_MAGENTA\]└[\[$CLR_RST\] '
+    PS1='$(clr_ps1 ┌─=)$(_clrbrkt $(clr_white \t))${_clrline}$(_clrbrkt $(clr_white \u@\h))${_clrline}$(_clrbrkt \W)$(clr_green $(__git_ps1 "${_clrline}$(_clrbrkt $(clr_green %s))"))'
+    PS1+='\n$(clr_ps1 └[) '
   else
     PS1=' \[$FG_MAGENTA\][\[$CLR_RST\]'
     PS1+='\[$FG_WHITE\]\t\[$CLR_RST\]'
@@ -206,6 +206,17 @@ function cbar() {
     nohup conky -c ~/.conky/Wonky/Wonky &> /dev/null &
     sleep 1
     nohup conky -c ~/.conky/Wonky/WorldClock &> /dev/null &
+  fi
+}
+
+function pbar() {
+  if (pgrep -x polybar); then
+    killall polybar
+  else
+    nohup polybar main &> /dev/null &
+    nohup polybar net &> /dev/null &
+    sleep 1
+    nohup polybar -c ~/.config/polybar/world_clock -r worldclock &> /dev/null &
   fi
 }
 

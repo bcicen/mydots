@@ -25,6 +25,13 @@ function _clr() {
   echo "${!clr}$@${CLR_RST}"
 }
 
+function _rgb() {
+  r=$1 g=$2 b=$3; shift 3
+  echo -ne "\033[38;2;${r};${g};${b}m$@\033[0m";
+}
+
+function clr_ps1             { _rgb 194 255 249 $@; }
+
 function clr_black           { _clr FG_BLACK $@; }
 function clr_red             { _clr FG_RED $@; }
 function clr_green           { _clr FG_GREEN $@; }
