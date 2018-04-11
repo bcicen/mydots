@@ -26,7 +26,6 @@
         <property name="startup-notify" type="bool" value="true"/>
       </property>
       <property name="&lt;Primary&gt;&lt;Alt&gt;Delete" type="string" value="xflock4"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;l" type="string" value="xflock4"/>
       <property name="XF86Mail" type="string" value="exo-open --launch MailReader"/>
       <property name="XF86Display" type="string" value="xfce4-display-settings --minimal"/>
       <property name="XF86WWW" type="string" value="exo-open --launch WebBrowser"/>
@@ -34,7 +33,8 @@
       <property name="&lt;Primary&gt;Escape" type="string" value="xfdesktop --menu"/>
       <property name="override" type="bool" value="true"/>
       <property name="&lt;Alt&gt;F1" type="string" value="i3lock -c 000000"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;m" type="string" value="/bin/bash -lic &apos;cbar&apos;"/>
+      <property name="&lt;Alt&gt;XF86AudioPrev" type="string" value="xflock4"/>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;m" type="string" value="/bin/bash -lic &apos;pbar&apos;"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
@@ -115,7 +115,6 @@
       <property name="&lt;Alt&gt;F12" type="string" value="above_key"/>
       <property name="&lt;Alt&gt;F9" type="string" value="hide_window_key"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;Down" type="string" value="down_workspace_key"/>
-      <property name="&lt;Alt&gt;F8" type="string" value="resize_window_key"/>
       <property name="&lt;Super&gt;Tab" type="string" value="switch_window_key"/>
       <property name="Escape" type="string" value="cancel_key"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;End" type="string" value="move_window_next_workspace_key"/>
@@ -146,6 +145,7 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;KP_4" type="string" value="move_window_workspace_4_key"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;KP_5" type="string" value="move_window_workspace_5_key"/>
       <property name="override" type="bool" value="true"/>
+      <property name="&lt;Alt&gt;F8" type="string" value="resize_window_key"/>
     </property>
   </property>
   <property name="providers" type="array">
