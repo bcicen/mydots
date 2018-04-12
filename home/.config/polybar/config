@@ -11,7 +11,7 @@
 ;background = #ee283139
 ;background = #ee3d4b57
 background = #363737
-background-alt = #444
+background-alt = #11aaaaaa
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
@@ -28,10 +28,11 @@ indicator = "● "
 
 [bar/main]
 ;monitor = ${env:MONITOR:HDMI-1}
-width = 100%
+width = 99.8%
 height = 40
-;offset-x = 1%
-;offset-y = 1%
+offset-x = 0.2%
+offset-y = 0.2%
+radius = 2.0
 fixed-center = false
 
 background = ${colors.background}
@@ -46,20 +47,19 @@ padding-right = 2
 border-bottom-size = 1
 border-color = ${colors.background}
 
-font-0 = fixed:pixelsize=12;1
-font-1 = "GE Inspira:pixelsize=14;1"
-font-2 = "Symbola:pixelsize=25;2"
-font-3 = "Symbola:pixelsize=10;2"
-font-4 = "Symbola:pixelsize=21;2"
+font-0 = "GE Inspira:pixelsize=14;1"
+font-1 = "Symbola:pixelsize=25;2"
+font-2 = "Symbola:pixelsize=10;2"
+font-3 = "Symbola:pixelsize=21;2"
+font-4 = "GE Inspira:pixelsize=16;1"
 
 modules-left = life cpu sp memory sp wifi wifibar sp battery sp temp tempbar
-modules-right = pulseaudio sp date daybar
+modules-right = date daybar
 
 tray-position = right
 tray-padding = 2
 tray-detached = false
 tray-maxsize = 20
-
 ;tray-transparent = true
 ;tray-background = #0063ff
 
@@ -79,30 +79,27 @@ cursor-scroll = ns-resize
 
 [bar/net]
 ;monitor = ${env:MONITOR:HDMI-1}
-width = 40%
-height = 40
-offset-x = 0.5%
-offset-y = 2.9%
-radius = 4.0
+width = 24%
+height = 33
+offset-x = 36.85%
+offset-y = 0.48%
+radius = 8.0
 fixed-center = false
 
-background = ${colors.background}
+background = ${colors.background-alt}
 foreground = ${colors.foreground}
 
 line-size = 3
 line-color = #f00
 
-border-size = 1
-border-color = #00000000
-
-padding-left = 4
+padding-left = 2
 padding-right = 2
 
 font-0 = "GE Inspira:pixelsize=14;1"
 font-1 = "Symbola:pixelsize=15;0"
 font-2 = "Symbola:pixelsize=20;2"
 
-modules-left = globe lip sp wip sp dns sp tcpconn sp netrx nettx
+modules-center = globe lip sp wip sp tcpconn sp netrx nettx
 
 [module/xwindow]
 type = internal/xwindow
@@ -115,24 +112,22 @@ format = <label> | <bar-load>
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
 label = %percentage:2%
-label-font = 2
 
 bar-load-empty = ${pbars.empty}
 bar-load-fill = ${pbars.fill}
 bar-load-width = ${pbars.width}
 bar-load-indicator = ${pbars.indicator}
 
-bar-load-empty-font = 4
-bar-load-fill-font = 4
-bar-load-width-font = 4
-bar-load-indicator-font = 4
+bar-load-empty-font = 3
+bar-load-fill-font = 3
+bar-load-width-font = 3
+bar-load-indicator-font = 3
 
 [module/memory]
 type = internal/memory
 interval = 1
 format-underline = #4bffdc
 label = %percentage_used%
-label-font = 2
 format = <label> | <bar-used>
 
 bar-used-empty = ${pbars.empty}
@@ -140,10 +135,10 @@ bar-used-fill = ${pbars.fill}
 bar-used-width = ${pbars.width}
 bar-used-indicator = ${pbars.indicator}
 
-bar-used-empty-font = 4
-bar-used-fill-font = 4
-bar-used-width-font = 4
-bar-used-indicator-font = 4
+bar-used-empty-font = 3
+bar-used-fill-font = 3
+bar-used-width-font = 3
+bar-used-indicator-font = 3
 
 [module/wlan]
 type = internal/network
@@ -212,10 +207,10 @@ bar-capacity-fill = ${pbars.fill}
 bar-capacity-width = ${pbars.width}
 bar-capacity-indicator = ${pbars.indicator}
 
-bar-capacity-empty-font = 4
-bar-capacity-fill-font = 4
-bar-capacity-width-font = 4
-bar-capacity-indicator-font = 4
+bar-capacity-empty-font = 3
+bar-capacity-fill-font = 3
+bar-capacity-width-font = 3
+bar-capacity-indicator-font = 3
 
 [module/sp]
 type = custom/script
@@ -230,7 +225,7 @@ interval = 2
 exec = date "+%H:%M"
 format-suffix = " | "
 format-underline = #e3ecf2
-label-font = 2
+label-font = 5
 
 [module/daybar]
 type = custom/script
@@ -238,7 +233,7 @@ exec = ~/.config/polybar/bin/daybar.sh
 tail = true
 click-left = kill -USR1 %pid%
 format-underline = #e3ecf2
-label-font = 4
+label-font = 3
 
 [module/temp]
 type = custom/script
@@ -246,14 +241,13 @@ exec = ~/.config/polybar/bin/temp.sh text 8
 format-suffix = " | "
 interval = 2
 format-underline = #e3ecf2
-label-font = 2
 
 [module/tempbar]
 type = custom/script
 exec = ~/.config/polybar/bin/temp.sh bar 8
 interval = 2
 format-underline = #e3ecf2
-label-font = 4
+label-font = 3
 
 [module/wifi]
 type = custom/script
@@ -261,14 +255,13 @@ exec = ~/.config/polybar/bin/wireless.sh text wlp58s0
 format-suffix = " | "
 interval = 5
 format-underline = #e3ecf2
-label-font = 2
 
 [module/wifibar]
 type = custom/script
 exec = ~/.config/polybar/bin/wireless.sh bar wlp58s0
 interval = 2
 format-underline = #e3ecf2
-label-font = 4
+label-font = 3
 
 [module/vpn]
 type = custom/script
@@ -276,7 +269,7 @@ exec = pgrep -x openvpn > /dev/null && echo " "
 format-prefix = "🔒  "
 format-prefix-foreground = #4bffdc
 interval = 5
-label-font = 3
+label-font = 2
 
 [module/life]
 type = custom/script
@@ -284,7 +277,7 @@ exec = echo " "
 format-prefix = "💚 "
 format-prefix-foreground = ${colors.foreground-alt2}
 interval = 86400
-format-prefix-font = 5
+format-prefix-font = 4
 label-padding-right = 3
 
 [module/globe]

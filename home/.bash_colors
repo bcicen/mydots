@@ -25,12 +25,12 @@ function _clr() {
   echo "${!clr}$@${CLR_RST}"
 }
 
-function _rgb() {
+function _clr256() {
   r=$1 g=$2 b=$3; shift 3
-  echo -ne "\033[38;2;${r};${g};${b}m$@\033[0m";
+  echo -ne "$(_rgb $r $g $b)$@${CLR_RST}"
 }
 
-function clr_ps1             { _rgb 194 255 249 $@; }
+function _rgb() { echo -en "\033[38;2;${1};${2};${3}m"; }
 
 function clr_black           { _clr FG_BLACK $@; }
 function clr_red             { _clr FG_RED $@; }

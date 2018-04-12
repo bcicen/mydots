@@ -17,13 +17,13 @@ case $1 in
   rx)
     lastrx=$(cat $rxfile 2> /dev/null)
     change=$((${rate[0]} - ${lastrx:-0}))
-    echo "$(($change / $interval))" | numfmt --to=iec --suffix=B/s
+    echo "$(($change / $interval))" | numfmt --to=iec --suffix=b/s --format='%03.0f'
     echo ${rate[0]} > $rxfile
     ;;
   tx)
     lasttx=$(cat $txfile 2> /dev/null)
     change=$((${rate[1]} - ${lasttx:-0}))
-    echo "$(($change / $interval))" | numfmt --to=iec --suffix=B/s
+    echo "$(($change / $interval))" | numfmt --to=iec --suffix=b/s --format='%03.0f'
     echo ${rate[1]} > $txfile
     ;;
 esac

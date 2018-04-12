@@ -1,5 +1,5 @@
 [colors]
-background = #ee3d4b57
+background = #11aaaaaa
 background-alt = #444
 foreground = #dfdfdf
 foreground-alt = #b8f2ec
@@ -8,13 +8,13 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/worldclock]
-width = 27%
-height = 41
-offset-x = 47%
-;offset-y = 2.9%
-;radius = 4.0
+width = 22%
+height = 33
+offset-x = 62%
+offset-y = 0.48%
+radius = 8.0
 
-background = #11ffffff
+background = ${colors.background}
 foreground = ${colors.foreground}
 
 line-size = 0

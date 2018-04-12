@@ -29,22 +29,24 @@ bind "set completion-ignore-case on"
 
 # prompt
 export PS1_CONCAT=0
-_clrline=$(clr_ps1 '─')
+PS1_COLOR=$(_rgb 194 255 249)
+function clr_ps1 { _clr256 194 255 249 $@; }
 function _clrbrkt() { echo "$(clr_ps1 '[')$@$(clr_ps1 ']')"; }
+_clrline=$(clr_ps1 '─')
 function ps1t() {
   let PS1_CONCAT++
   if (($PS1_CONCAT % 2)); then
     PS1='$(clr_ps1 ┌─=)$(_clrbrkt $(clr_white \t))${_clrline}$(_clrbrkt $(clr_white \u@\h))${_clrline}$(_clrbrkt \W)$(clr_green $(__git_ps1 "${_clrline}$(_clrbrkt $(clr_green %s))"))'
-    PS1+='\n$(clr_ps1 └[) '
+    PS1+='\n\[$PS1_COLOR\]└[\[$CLR_RST\] '
   else
-    PS1=' \[$FG_MAGENTA\][\[$CLR_RST\]'
+    PS1=' \[$PS1_COLOR\][\[$CLR_RST\]'
     PS1+='\[$FG_WHITE\]\t\[$CLR_RST\]'
-    PS1+='\[$FG_MAGENTA\]]\[$CLR_RST\]'
-    PS1+='\[$FG_MAGENTA\]─\[$CLR_RST\]'
-    PS1+=' \[$FG_MAGENTA\][\[$CLR_RST\]'
+    PS1+='\[$PS1_COLOR\]]\[$CLR_RST\]'
+    PS1+='\[$PS1_COLOR\]─\[$CLR_RST\]'
+    PS1+='\[$PS1_COLOR\][\[$CLR_RST\]'
     PS1+='\[$FG_WHITE\]\W\[$CLR_RST\]'
-    PS1+='\[$FG_MAGENTA\]]\[$CLR_RST\]'
-    PS1+='\[$FG_MAGENTA\]─[\[$CLR_RST\] '
+    PS1+='\[$PS1_COLOR\]]\[$CLR_RST\]'
+    PS1+='\[$PS1_COLOR\]─[\[$CLR_RST\] '
   fi
 }
 ps1t
@@ -214,8 +216,8 @@ function pbar() {
     killall polybar
   else
     nohup polybar main &> /dev/null &
-    nohup polybar net &> /dev/null &
     sleep 1
+    nohup polybar net &> /dev/null &
     nohup polybar -c ~/.config/polybar/world_clock -r worldclock &> /dev/null &
   fi
 }

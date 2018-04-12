@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WIDTH=20
+WIDTH=24
 DATE_TOGGLE=0
 
 empty="○"
