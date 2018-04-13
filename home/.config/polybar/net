@@ -1,0 +1,140 @@
+;
+
+[colors]
+background = #363737
+foreground = #dfdfdf
+foreground-alt = #c2fff9
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[pbars]
+empty = "○ "
+fill = "● "
+width = 10
+indicator = "● "
+
+[bar/net]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 23%
+height = 40
+offset-x = 35.5%
+offset-y = 0.2%
+radius = 2.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+padding-left = 2
+padding-right = 2
+
+border-bottom-size = 1
+border-color = ${colors.background}
+
+font-0 = "GE Inspira:pixelsize=15;2"
+font-1 = "Symbola:pixelsize=15;0"
+font-2 = "Symbola:pixelsize=23;2"
+
+modules-left = tele lip sp wip sp tcpconn sp netrx nettx
+
+[module/sp]
+type = custom/script
+interval = 86400
+exec = echo " "
+;format-underline = #e3ecf2
+format-margin = 4
+
+[module/tele]
+type = custom/script
+exec = echo " "
+format-prefix = "✆ "
+format-prefix-foreground = ${colors.foreground-alt}
+interval = 86400
+format-prefix-font = 3
+label-padding-right = 3
+
+[module/wifi]
+type = custom/script
+exec = ~/.config/polybar/bin/wireless.sh text wlp58s0
+format-suffix = " | "
+interval = 5
+format-underline = #e3ecf2
+
+[module/wifibar]
+type = custom/script
+exec = ~/.config/polybar/bin/wireless.sh bar wlp58s0
+interval = 2
+format-underline = #e3ecf2
+label-font = 3
+
+[module/vpn]
+type = custom/script
+exec = pgrep -x openvpn > /dev/null && echo " "
+format-prefix = "🔒  "
+format-prefix-foreground = #4bffdc
+interval = 5
+label-font = 2
+
+[module/lip]
+type = custom/script
+exec = ~/.config/polybar/bin/ip.sh lip wlp58s0
+format-prefix = "LIP "
+format-prefix-foreground = ${colors.foreground-alt}
+interval = 5
+label-font = 0
+
+[module/wip]
+type = custom/script
+exec = ~/.config/polybar/bin/ip.sh wip wlp58s0
+format-prefix = "WIP "
+format-prefix-foreground = ${colors.foreground-alt}
+interval = 60
+label-font = 0
+
+[module/dns]
+type = custom/script
+exec = ~/.config/polybar/bin/ip.sh dns wlp58s0
+format-prefix = "DNS "
+format-prefix-foreground = ${colors.foreground-alt}
+interval = 5
+label-font = 0
+
+[module/tcpconn]
+type = custom/script
+exec = wc -l /proc/net/tcp | awk '{print $1}'
+format-prefix = "CONN "
+format-prefix-foreground = ${colors.foreground-alt}
+interval = 5
+
+[module/netrx]
+type = custom/script
+exec = ~/.config/polybar/bin/net.sh rx wlp58s0 5
+format-prefix = "⬃ "
+format-prefix-foreground = ${colors.foreground-alt}
+interval = 5
+label-margin-right = 3
+
+[module/nettx]
+type = custom/script
+exec = ~/.config/polybar/bin/net.sh tx wlp58s0 5
+format-prefix = "⬀ "
+format-prefix-foreground = ${colors.foreground-alt}
+interval = 5
+
+[settings]
+;format-margin = 2
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini

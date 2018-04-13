@@ -1,0 +1,74 @@
+;
+
+[colors]
+background = #363737
+background-alt = #11aaaaaa
+foreground = #dfdfdf
+foreground-alt = #87ffff
+foreground-alt2 = #c2fff9
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[bar/aux]
+width = 20.85%
+height = 40
+offset-x = 78.95%
+offset-y = 0.2%
+radius = 2.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+padding-left = 2
+padding-right = 2
+
+border-bottom-size = 1
+border-color = ${colors.background}
+
+font-0 = "GE Inspira:pixelsize=16;1"
+font-1 = "Symbola:pixelsize=10;2"
+
+modules-left = date daybar
+
+tray-position = right
+tray-padding = 2
+tray-detached = false
+tray-maxsize = 20
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/sp]
+type = custom/script
+interval = 86400
+exec = echo " "
+;format-underline = #e3ecf2
+format-margin = 4
+
+[module/date]
+type = custom/script
+interval = 2
+exec = date "+%H:%M"
+format-suffix = " | "
+format-underline = #e3ecf2
+
+[module/daybar]
+type = custom/script
+exec = ~/.config/polybar/bin/daybar.sh
+tail = true
+click-left = kill -USR1 %pid%
+format-underline = #e3ecf2
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini

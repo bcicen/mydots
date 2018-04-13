@@ -12,6 +12,7 @@ case $1 in
     ;;
   bar)
     level=$(awk 'NR==3 {print $3}' /proc/net/wireless)
+    level=${level:-0}
     ~/.config/polybar/bin/pbar ${level%.}
     ;;
 esac

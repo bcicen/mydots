@@ -30,7 +30,7 @@ bind "set completion-ignore-case on"
 # prompt
 export PS1_CONCAT=0
 PS1_COLOR=$(_rgb 194 255 249)
-function clr_ps1 { _clr256 194 255 249 $@; }
+function clr_ps1 { _clrRGB 194 255 249 $@; }
 function _clrbrkt() { echo "$(clr_ps1 '[')$@$(clr_ps1 ']')"; }
 _clrline=$(clr_ps1 '─')
 function ps1t() {
@@ -216,9 +216,9 @@ function pbar() {
     killall polybar
   else
     nohup polybar main &> /dev/null &
-    sleep 1
-    nohup polybar net &> /dev/null &
-    nohup polybar -c ~/.config/polybar/world_clock -r worldclock &> /dev/null &
+    nohup polybar -c ~/.config/polybar/net net &> /dev/null &
+    nohup polybar -c ~/.config/polybar/aux aux &> /dev/null &
+    nohup polybar -c ~/.config/polybar/world_clock worldclock &> /dev/null &
   fi
 }
 

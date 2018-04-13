@@ -39,6 +39,6 @@ while :; do
   else
     date "+%A, %B %d"
   fi
-  sleep 5 &
+  sleep 60 &
   wait
 done

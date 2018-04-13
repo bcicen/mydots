@@ -26,6 +26,11 @@ function _clr() {
 }
 
 function _clr256() {
+  code=$1; shift
+  echo -ne "\033[38;5;${code}m$@\033[0m";
+}
+
+function _clrRGB() {
   r=$1 g=$2 b=$3; shift 3
   echo -ne "$(_rgb $r $g $b)$@${CLR_RST}"
 }

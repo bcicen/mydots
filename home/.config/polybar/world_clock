@@ -1,5 +1,7 @@
+;
+
 [colors]
-background = #11aaaaaa
+background = #363737
 background-alt = #444
 foreground = #dfdfdf
 foreground-alt = #b8f2ec
@@ -8,11 +10,12 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/worldclock]
-width = 22%
-height = 33
-offset-x = 62%
-offset-y = 0.48%
-radius = 8.0
+width = 20.2%
+height = 40
+offset-x = 58.62%
+offset-y = 0.2%
+radius = 2.0
+fixed-center = false
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -20,14 +23,32 @@ foreground = ${colors.foreground}
 line-size = 0
 line-color = #f00
 
-border-size = 0
-border-color = #fff
+padding-left = 2
+padding-right = 2
 
-module-margin = 3
+border-bottom-size = 1
+border-color = ${colors.background}
 
-font-0 = "GE Inspira:pixelsize=16;1"
+font-0 = "GE Inspira:pixelsize=16;2"
+font-1 = "Symbola:pixelsize=21;2"
 
-modules-center = lax nyc lon sel
+modules-left = globe lax sp nyc sp lon sp sel
+
+[module/sp]
+type = custom/script
+interval = 86400
+exec = echo " "
+;format-underline = #e3ecf2
+format-margin = 2
+
+[module/globe]
+type = custom/script
+exec = echo " "
+format-prefix = "🌐 "
+format-prefix-foreground = #c2fff9
+interval = 86400
+format-prefix-font = 2
+label-padding-right = 3
 
 [module/lax]
 type = custom/script
@@ -56,3 +77,5 @@ exec = TZ=Asia/Seoul date +"%a  %H:%M"
 interval = 5
 format-prefix = "SEL  "
 format-prefix-foreground = ${colors.foreground-alt}
+
+; vim:ft=dosini

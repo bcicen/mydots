@@ -78,8 +78,7 @@ Plugin 'majutsushi/tagbar'
 " let g:airline_powerline_fonts = 1
 
 " Colorschemes
-" Plugin 'bcicen/vim-vice'
-Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'bcicen/vim-vice'
 
 " Git
 Plugin 'tpope/vim-fugitive'
@@ -101,8 +100,8 @@ au BufNewFile,BufRead *.geojson set filetype=json
 au BufNewFile,BufRead Dockerfile* set filetype=dockerfile
 
 " Theme
-set background=dark
-colorscheme PaperColor
+set termguicolors
+colorscheme vice
 
 " overlength
 " au BufRead,BufNewFile *.py match OverLength /\%79v.\+/
