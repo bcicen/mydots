@@ -11,9 +11,9 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/aux]
-width = 20.85%
+width = 20.3%
 height = 40
-offset-x = 78.95%
+offset-x = 79.55%
 offset-y = 0.2%
 radius = 2.0
 fixed-center = false
@@ -30,8 +30,8 @@ padding-right = 2
 border-bottom-size = 1
 border-color = ${colors.background}
 
-font-0 = "GE Inspira:pixelsize=16;1"
-font-1 = "Symbola:pixelsize=10;2"
+font-0 = "GE Inspira:pixelsize=16:weight=100;1"
+font-1 = "Symbola:pixelsize=12;2"
 
 modules-left = date daybar
 

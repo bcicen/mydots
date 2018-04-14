@@ -10,7 +10,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/worldclock]
-width = 20.2%
+width = 20.8%
 height = 40
 offset-x = 58.62%
 offset-y = 0.2%
@@ -32,7 +32,8 @@ border-color = ${colors.background}
 font-0 = "GE Inspira:pixelsize=16;2"
 font-1 = "Symbola:pixelsize=21;2"
 
-modules-left = globe lax sp nyc sp lon sp sel
+modules-left = globe
+modules-center = lax sp nyc sp lon sp sel
 
 [module/sp]
 type = custom/script
@@ -48,7 +49,6 @@ format-prefix = "🌐 "
 format-prefix-foreground = #c2fff9
 interval = 86400
 format-prefix-font = 2
-label-padding-right = 3
 
 [module/lax]
 type = custom/script

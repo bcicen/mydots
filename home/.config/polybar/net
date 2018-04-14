@@ -39,23 +39,24 @@ font-0 = "GE Inspira:pixelsize=15;2"
 font-1 = "Symbola:pixelsize=15;0"
 font-2 = "Symbola:pixelsize=23;2"
 
-modules-left = tele lip sp wip sp tcpconn sp netrx nettx
+modules-left = tele
+modules-center = lip sp wip sp tcpconn sp netrx nettx
 
 [module/sp]
 type = custom/script
 interval = 86400
 exec = echo " "
 ;format-underline = #e3ecf2
-format-margin = 4
+format-margin = 3
 
 [module/tele]
 type = custom/script
 exec = echo " "
-format-prefix = "✆ "
+format-prefix = "✆"
 format-prefix-foreground = ${colors.foreground-alt}
 interval = 86400
 format-prefix-font = 3
-label-padding-right = 3
+;label-padding-right = 3
 
 [module/wifi]
 type = custom/script

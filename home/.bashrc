@@ -215,10 +215,12 @@ function pbar() {
   if (pgrep -x polybar); then
     killall polybar
   else
-    nohup polybar main &> /dev/null &
-    nohup polybar -c ~/.config/polybar/net net &> /dev/null &
-    nohup polybar -c ~/.config/polybar/aux aux &> /dev/null &
-    nohup polybar -c ~/.config/polybar/world_clock worldclock &> /dev/null &
+    args="-q"
+    [[ "$1" == "debug" ]] && args="-r -l info"
+    polybar $args main &
+    nohup polybar $args -c ~/.config/polybar/net net &
+    nohup polybar $args -c ~/.config/polybar/aux aux &
+    nohup polybar $args -c ~/.config/polybar/world_clock worldclock &
   fi
 }
 
@@ -241,3 +243,4 @@ complete -W "$known_hosts" scp
 
 source ~/.bashrcx
 source ~/.tptrc
+source ~/.gcloudrc
