@@ -16,9 +16,9 @@ indicator = "● "
 
 [bar/net]
 ;monitor = ${env:MONITOR:HDMI-1}
-width = 23%
+width = 25%
 height = 40
-offset-x = 35.5%
+offset-x = 43.8%
 offset-y = 0.2%
 radius = 2.0
 fixed-center = false

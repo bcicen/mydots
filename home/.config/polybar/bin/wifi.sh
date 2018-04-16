@@ -8,7 +8,9 @@
 case $1 in
   text)
     essid=$(iwconfig $2 | grep ESSID | cut -f2 -d\:)
-    echo ${essid//\"/}
+    essid=${essid//\"/}
+    [[ ${#essid} -gt 20 ]] && essid="${essid:0:18}..."
+    echo $essid
     ;;
   bar)
     level=$(awk 'NR==3 {print $3}' /proc/net/wireless)

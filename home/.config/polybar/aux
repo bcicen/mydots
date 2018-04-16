@@ -11,9 +11,9 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/aux]
-width = 20.3%
+width = 5.8%
 height = 40
-offset-x = 79.55%
+offset-x = 94.1%
 offset-y = 0.2%
 radius = 2.0
 fixed-center = false
@@ -33,7 +33,7 @@ border-color = ${colors.background}
 font-0 = "GE Inspira:pixelsize=16:weight=100;1"
 font-1 = "Symbola:pixelsize=12;2"
 
-modules-left = date daybar
+modules-left = sp
 
 tray-position = right
 tray-padding = 2
@@ -59,7 +59,7 @@ format-underline = #e3ecf2
 
 [module/daybar]
 type = custom/script
-exec = ~/.config/polybar/bin/daybar.sh
+exec = ~/.config/polybar/bin/daybar.sh 10
 tail = true
 click-left = kill -USR1 %pid%
 format-underline = #e3ecf2

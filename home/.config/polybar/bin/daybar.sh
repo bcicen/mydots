@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WIDTH=24
+WIDTH=${1:-24}
 DATE_TOGGLE=0
 
 empty="○"
@@ -12,7 +12,7 @@ fill="●"
 toggle() { DATE_TOGGLE=$((($DATE_TOGGLE + 1) % 2)); }
 
 function mkbar() {
-  ((hour=10#$(date +%H)+1))
+  ((hour=10#$(date +%H)))
   [[ $((10#$(date +%M))) -gt 29 ]] && let hour++
 
   filln=$(($((WIDTH * hour)) / 24))

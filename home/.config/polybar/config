@@ -17,7 +17,7 @@ width = 10
 indicator = "● "
 
 [bar/main]
-width = 35.2%
+width = 43.5%
 height = 40
 offset-x = 0.2%
 offset-y = 0.2%
@@ -42,7 +42,7 @@ font-2 = "Symbola:pixelsize=10;2"
 font-3 = "Symbola:pixelsize=21;2"
 font-4 = "GE Inspira:pixelsize=16;1"
 
-modules-left = life cpu sp memory sp wifi wifibar sp battery sp temp tempbar
+modules-left = life cpu sp memory sp wifi wifibar sp battery sp temp tempbar sp date daybar
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -150,22 +150,6 @@ interval = 86400
 format-prefix-font = 4
 label-padding-right = 3
 
-[module/date]
-type = custom/script
-interval = 2
-exec = date "+%H:%M"
-format-suffix = " | "
-format-underline = #e3ecf2
-label-font = 5
-
-[module/daybar]
-type = custom/script
-exec = ~/.config/polybar/bin/daybar.sh
-tail = true
-click-left = kill -USR1 %pid%
-format-underline = #e3ecf2
-label-font = 3
-
 [module/temp]
 type = custom/script
 exec = ~/.config/polybar/bin/temp.sh text 8
@@ -182,15 +166,30 @@ label-font = 3
 
 [module/wifi]
 type = custom/script
-exec = ~/.config/polybar/bin/wireless.sh text wlp58s0
+exec = ~/.config/polybar/bin/wifi.sh text wlp58s0
 format-suffix = " | "
 interval = 5
 format-underline = #e3ecf2
 
 [module/wifibar]
 type = custom/script
-exec = ~/.config/polybar/bin/wireless.sh bar wlp58s0
+exec = ~/.config/polybar/bin/wifi.sh bar wlp58s0
 interval = 2
+format-underline = #e3ecf2
+label-font = 3
+
+[module/date]
+type = custom/script
+interval = 2
+exec = date "+%H:%M"
+format-suffix = " | "
+format-underline = #e3ecf2
+
+[module/daybar]
+type = custom/script
+exec = ~/.config/polybar/bin/daybar.sh 10
+tail = true
+click-left = kill -USR1 %pid%
 format-underline = #e3ecf2
 label-font = 3
 

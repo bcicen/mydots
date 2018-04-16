@@ -10,9 +10,9 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/worldclock]
-width = 20.8%
+width = 25%
 height = 40
-offset-x = 58.62%
+offset-x = 68.95%
 offset-y = 0.2%
 radius = 2.0
 fixed-center = false
@@ -40,7 +40,7 @@ type = custom/script
 interval = 86400
 exec = echo " "
 ;format-underline = #e3ecf2
-format-margin = 2
+format-margin = 3
 
 [module/globe]
 type = custom/script
