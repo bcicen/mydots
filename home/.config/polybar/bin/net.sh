@@ -7,8 +7,11 @@
 
 iface=$2
 interval=$3
+rate=(0 0) # default
 
-rate=($(ifstat -j ${iface}| jq -r ".kernel.${iface} | map_values(tostring) | .rx_bytes + \" \" + .tx_bytes"))
+grep -q up /sys/class/net/${iface}/operstate && {
+  rate=($(ifstat -j ${iface}| jq -r ".kernel.${iface} | map_values(tostring) | .rx_bytes + \" \" + .tx_bytes"))
+}
 
 rxfile="${TMP:-/tmp}/pbar-${iface}-rx"
 txfile="${TMP:-/tmp}/pbar-${iface}-tx"
