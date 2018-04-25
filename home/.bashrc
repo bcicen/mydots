@@ -19,6 +19,7 @@ export PYTHONPATH=~/.mypy/
 export AMQP_URL=amqp://127.0.0.1:5672
 _pathadd ${HOME}/go/bin
 _pathadd ${HOME}/.local/bin
+_pathadd ${HOME}/.yarn/bin
 
 # history
 export HISTFILESIZE=10000
