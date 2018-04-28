@@ -173,14 +173,8 @@ function rgrep() {
   esac
   done
 
-  if [ ${#args[@]} -eq 2 ]; then
-    ftype=${args[0]}
-    opts+=("-t${ftype}")
-    args=(${args[1]})
-  fi
-
-  #echo "opts: ${opts[@]}"
-  #echo "args: ${args[@]}"
+  echo "opts: ${opts[@]}"
+  echo "args: ${args[@]}"
 
   rg ${opts[@]} -g '!vendor/*' -g '!.git/*' "${args[@]}"
 }
