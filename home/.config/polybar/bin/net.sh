@@ -1,32 +1,40 @@
 #!/bin/bash
 
-[[ $# != 3 ]] && {
-  echo "usage: $0 {rx,tx} <interface> <interval>"
+HI_COLOR="#c2fff9"
+
+[[ $# != 2 ]] && {
+  echo "usage: $0 <interface> <interval>"
   exit 1
 }
 
-iface=$2
-interval=$3
-rate=(0 0) # default
+iface=$1
+interval=$2
+last_bytes=(0 0)
 
-grep -q up /sys/class/net/${iface}/operstate && {
-  rate=($(ifstat -j ${iface}| jq -r ".kernel.${iface} | map_values(tostring) | .rx_bytes + \" \" + .tx_bytes"))
+_fmt() { echo "$@" | numfmt --to=iec --suffix=b/s --format='%3.0f'; }
+
+_output() {
+  rx=${1:-0} tx=${2:-0}
+  echo -n "%{F${HI_COLOR}}⬃ %{F-} $(_fmt $rx)"
+  echo " %{F${HI_COLOR}}⬀ %{F-} $(_fmt $tx)"
 }
 
-rxfile="${TMP:-/tmp}/pbar-${iface}-rx"
-txfile="${TMP:-/tmp}/pbar-${iface}-tx"
+while :; do
+  # defaults (rx,tx)
+  rate=(0 0)
+  cur_bytes=(0 0)
 
-case $1 in
-  rx)
-    lastrx=$(cat $rxfile 2> /dev/null)
-    change=$((${rate[0]} - ${lastrx:-0}))
-    echo "$(($change / $interval))" | numfmt --to=iec --suffix=b/s --format='%03.0f'
-    echo ${rate[0]} > $rxfile
-    ;;
-  tx)
-    lasttx=$(cat $txfile 2> /dev/null)
-    change=$((${rate[1]} - ${lasttx:-0}))
-    echo "$(($change / $interval))" | numfmt --to=iec --suffix=b/s --format='%03.0f'
-    echo ${rate[1]} > $txfile
-    ;;
-esac
+  grep -q up /sys/class/net/${iface}/operstate || {
+    _output
+   continue
+  }
+
+  cur_bytes=($(ifstat -j ${iface}| jq -r ".kernel.${iface} | map_values(tostring) | .rx_bytes + \" \" + .tx_bytes"))
+  rx_rate=$(((${cur_bytes[0]} - ${last_bytes[0]}) / $interval))
+  tx_rate=$(((${cur_bytes[0]} - ${last_bytes[0]}) / $interval))
+
+  _output $rx_rate $tx_rate
+  last_bytes=$cur_bytes
+
+  sleep $interval
+done

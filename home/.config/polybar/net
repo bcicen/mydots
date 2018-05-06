@@ -40,7 +40,7 @@ font-1 = "Symbola:pixelsize=15;0"
 font-2 = "Symbola:pixelsize=23;2"
 
 modules-left = tele
-modules-center = lip sp wip sp tcpconn sp netrx nettx
+modules-center = lip sp wip sp tcpconn sp netrate
 
 [module/sp]
 type = custom/script
@@ -111,20 +111,11 @@ format-prefix = "CONN "
 format-prefix-foreground = ${colors.foreground-alt}
 interval = 5
 
-[module/netrx]
+[module/netrate]
 type = custom/script
-exec = ~/.config/polybar/bin/net.sh rx wlp58s0 5
-format-prefix = "⬃ "
-format-prefix-foreground = ${colors.foreground-alt}
-interval = 5
+exec = ~/.config/polybar/bin/net.sh wlp58s0 2
+tail = true
 label-margin-right = 3
-
-[module/nettx]
-type = custom/script
-exec = ~/.config/polybar/bin/net.sh tx wlp58s0 5
-format-prefix = "⬀ "
-format-prefix-foreground = ${colors.foreground-alt}
-interval = 5
 
 [settings]
 ;format-margin = 2
