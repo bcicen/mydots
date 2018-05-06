@@ -35,7 +35,7 @@ def jprint(d):
     if isinstance(d, str):
         d = json.loads(d)
 
-    if isinstance(d, (KeysView, ValuesView)):
+    if isinstance(d, (KeysView, ValuesView, set)):
         d = list(d)
 
     print(jdump(d, indent=2, sort_keys=True))
