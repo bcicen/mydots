@@ -11,7 +11,7 @@ iface=$1
 interval=$2
 last_bytes=(0 0)
 
-_fmt() { echo "$@" | numfmt --to=iec --suffix=b/s --format='%3.0f'; }
+_fmt() { echo "$@" | numfmt --to=iec --suffix=b/s --format='%3f'; }
 
 _output() {
   rx=${1:-0} tx=${2:-0}
@@ -26,15 +26,16 @@ while :; do
 
   grep -q up /sys/class/net/${iface}/operstate || {
     _output
+   sleep $interval
    continue
   }
 
   cur_bytes=($(ifstat -j ${iface}| jq -r ".kernel.${iface} | map_values(tostring) | .rx_bytes + \" \" + .tx_bytes"))
   rx_rate=$(((${cur_bytes[0]} - ${last_bytes[0]}) / $interval))
-  tx_rate=$(((${cur_bytes[0]} - ${last_bytes[0]}) / $interval))
+  tx_rate=$(((${cur_bytes[1]} - ${last_bytes[1]}) / $interval))
 
   _output $rx_rate $tx_rate
-  last_bytes=$cur_bytes
+  last_bytes=(${cur_bytes[@]})
 
   sleep $interval
 done
