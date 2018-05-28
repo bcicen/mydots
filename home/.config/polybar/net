@@ -58,20 +58,6 @@ interval = 86400
 format-prefix-font = 3
 ;label-padding-right = 3
 
-[module/wifi]
-type = custom/script
-exec = ~/.config/polybar/bin/wireless.sh text wlp58s0
-format-suffix = " | "
-interval = 5
-format-underline = #e3ecf2
-
-[module/wifibar]
-type = custom/script
-exec = ~/.config/polybar/bin/wireless.sh bar wlp58s0
-interval = 2
-format-underline = #e3ecf2
-label-font = 3
-
 [module/vpn]
 type = custom/script
 exec = pgrep -x openvpn > /dev/null && echo " "
@@ -85,7 +71,7 @@ type = custom/script
 exec = ~/.config/polybar/bin/ip.sh lip wlp58s0
 format-prefix = "LIP "
 format-prefix-foreground = ${colors.foreground-alt}
-interval = 5
+interval = 30
 label-font = 0
 
 [module/wip]
@@ -93,7 +79,7 @@ type = custom/script
 exec = ~/.config/polybar/bin/ip.sh wip wlp58s0
 format-prefix = "WIP "
 format-prefix-foreground = ${colors.foreground-alt}
-interval = 60
+interval = 90
 label-font = 0
 
 [module/dns]
@@ -101,7 +87,7 @@ type = custom/script
 exec = ~/.config/polybar/bin/ip.sh dns wlp58s0
 format-prefix = "DNS "
 format-prefix-foreground = ${colors.foreground-alt}
-interval = 5
+interval = 20
 label-font = 0
 
 [module/tcpconn]
@@ -109,7 +95,7 @@ type = custom/script
 exec = wc -l /proc/net/tcp | awk '{print $1}'
 format-prefix = "CONN "
 format-prefix-foreground = ${colors.foreground-alt}
-interval = 5
+interval = 10
 
 [module/netrate]
 type = custom/script
