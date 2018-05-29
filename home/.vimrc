@@ -46,7 +46,6 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-" Autocomplete / Syntax Highlighting
 Plugin 'fatih/vim-go'
 Plugin 'udalov/kotlin-vim'
 Plugin 'pangloss/vim-javascript'
@@ -54,7 +53,6 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'vimwiki/vimwiki'
 Plugin 'jeetsukumaran/vim-buffersaurus'
 Plugin 'bcicen/vim-jfmt'
 Plugin 'tpope/vim-jdaddy'
@@ -62,6 +60,13 @@ Plugin 'diepm/vim-rest-console'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-surround'
+Plugin 'junegunn/vim-peekaboo'
+
+" Snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
 "let g:vrc_curl_opts = {
   "\ '--connect-timeout' : 10,
   "\ '-L': '',
@@ -118,6 +123,7 @@ map <c-Up> <c-w>k
 map <c-Right> <c-w>l
 map <c-Left> <c-w>h
 map <leader>j :RopeGotoDefinition<CR>
+map <Leader>w <Esc>:w<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>n :n<CR>
 nnoremap gb :ls<CR>:b<Space>
@@ -176,3 +182,7 @@ let g:rg_command = '
 command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
 " let g:jfmt_autofmt = 1
+
+let g:UltiSnipsExpandTrigger="<c-\\>"
+
+command! RegFlush for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
