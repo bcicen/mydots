@@ -100,15 +100,3 @@ function bm() {
 }
 
 bind '"\C-b": " `__bm_search__`\e\C-e\e^\er"'
-
-#function gobench() {
-  #IFS=$'\n' a=($(go test -list=.))
-  #[[ $? -ne 0 ]] && return 1
-
-  #len=${#a[@]}
-  #[[ "$len" -lte 1 ]] && {
-    #echo ${a[@]}
-    #return 1
-  #}
-
-#}
