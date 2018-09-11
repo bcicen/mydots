@@ -67,12 +67,13 @@ alias drun='docker run --rm -ti'
 alias flog="vim ${HOME}/work/notes/$(date +%m-%d-%Y).log"
 alias vundle_install="vim +PluginInstall +qall"
 function vimp() { /usr/bin/vim -p $@; }
+function vimgo() { /usr/bin/vim -p $(find $@ -maxdepth 1 -iname "*.go" ! -iname "*_test.go"); }
 
 #functions
 function ctof() { echo "scale=1; ($1*9) / 5 + 32" | bc; }
 function ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
 function dusort() { path=$@; du -hs ${path:=.}/* | sort -h; }
-function grepnotes() { find $HOME/work/notes/ -type f -iname "*log" -exec grep -Hi "$@" {} \; ; }
+function grepnotes() { find $HOME/work/notes/ -type f -exec grep -Hi "$@" {} \; ; }
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 function isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
 
@@ -239,3 +240,7 @@ complete -W "$known_hosts" scp
 source ~/.bashrcx
 source ~/.tptrc
 source ~/.gcloudrc
+
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+export GTK_IM_MODULE=ibus

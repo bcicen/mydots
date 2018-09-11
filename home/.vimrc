@@ -101,7 +101,7 @@ syntax on
 let g:ycm_python_binary_path = '/usr/bin/python3'
 
 " Custom filetype extensions
-au BufNewFile,BufRead *.geojson set filetype=json
+au BufNewFile,BufRead *.geojson,*.jsonl set filetype=json
 au BufNewFile,BufRead Dockerfile* set filetype=dockerfile
 
 " Theme
@@ -133,8 +133,8 @@ nnoremap gv :ls<CR>:vert belowright sb<Space>
 vnoremap : y:Bsgrep <C-r>"<C-b>
 
 "insert timestamp under cursor
-nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
-imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p %Z")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p %Z")<CR>
 
 "clear 80 char overlength highlighting:
 nmap <F4> :match OverLength /\%79v.\+/<CR>

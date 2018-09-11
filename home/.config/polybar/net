@@ -15,7 +15,7 @@ width = 10
 indicator = "● "
 
 [bar/net]
-;monitor = ${env:MONITOR:HDMI-1}
+monitor = eDP1
 width = 25%
 height = 40
 offset-x = 43.8%

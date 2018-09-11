@@ -14,6 +14,9 @@
   title_use_system_font = False
   use_custom_url_handler = True
 [keybindings]
+  broadcast_all = None
+  close_term = None
+  close_window = None
   help = None
   scaled_zoom = None
   split_horiz = <Primary><Shift>z

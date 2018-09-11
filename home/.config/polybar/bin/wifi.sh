@@ -9,7 +9,7 @@ case $1 in
   text)
     essid=$(iwconfig $2 | grep ESSID | cut -f2 -d\:)
     essid=${essid//\"/}
-    [[ ${#essid} -gt 20 ]] && essid="${essid:0:18}..."
+    [[ ${#essid} -gt 14 ]] && essid="${essid:0:12}..."
     echo $essid
     ;;
   bar)
