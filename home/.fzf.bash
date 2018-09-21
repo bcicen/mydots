@@ -100,3 +100,23 @@ function bm() {
 }
 
 bind '"\C-b": " `__bm_search__`\e\C-e\e^\er"'
+
+function __tm_list_sessions() {
+  fmt='#{session_name}|#{session_group}|#{session_id}|#{session_windows}|#{session_created}'
+  tmux list-sessions -F $fmt | while read line; do
+    IFS='|' read name group id winno created <<< $line
+    echo "$name,($winno windows),(created $(date --date=@${created}))"
+  done | sort -n | column -t -s ','
+}
+
+function __tm_search__() {
+  __tm_list_sessions | fzf --ansi --multi --reverse -e
+}
+
+function tm() {
+  out=$(__tm_search__)
+  [[ ! -z "$out" ]] && {
+    id=$(echo $out | awk '{print $1}')
+    tmux attach -t $id
+  }
+}
