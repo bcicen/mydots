@@ -156,6 +156,12 @@ nmap <F9> :TagbarOpenAutoClose<CR>
 "quote single word
 nnoremap qw :silent! normal mpea"<Esc>bi"<Esc>`pl
 
+" ctrl+t for new tab
+nmap <C-t> :tabnew<CR>
+" ctrl+l/h to switch tabs
+nmap <C-l> :tabn<CR>
+nmap <C-h> :tabp<CR>
+
 " autocmd stuff
 "autocmd vimenter * NERDTree
 

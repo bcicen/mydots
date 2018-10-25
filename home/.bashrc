@@ -83,7 +83,7 @@ function gh-gosearch() {
 }
 
 function pypi-publish() {
-  pandoc README.md -o README.rst && \
+  #pandoc README.md -o README.rst && \
   python setup.py sdist && \
   python setup.py bdist_wheel --universal && \
   twine upload dist/*

@@ -101,22 +101,32 @@ function bm() {
 
 bind '"\C-b": " `__bm_search__`\e\C-e\e^\er"'
 
+TM_PATH="${HOME}/.tmux-sessions"
+
 function __tm_list_sessions() {
+  # output dead sessions
+  comm -13 <(__tm_session_names) <(ls --color=never $TM_PATH | sort) | while read name; do
+    echo "${name},(dead)"
+  done
+
+  # output live sessions
   fmt='#{session_name}|#{session_group}|#{session_id}|#{session_windows}|#{session_created}'
-  tmux list-sessions -F $fmt | while read line; do
+  tmux list-sessions -F $fmt 2> /dev/null | while read line; do
     IFS='|' read name group id winno created <<< $line
     echo "$name,($winno windows),(created $(date --date=@${created}))"
-  done | sort -n | column -t -s ','
+  done | sort
 }
 
+function __tm_session_names() { tmux list-sessions -F '#{session_name}' 2> /dev/null | sort ; }
+
 function __tm_search__() {
-  __tm_list_sessions | fzf --ansi --multi --reverse -e
+  __tm_list_sessions | column -t -s ',' | fzf --ansi --multi --reverse -e
 }
 
 function tm() {
   out=$(__tm_search__)
-  [[ ! -z "$out" ]] && {
-    id=$(echo $out | awk '{print $1}')
-    tmux attach -t $id
-  }
+  [[ -z "$out" ]] && return
+  id=$(echo $out | awk '{print $1}')
+  [[ "$(echo $out | awk '{print $2}')" == "(dead)" ]] && ${TM_PATH}/${id}
+  tmux attach -t $id
 }
