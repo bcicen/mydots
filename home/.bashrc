@@ -5,6 +5,7 @@ source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 source "$HOME/.bash_colors"
 [ -e "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
 source /usr/share/git/completion/git-prompt.sh
+source $HOME/.kubectl_completion
 
 # internal helper fn
 function _echoout() { echo "$(clr_cyan "stdout:") $@" > /dev/stdout; }
@@ -83,7 +84,7 @@ function gh-gosearch() {
 }
 
 function pypi-publish() {
-  #pandoc README.md -o README.rst && \
+  pandoc README.md -o README.rst && \
   python setup.py sdist && \
   python setup.py bdist_wheel --universal && \
   twine upload dist/*
@@ -143,17 +144,39 @@ function gdiff() { git diff --color $@ | diff-so-fancy; }
 function gcommit() {
   commit_msg=$@
   git status -s
-  [ $(echo $commit_msg| wc -w) -lt 1 ] && {
+
+  [ ${#commit_msg} -lt 1 ] && {
     prompt=$(clr_green "commit msg> ")
     read -p "$prompt" commit_msg
   }
-  [ $(echo $commit_msg| wc -w) -lt 1 ] && {
-    echo "no commit message provided"
-    return
-  }
+  [ ${#commit_msg} -lt 1 ] && { echo "no commit message provided"; return; }
+
+  __gcommit "$commit_msg"
+}
+
+function gcommiti() {
+  local commit_msg
+  files=$@
+  git diff --stat $files
+
+  prompt=$(clr_green "commit msg> ")
+  read -p "$prompt" commit_msg
+  [ ${#commit_msg} -lt 1 ] && { echo "no commit message provided"; return; }
+
+  __gcommit "$commit_msg" $files
+}
+
+function __gcommit() {
+  msg=$1; shift
+  files=$@
+
   ts="$(TZ=:UTC date --rfc-2822)"
   export GIT_AUTHOR_DATE="$ts" GIT_COMMITTER_DATE="$ts"
-  git commit -a -m "$commit_msg"
+  if [[ -z "$files" ]]; then
+    git commit -a -m "$msg"
+  else
+    git commit -m "$msg" $files
+  fi
   unset GIT_COMMITTER_DATE GIT_AUTHOR_DATE
 
   prompt=$(clr_green "push?(y/N)")
