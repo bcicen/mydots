@@ -129,6 +129,9 @@ nnoremap <Leader>n :n<CR>
 nnoremap gb :ls<CR>:b<Space>
 nnoremap gv :ls<CR>:vert belowright sb<Space>
 
+" search for matches of current visual selection
+vnoremap // y/<C-R>"<CR>
+
 " yank current selection to command line
 vnoremap : y:Bsgrep <C-r>"<C-b>
 
