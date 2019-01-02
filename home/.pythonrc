@@ -95,3 +95,8 @@ def iterfiles(d, maxdepth=None):
             if maxdepth and depth(root) > maxdepth:
                 break
             yield os.path.join(root, fname)
+
+def truncate(n, decimals=0):
+    """ truncate float at given decimal (round down) """
+    multiplier = 10 ** decimals
+    return int(int(n * multiplier) / multiplier)
