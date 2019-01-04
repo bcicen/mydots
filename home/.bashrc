@@ -188,7 +188,7 @@ function __gcommit() {
 }
 
 function rgrep() {
-  local opts args
+  local opts args o a
 
   for a in $@; do
   case $a in
@@ -197,10 +197,12 @@ function rgrep() {
   esac
   done
 
-  echo "opts: ${opts[@]}"
-  echo "args: ${args[@]}"
+  opts="${opts[@]}" args="${args[@]}"
 
-  rg ${opts[@]} -g '!vendor/*' -g '!.git/*' "${args[@]}"
+  #_echoerr "opts: $opts"
+  #_echoerr "args: $args"
+
+  rg ${opts} -g '!vendor/*' -g '!.git/*' "${args}"
 }
 
 function pyclean() {
