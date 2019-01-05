@@ -188,19 +188,16 @@ function __gcommit() {
 }
 
 function rgrep() {
-  local opts args o a
+  local opts args
 
   for a in $@; do
-  case $a in
-    -*) opts+=($a) ;;
-    *) args+=($a) ;;
-  esac
+    case $a in
+      -*) opts+=($a) ;;
+      *) args+=($a) ;;
+    esac
   done
 
   opts="${opts[@]}" args="${args[@]}"
-
-  #_echoerr "opts: $opts"
-  #_echoerr "args: $args"
 
   rg ${opts} -g '!vendor/*' -g '!.git/*' "${args}"
 }
@@ -257,10 +254,16 @@ function gorunloop() {
   done
 }
 
+__ssh_hosts() {
+  local hosts
+  hosts=$(awk '{print $1}' ~/.ssh/known_hosts | tr ',' '\n' | cut -f1 -d\: | sed 's/\[//g;s/\]//g' | tr '\n' ' ')
+  hosts+=" $(grep ^Host ~/.ssh/config | awk '{print $2}' | grep -v '*')"
+  echo $hosts
+}
+
 #autocomplete
-known_hosts=$(awk '{print $1}' ~/.ssh/known_hosts | tr ',' '\n' | cut -f1 -d\: | sed 's/\[//g;s/\]//g' | tr '\n' ' ')
-complete -W "$known_hosts" ssh
-complete -W "$known_hosts" scp
+complete -W "$(__ssh_hosts)" ssh
+complete -W "$(__ssh_hosts)" scp
 
 source ~/.bashrcx
 source ~/.tptrc
