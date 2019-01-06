@@ -99,4 +99,4 @@ def iterfiles(d, maxdepth=None):
 def truncate(n, decimals=0):
     """ truncate float at given decimal (round down) """
     multiplier = 10 ** decimals
-    return int(int(n * multiplier) / multiplier)
+    return int(n * multiplier) / multiplier
