@@ -22,7 +22,7 @@ glog() {
     git log --graph --color=always \
       --date="format:%b %e %H:%M:%S" \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cd (%cr)" "$@" |
-    fzf --ansi --multi --no-sort --reverse --query="$q" --print-query); do
+    fzf --ansi --multi --no-sort --reverse --query="$q" --print-query -e); do
     q=$(head -1 <<< "$out")
     while read sha; do
       git show --color=always $sha | less -R
@@ -100,6 +100,20 @@ function bm() {
 }
 
 bind '"\C-b": " `__bm_search__`\e\C-e\e^\er"'
+
+function __inline_help() {
+  local cmd pos=0
+  echo ${#READLINE_LINE} >> /tmp/envt
+  echo ${READLINE_POINT} >> /tmp/envt
+  while [[ $pos -lt $READLINE_POINT ]]; do
+    ch=${READLINE_LINE:$pos:$((pos+1))}
+    echo "ch[$pos:$((pos+1))]: $ch" >> /tmp/envt
+    let pos++
+  done
+  echo $cmd >> /tmp/envt
+}
+
+bind -x '"\C-n": __inline_help'
 
 TM_PATH="${HOME}/.tmux-sessions"
 

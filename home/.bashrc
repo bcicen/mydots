@@ -198,8 +198,10 @@ function rgrep() {
   done
 
   opts="${opts[@]}" args="${args[@]}"
+  _echoerr "opts: $opts"
+  _echoerr "args: $args"
 
-  rg ${opts} -g '!vendor/*' -g '!.git/*' "${args}"
+  rg ${opts} --no-ignore-vcs -g '!vendor/*' -g '!.git/*' "${args}"
 }
 
 function pyclean() {
