@@ -69,6 +69,15 @@ alias flog="vim ${HOME}/work/notes/$(date +%m-%d-%Y).log"
 alias vundle_install="vim +PluginInstall +qall"
 function vimp() { /usr/bin/vim -p $@; }
 function vimgo() { /usr/bin/vim -p $(find $@ -maxdepth 1 -iname "*.go" ! -iname "*_test.go"); }
+function vimdir() {
+  files=$(find ${@:-.} -maxdepth 5 -type f)
+  fileno=$(wc -w <<< $files)
+  [[ $fileno -ge 12 ]] && {
+    (__confirm "open $fileno files?") || return
+  }
+  echo
+  vim -p $files
+}
 
 #functions
 function ctof() { echo "scale=1; ($1*9) / 5 + 32" | bc; }
@@ -185,6 +194,14 @@ function __gcommit() {
     echo
     git push
   }
+}
+
+function __confirm() {
+  local x
+  prompt=$(clr_green "$@(y/N)")
+  read -n1 -p "$prompt" x
+  [ "$x" == "y" ] && return 0
+  return 1
 }
 
 function rgrep() {
