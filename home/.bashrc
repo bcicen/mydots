@@ -75,7 +75,6 @@ function vimdir() {
   [[ $fileno -ge 12 ]] && {
     (__confirm "open $fileno files?") || return
   }
-  echo
   vim -p $files
 }
 
@@ -188,18 +187,14 @@ function __gcommit() {
   fi
   unset GIT_COMMITTER_DATE GIT_AUTHOR_DATE
 
-  prompt=$(clr_green "push?(y/N)")
-  read -n1 -p "$prompt" do_push
-  [ "$do_push" == "y" ] && {
-    echo
-    git push
-  }
+  (__confirm "push?") || return
+  git push
 }
 
 function __confirm() {
   local x
   prompt=$(clr_green "$@(y/N)")
-  read -n1 -p "$prompt" x
+  read -n1 -p "$prompt" x; echo
   [ "$x" == "y" ] && return 0
   return 1
 }
