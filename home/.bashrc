@@ -149,6 +149,8 @@ function _parse_reponame() { python -c 'import sys; print(sys.argv[1].split("/")
 
 function gdiff() { git diff --color $@ | diff-so-fancy; }
 
+function groot() { cd $(git rev-parse --show-toplevel); }
+
 function gcommit() {
   commit_msg=$@
   git status -s
