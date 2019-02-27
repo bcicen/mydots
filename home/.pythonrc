@@ -83,7 +83,18 @@ def getsoup(url):
     import requests
     from bs4 import BeautifulSoup
     r = requests.get(url)
+    r.raise_for_status()
     return BeautifulSoup(r.text, 'html.parser')
+
+def rdl(url, fname=None):
+    import requests
+    if not fname:
+        fname = url.split('/')[-1]
+    with requests.get(url, stream=True) as r:
+        with open(fname, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                f.write(chunk)
+    return fname
 
 def chromeopen(url):
     from subprocess import call
