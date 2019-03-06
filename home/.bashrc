@@ -86,6 +86,9 @@ function grepnotes() { find $HOME/work/notes/ -type f -exec grep -Hi "$@" {} \; 
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 function isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
 
+function __is_int() { [[ "$1" =~ ^[0-9]+$ ]] && return 0 || return 1; }
+function __is_float() { [[ "$1" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]] && return 0 || return 1; }
+
 function gh-gosearch() {
   q=$@
   xdg-open "https://github.com/search?l=go&q=${q// /+}&type=Repositories&utf8=✓" 1> /dev/null
