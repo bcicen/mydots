@@ -44,6 +44,19 @@ def jprint(d):
 
     print(jdump(d, indent=2, sort_keys=True))
 
+def csvread(path):
+    import csv
+    idx, rows = 0, []
+    with open(path) as of:
+        try:
+            for row in csv.reader(of, quotechar='"'):
+                rows.append(row)
+                idx+=1
+        except Exception as ex:
+            print('error at row {idx}')
+            raise ex
+    return rows
+
 def lprint(l):
     for idx, v in enumerate(l):
         print(f'{idx}: {v}')
