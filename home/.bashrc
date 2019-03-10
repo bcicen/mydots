@@ -32,14 +32,17 @@ bind "set completion-ignore-case on"
 # prompt
 export PS1_CONCAT=0
 PS1_COLOR=$(_rgb 194 255 249)
-function clr_ps1 { _clrRGB 194 255 249 $@; }
-function _clrbrkt() { echo "$(clr_ps1 '[')$@$(clr_ps1 ']')"; }
-_clrline=$(clr_ps1 '─')
+function __ps1clr1 { _clrRGB 194 255 249 $@; }
+function __ps1clr2 { _clrRGB 020 130 110 $@; }
+function __ps1clr3 { _clrRGB 000 240 120 $@; }
+function _clrbrkt() { echo " $@ $(__ps1clr1 '›')"; }
+
 function ps1t() {
   let PS1_CONCAT++
   if (($PS1_CONCAT % 2)); then
-    PS1='$(clr_ps1 ┌─=)$(_clrbrkt $(clr_white \t))${_clrline}$(_clrbrkt $(clr_white \u@\h))${_clrline}$(_clrbrkt \W)$(clr_green $(__git_ps1 "${_clrline}$(_clrbrkt $(clr_green %s))"))'
-    PS1+='\n\[$PS1_COLOR\]└[\[$CLR_RST\] '
+    PS1='›'
+    PS1+='$(_clrbrkt \t)$(_clrbrkt $(__ps1clr2 \W))$(__git_ps1 " $(_clrbrkt $(__ps1clr3 %s))")'
+    PS1+='\n \[$PS1_COLOR\]〢\[$CLR_RST\] '
   else
     PS1=' \[$PS1_COLOR\][\[$CLR_RST\]'
     PS1+='\[$FG_WHITE\]\t\[$CLR_RST\]'
