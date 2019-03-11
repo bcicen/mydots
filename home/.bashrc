@@ -81,13 +81,19 @@ function vimdir() {
   vim -p $files
 }
 
-#functions
+# functions
 function ctof() { echo "scale=1; ($1*9) / 5 + 32" | bc; }
 function ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
 function dusort() { path=$@; du -hs ${path:=.}/* | sort -h; }
 function grepnotes() { find $HOME/work/notes/ -type f -exec grep -Hi "$@" {} \; ; }
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 function isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
+
+function hex2rgb() {
+  input=${1#\#} # strip leading #, if any
+  r=${input:0:2} g=${input:2:2} b=${input:4:2}
+  echo "$((16#$r)) $((16#$g)) $((16#$b))"
+}
 
 function __is_int() { [[ "$1" =~ ^[0-9]+$ ]] && return 0 || return 1; }
 function __is_float() { [[ "$1" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]] && return 0 || return 1; }
