@@ -95,6 +95,8 @@ function hex2rgb() {
   echo "$((16#$r)) $((16#$g)) $((16#$b))"
 }
 
+function rgb2hex() { printf '%x' $1 $2 $3; }
+
 function __is_int() { [[ "$1" =~ ^[0-9]+$ ]] && return 0 || return 1; }
 function __is_float() { [[ "$1" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]] && return 0 || return 1; }
 
