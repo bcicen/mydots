@@ -12,7 +12,7 @@ set hidden
 set relativenumber
 set tabpagemax=30
 set nocompatible
-set foldmethod=indent
+set foldmethod=manual
 set foldlevel=99
 "set foldmarker={,} foldlevel=0 foldmethod=manual
 set laststatus=2
@@ -172,8 +172,8 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " automatically save and load views/folds
-"autocmd BufWinLeave *.* mkview
-"autocmd BufWinEnter *.* silent loadview
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
 " open at last known cursor position, if possible
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
@@ -182,6 +182,8 @@ endif
 " Custom commands
 "enables to search in all open buffers with :Search <pattern>
 command! -nargs=1 Search call setqflist([]) | silent cex [] | bufdo vimgrepadd /<args>/g %
+
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go']
 
 let g:rg_command = '
   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
