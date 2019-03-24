@@ -135,6 +135,13 @@ def yaml2json(path):
         d = yaml.load(of.read())
     jprint(d)
 
+def pivot(items, key):
+    from collections import defaultdict
+    res = defaultdict(list)
+    for x in items:
+        res[x.get(key)].append(x)
+    return res
+
 if sys.argv[0].split('/')[-1] == '.pythonrc':
     if len(sys.argv) < 2:
         print('no function provided')
