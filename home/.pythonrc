@@ -6,6 +6,7 @@ readline.parse_and_bind('tab:complete')
 def logdebug():
     import logging
     logging.basicConfig(level=logging.DEBUG)
+    logging.getLogger("parso").setLevel(logging.ERROR)
     logging.getLogger(__name__).debug('debug logging enabled')
 
 class CustomJSONEncoder(json.JSONEncoder):
@@ -141,6 +142,54 @@ def pivot(items, key):
     for x in items:
         res[x.get(key)].append(x)
     return res
+
+def escape_ansi(line):
+    import re
+    ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -/]*[@-~]')
+    return ansi_escape.sub('', line)
+
+# column-aligned output
+def column(items, spacing=2):
+    ret = []
+    col_w = [ 1 for _ in items[0] ] # default minimum widths
+
+    _len = lambda x: len(escape_ansi(x))
+
+    def _maxw(line):
+        for n, txt in enumerate(line):
+            if _len(txt) > col_w[n]:
+                col_w[n] = _len(txt)
+
+    for line in items:
+        _maxw(line)
+    col_w = [ w+spacing for w in col_w ]
+
+    for line in items:
+        ret.append(''.join([ f'{txt: <{w}}' for w, txt in zip(col_w, line) ]))
+
+    return '\n'.join(ret)
+
+class DictStats(dict):
+
+    def add(self, *dicts):
+        for d in dicts:
+            self._add(d)
+
+    def unique_kv_counts(self):
+        rows = []
+        for k,v in self.items():
+            rows.append([ str(k), str(len(v)) ])
+        print(column(rows))
+
+    def _add(self, d):
+        from collections import defaultdict
+        for k,v in d.items():
+            if not isinstance(v, (str,int,float,bool)):
+                continue
+            if k not in self:
+                self[k] = defaultdict(int)
+            self[k][v] += 1
+
 
 if sys.argv[0].split('/')[-1] == '.pythonrc':
     if len(sys.argv) < 2:
