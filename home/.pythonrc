@@ -178,7 +178,9 @@ class DictStats(dict):
     def unique_kv_counts(self):
         rows = []
         for k,v in self.items():
-            rows.append([ str(k), str(len(v)) ])
+            rows.append([ str(k), len(v) ])
+        rows = [ [x[0], str(x[1])] for x in
+                sorted(rows, key=lambda x: x[1], reverse=True) ]
         print(column(rows))
 
     def _add(self, d):
