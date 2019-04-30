@@ -47,7 +47,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'fatih/vim-go'
-Plugin 'udalov/kotlin-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Valloric/YouCompleteMe'
@@ -76,11 +75,6 @@ Plugin 'honza/vim-snippets'
   "\ '-k': '',
 "\}
 
-" Status line
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'vim-airline/vim-airline-themes'
-" let g:airline_theme="vice"
-" let g:airline_powerline_fonts = 1
 
 " Colorschemes
 Plugin 'bcicen/vim-vice'
@@ -93,7 +87,6 @@ Plugin 'vektorlab/slackcat', {'rtp': 'contrib/vim-slackcat' }
 let g:slackcat_default_channel = "nam"
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'severin-lemaignan/vim-minimap'
 
 call vundle#end()
 filetype plugin indent on
@@ -172,8 +165,8 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " automatically save and load views/folds
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+"autocmd BufWinLeave *.* mkview
+"autocmd BufWinEnter *.* silent loadview
 " open at last known cursor position, if possible
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
