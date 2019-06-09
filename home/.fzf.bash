@@ -30,6 +30,61 @@ glog() {
   done
 }
 
+__reldate() {
+  local -i diff years=0 days=0 hours=0 minutes=0 seconds=0
+  diff=$(echo "$(date +%s) - $1" | bc)
+
+  while [[ $diff -ge 31536000 ]]; do
+    diff=$((diff - 31536000))
+    years+=1
+  done
+
+  while [[ $diff -ge 86400 ]]; do
+    diff=$((diff - 86400))
+    days+=1
+  done
+
+  while [[ $diff -ge 3600 ]]; do
+    diff=$((diff - 3600))
+    hours+=1
+  done
+
+  while [[ $diff -ge 60 ]]; do
+    diff=$((diff - 60))
+    minutes+=1
+  done
+
+  s=""
+  [[ $years -gt 0 ]] && s+="${years}y"
+  [[ $days -gt 0 ]] && s+=" ${days}d"
+  [[ $hours -gt 0 ]] && s+=" ${hours}h"
+  [[ $minutes -gt 0 ]] && s+=" ${minutes}m"
+  [[ $seconds -gt 0 ]] && s+=" ${seconds}s"
+
+  echo $s
+}
+
+__gstash_list() {
+  git stash list --format='%C(yellow)%gd %C(auto)[%ct] %gs' --color=always | while read line; do
+    ts=$(echo "$line" | sed 's/.*\[\([^]]*\)\].*/\1/g')
+    echo $line | sed "s/$ts/$(__reldate $ts)/"
+  done
+}
+
+# git commit browser
+gstash() {
+  local out sha q
+  while out=$(
+    __gstash_list |
+    fzf --ansi --multi --no-sort --reverse --query="$q" --print-query -e); do
+    q=$(head -1 <<< "$out")
+    while read sha; do
+      git show --color=always $sha | less -R
+    done < <(echo "$out" | awk '{print $1}')
+  done
+}
+
+
 # jump to go src dir
 function cdgo() {
   srcdir="${GOPATH}/src/"

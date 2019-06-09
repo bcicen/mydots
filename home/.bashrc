@@ -159,6 +159,8 @@ function gdiff() { git diff --color $@ | diff-so-fancy; }
 
 function groot() { cd $(git rev-parse --show-toplevel); }
 
+function gstashi() { git stash push -- $@; }
+
 function gcommit() {
   commit_msg=$@
   git status -s
