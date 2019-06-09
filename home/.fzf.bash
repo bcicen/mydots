@@ -199,3 +199,24 @@ function tm() {
   [[ "$(echo $out | awk '{print $2}')" == "(dead)" ]] && ${TM_PATH}/${id}
   tmux attach -t $id
 }
+
+function __k8s_contexts() {
+  local -i n=0
+  cur=$(kubectl config current-context)
+  for x in $@; do
+    if [[ "$x" == "$cur" ]]; then
+      echo -e "${n} \033[32m${x}\033[0m"
+    else
+      echo "${n} ${x}"
+    fi
+    n+=1
+  done
+}
+
+function k8s-context() {
+  ctx=($(kubectl config get-contexts -o='name'))
+  out=$(__k8s_contexts "${ctx[@]}" | fzf --ansi --cycle --reverse -e)
+  [[ -z "$out" ]] && return
+  idx=$(echo $out | awk '{print $1}')
+  kubectl config use-context ${ctx[$idx]}
+}
