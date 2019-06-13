@@ -1,5 +1,5 @@
-import json
 import sys
+import json
 import rlcompleter, readline
 readline.parse_and_bind('tab:complete')
 
@@ -11,9 +11,10 @@ def logdebug():
 
 class CustomJSONEncoder(json.JSONEncoder):
     def default(self, obj):
+        from uuid import UUID
         from datetime import datetime
-        if isinstance(obj, datetime):
-            return str(datetime)
+        if isinstance(obj, (UUID, datetime)):
+            return str(obj)
         if hasattr(obj, '__json__'):
             return obj.__json__()
         return json.JSONEncoder.default(self, obj)
