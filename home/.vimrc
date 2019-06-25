@@ -16,7 +16,8 @@ set foldmethod=manual
 set foldlevel=99
 "set foldmarker={,} foldlevel=0 foldmethod=manual
 set laststatus=2
-set statusline=%F%m%r%h%w[%L][%p%%][%04l,%04v]-%{fugitive#statusline()}
+let statusbase="%F%m%r%h%w[%L][%p%%][%04l,%04v]-%{fugitive#statusline()}"
+execute "set statusline=".statusbase
 "              | | | | |  |   |     |    |       |
 "              | | | | |  |   |     |    |       + current git branch
 "              | | | | |  |   |     |    + current column
@@ -48,9 +49,10 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'fatih/vim-go'
 Plugin 'pangloss/vim-javascript'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'leafgarland/typescript-vim'
+
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jeetsukumaran/vim-buffersaurus'
 Plugin 'bcicen/vim-jfmt'
@@ -61,6 +63,10 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
 Plugin 'junegunn/vim-peekaboo'
+
+" Yaml
+Plugin 'lmeijvogel/vim-yaml-helper'
+let g:vim_yaml_helper#auto_display_path = 1
 
 " Snippets
 Plugin 'SirVer/ultisnips'
