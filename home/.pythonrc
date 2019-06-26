@@ -1,7 +1,34 @@
+import os
 import sys
 import json
 import rlcompleter, readline
 readline.parse_and_bind('tab:complete')
+
+__jlogfmt = {
+  'asctime': '%(asctime)s',
+  'thread': '%(threadName)-12.12s',
+  'level': '%(levelname)-5.5s',
+  'module': '%(module)s',
+  'filename': '%(filename)s:%(lineno)d',
+  'func': '%(funcName)s',
+  'msg': '%(message)s'
+}
+
+if os.getenv('PYDEBUG'):
+    import logging
+    from tempfile import mkstemp
+
+    path = mkstemp(prefix='pylog-')[1]
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format=json.dumps(__jlogfmt),
+        handlers=[
+            logging.FileHandler(path),
+            logging.StreamHandler(sys.stdout)
+        ])
+    logging.getLogger("parso").setLevel(logging.ERROR)
+    logging.getLogger(__name__).debug(f'debug logging enabled ({path})')
+
 
 def logdebug():
     import logging
@@ -134,7 +161,7 @@ def truncate(n, decimals=0):
 def yaml2json(path):
     import yaml
     with open(path) as of:
-        d = yaml.load(of.read())
+        d = yaml.load(of.read(), Loader=yaml.FullLoader)
     jprint(d)
 
 def pivot(items, key):
