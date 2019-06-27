@@ -11,3 +11,10 @@
 	pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
 	statusall = "submodule status --recursive"
 	checkoutall = "!f(){ git submodule foreach \"git checkout $1\" && git checkout $1; }; f"
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[diff]
+	context = 5
