@@ -18,12 +18,15 @@ export VISUAL=vim
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=~/.mypy/
 export AMQP_URL=amqp://127.0.0.1:5672
+export KUBE_EDITOR=vim
+export KUBECONFIG=~/.kube/config:~/.kube/kind-config-kind
 _pathadd ${HOME}/go/bin
 _pathadd ${HOME}/.local/bin
 _pathadd ${HOME}/.yarn/bin
+_pathadd /usr/local/kubebuilder/bin
 
 # history
-export HISTFILESIZE=10000
+export HISTFILESIZE=100000
 export HISTCONTROL=ignoredups:erasedups
 # export histchars='@^#'
 
@@ -193,9 +196,9 @@ function __gcommit() {
   ts="$(TZ=:UTC date --rfc-2822)"
   export GIT_AUTHOR_DATE="$ts" GIT_COMMITTER_DATE="$ts"
   if [[ -z "$files" ]]; then
-    git commit -a -m "$msg"
+    git commit -S -a -m "$msg"
   else
-    git commit -m "$msg" $files
+    git commit -S -m "$msg" $files
   fi
   unset GIT_COMMITTER_DATE GIT_AUTHOR_DATE
 
