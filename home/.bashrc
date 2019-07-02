@@ -271,6 +271,25 @@ function pbar() {
   fi
 }
 
+function stash() {
+  local sroot=~/.stash ts=$(date +%Y.%M.%d-%H.%m.%S)
+  local sfile spath abspath
+  mkdir -p $sroot
+
+  [[ "$1" == "ls" ]] && { ls -ltrha ${sroot}; return; }
+
+  for path in $@; do
+    abspath=$(readlink -f $path)
+    spath=$(dirname $abspath)
+    spath="${sroot}/${spath#/}"
+    sfile=$(basename $abspath)
+
+    mkdir -p $spath
+    echo "cp -Rvi $path ${spath}/${sfile}-${ts}"
+    cp -Rvi $path ${spath}/${sfile}-${ts}
+  done
+}
+
 function gorunloop() {
   target=$1
   while :; do
