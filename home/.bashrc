@@ -290,6 +290,11 @@ function stash() {
   done
 }
 
+# exif aliases
+alias exift-erase="exiftool -all= -comment='0'"
+alias exift-json="exiftool -struct -j"
+alias exift-copyright="exiftool -CopyrightOwnerName='Bradley Cicenas <bradley@vektor.nyc>' -CopyrightOwnerID='bradley@vektor.nyc'"
+
 function gorunloop() {
   target=$1
   while :; do
@@ -312,6 +317,7 @@ __ssh_hosts() {
 #autocomplete
 complete -W "$(__ssh_hosts)" ssh
 complete -W "$(__ssh_hosts)" scp
+(command -v vault &> /dev/null) && complete -C $(command -v vault) vault
 
 source ~/.bashrcx
 source ~/.tptrc
