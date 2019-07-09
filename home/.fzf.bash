@@ -214,9 +214,56 @@ function __k8s_contexts() {
 }
 
 function k8s-context() {
-  ctx=($(kubectl config get-contexts -o='name'))
-  out=$(__k8s_contexts "${ctx[@]}" | fzf --ansi --cycle --reverse -e)
+  local ctx=($(kubectl config get-contexts -o='name'))
+  local out=$(__k8s_contexts "${ctx[@]}" | fzf --ansi --cycle --reverse -e)
   [[ -z "$out" ]] && return
-  idx=$(echo $out | awk '{print $1}')
+  local idx=$(echo $out | awk '{print $1}')
   kubectl config use-context ${ctx[$idx]}
 }
+
+function __gcp_configs_csv() {
+  gcloud config configurations list \
+    --flatten="[]" \
+    --format="csv(name,
+      is_active,
+      properties.core.account,
+      properties.core.project,
+      properties.compute.zone:label=DEFAULT_ZONE,
+      properties.compute.region:label=DEFAULT_REGION)"
+}
+
+function __gcp_configs() {
+  gcloud config configurations list --format="get(is_active,
+    name,
+    properties.core.account,
+    properties.core.project,
+    properties.compute.zone:label=DEFAULT_ZONE,
+    properties.compute.region:label=DEFAULT_REGION)"
+}
+
+function __gcp_contexts() {
+  local -i n=0 idx=0
+  header=(NAME ACCOUNT PROJECT DEFAULT_ZONE DEFAULT_REGION)
+
+  echo -e "\033[37m${header[0]}\t\033[0m$(__join_by_tab ${header[@]:1:7})"
+
+  __gcp_configs | while read line; do
+    idx=1
+    IFS='	' cols=($line)
+
+  if [[ "${cols[0]}" == "True" ]]; then
+    echo -e "\033[32m${cols[1]}\t\033[0m$(__join_by_tab ${cols[@]:2:7})"
+  else
+    echo -e "\033[37m${cols[1]}\t\033[0m$(__join_by_tab ${cols[@]:2:7})"
+  fi
+    echo
+  done
+}
+
+function gcp-context() {
+  out=$(__gcp_contexts | column -t -s$'\t' | fzf --ansi --cycle --reverse -e --header-lines=1)
+  [[ -z "$out" ]] && return
+  gcloud config configurations activate $(echo $out | awk '{print $1}')
+}
+
+function __join_by_tab { local IFS="	"; echo "$*"; }
