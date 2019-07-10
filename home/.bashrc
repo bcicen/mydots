@@ -259,15 +259,17 @@ function cbar() {
 }
 
 function pbar() {
+  local args mon
   if (pgrep -x polybar); then
     killall polybar
   else
     args="-q"
     [[ "$1" == "debug" ]] && args="-r -l info"
-    polybar $args main &
-    nohup polybar $args -c ~/.config/polybar/net net &
-    nohup polybar $args -c ~/.config/polybar/aux aux &
-    nohup polybar $args -c ~/.config/polybar/world_clock worldclock &
+    (xrandr | grep -q '^DP1') && mon="DP1"
+    MONITOR=$mon polybar $args main &
+    MONITOR=$mon nohup polybar $args -c ~/.config/polybar/net net &
+    MONITOR=$mon nohup polybar $args -c ~/.config/polybar/aux aux &
+    MONITOR=$mon nohup polybar $args -c ~/.config/polybar/world_clock worldclock &
   fi
 }
 

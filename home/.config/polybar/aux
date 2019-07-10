@@ -11,7 +11,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/aux]
-monitor = eDP1
+monitor = ${env:MONITOR:eDP1}
 width = 5.8%
 height = 40
 offset-x = 94.1%

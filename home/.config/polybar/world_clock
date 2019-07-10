@@ -10,7 +10,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/worldclock]
-monitor = eDP1
+monitor = ${env:MONITOR:eDP1}
 width = 25%
 height = 40
 offset-x = 68.95%
