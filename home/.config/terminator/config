@@ -36,11 +36,11 @@
 [profiles]
   [[default]]
     allow_bold = False
-    background_color = "#363737"
+    background_color = "#2b2a2a"
     cursor_color = "#25C3DC"
     font = Inconsolata Medium 9
     foreground_color = "#f2f2f2"
-    palette = "#2c2c2c:#c62828:#558b2e:#f9a825:#1565c1:#b851e3:#00838f:#ffffff:#969694:#f15250:#86bd47:#f8e63a:#77b2f6:#b963c8:#25c3dc:#ffffff"
+    palette = "#88adb4:#c62828:#558b2e:#f9a825:#1565c1:#b851e3:#00838f:#ffffff:#969694:#f15250:#86bd47:#f8e63a:#77b2f6:#b963c8:#25c3dc:#ffffff"
     scrollback_lines = 20000
     scrollbar_position = hidden
     show_titlebar = False
