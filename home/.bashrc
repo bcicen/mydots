@@ -57,7 +57,7 @@ ps1t
 alias ll='ls --color -ltrha'
 alias ls='ls --color'
 alias pps="ps -eLo user,pid,ppid,pcpu,psr,pmem,stat,start,etime,cmd"
-alias i3l='i3lock -c 000000'
+alias i3l='i3lock -c 1c1c1c'
 alias hugoserv='hugo server -v --watch --buildDrafts'
 alias docker-cleanup='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "status=exited")'
 alias stripws="sed -i.bak 's/[[:blank:]]*$//'"
