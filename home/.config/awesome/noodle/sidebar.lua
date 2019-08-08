@@ -56,6 +56,27 @@ exit:buttons(gears.table.join(
     end)
 ))
 
+-- Item configuration
+local dimmode_icon = wibox.widget.imagebox(icons.redshift)
+dimmode_icon.resize = true
+dimmode_icon.forced_width = icon_size
+dimmode_icon.forced_height = icon_size
+local dimmode_text = wibox.widget.textbox("")
+dimmode_text.font = "sans 14"
+
+local dimmode = wibox.widget{
+    dimmode_icon,
+    dimmode_text,
+    layout = wibox.layout.fixed.horizontal
+}
+dimmode:buttons(gears.table.join(
+    awful.button({ }, 1, function ()
+        sidebar.visible = false
+        dim_screen_show()
+    end)
+))
+
+
 -- Weather widget with text icons
 local weather_widget = require("noodle.weather")
 local weather_widget_icon = weather_widget:get_all_children()[2]
@@ -445,7 +466,8 @@ sidebar:setup {
         {
             {
                 exit,
-                layout = wibox.layout.fixed.vertical
+                dimmode,
+                layout = wibox.layout.fixed.horizontal
             },
             left = dpi(20),
             right = dpi(20),

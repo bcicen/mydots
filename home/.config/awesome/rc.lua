@@ -191,6 +191,9 @@ require("bars."..bar_theme_name)
 -- Exit screen
 local exit_screen = require("noodle.exit_screen")
 
+-- Exit screen
+local dim_screen = require("noodle.dim_screen")
+
 -- Start screen
 -- Have not used/tested it in a long time.
 -- Some things might not work properly.

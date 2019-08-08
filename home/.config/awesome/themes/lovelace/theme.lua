@@ -217,6 +217,12 @@ theme.sidebar_width = dpi(300)
 theme.sidebar_height = screen_height - dpi(8)
 theme.sidebar_border_radius = dpi(10)
 
+-- Dim screen
+theme.dim_screen_bg = theme.xcolor0 .. "EE"
+theme.dim_screen_fg = theme.xcolor7
+theme.dim_screen_font = "sans 20"
+theme.dim_screen_icon_size = dpi(180)
+
 -- Exit screen
 theme.exit_screen_bg = theme.xcolor0 .. "EE"
 theme.exit_screen_fg = theme.xcolor7
