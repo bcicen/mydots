@@ -112,21 +112,6 @@ function dim_screen_show()
     dim_screen.visible = true
 end
 
-dim_screen:buttons(gears.table.join(
-    -- Left click - Hide dim_screen
-    awful.button({ }, 1, function ()
-        dim_screen_hide()
-    end),
-    -- Middle click - Hide dim_screen
-    awful.button({ }, 2, function ()
-        dim_screen_hide()
-    end),
-    -- Right click - Hide dim_screen
-    awful.button({ }, 3, function ()
-        dim_screen_hide()
-    end)
-))
-
 -- buttons
 local moon = wibox.widget {
     align = "center",

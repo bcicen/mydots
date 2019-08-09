@@ -9,7 +9,8 @@ local pad = helpers.pad
 -- Some commonly used variables
 local playerctl_button_size = dpi(48)
 local icon_size = dpi(30)
-local progress_bar_width = dpi(215)
+local progress_bar_width = dpi(190)
+local progress_text_width = dpi(30)
 -- local progress_bar_margins = dpi(9)
 
 -- Helper function that changes the appearance of progress bars and their icons
@@ -35,6 +36,31 @@ local function format_progress_bar(bar, icon)
     }
     return w
 end
+
+local function format_progress_bar2(bar, icon, text)
+    icon.forced_height = icon_size
+    icon.forced_width = icon_size
+    icon.resize = true
+    bar.forced_width = progress_bar_width
+    bar.shape = gears.shape.rounded_bar
+    bar.bar_shape = gears.shape.rounded_bar
+    text.forced_width = progress_text_width
+
+    local w = wibox.widget{
+        nil,
+        {
+            icon,
+            bar,
+            text,
+            spacing = dpi(6),
+            layout = wibox.layout.fixed.horizontal
+        },
+        expand = "none",
+        layout = wibox.layout.align.horizontal
+    }
+    return w
+end
+
 
 -- Item configuration
 local exit_icon = wibox.widget.imagebox(icons.poweroff)
@@ -98,8 +124,8 @@ local weather = wibox.widget{
 
 
 local temperature_icon = wibox.widget.imagebox(icons.temperature)
-local temperature_bar = require("noodle.temperature_bar")
-local temperature = format_progress_bar(temperature_bar, temperature_icon)
+local temperature_bar, temperature_text = require("noodle.temperature_bar")()
+local temperature = format_progress_bar2(temperature_bar, temperature_icon, temperature_text)
 temperature:buttons(
     gears.table.join(
         awful.button({ }, 1, function ()

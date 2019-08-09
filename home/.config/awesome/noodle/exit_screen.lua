@@ -118,16 +118,11 @@ function exit_screen_show()
         if key == 's' then
             suspend_command()
             exit_screen_hide()
-            -- 'e' for exit
-        --elseif key == 'e' then
-            --exit_command()
+        elseif key == 'e' then
+            exit_command()
         elseif key == 'l' then
             exit_screen_hide()
             lock_command()
-        --elseif key == 'p' then
-            --poweroff_command()
-        --elseif key == 'r' then
-            --reboot_command()
         elseif key == 'escape' or key == 'q' or key == 'x' then
             sidebar.visible = true
             exit_screen_hide()

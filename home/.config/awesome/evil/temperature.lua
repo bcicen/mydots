@@ -6,7 +6,7 @@ local awful = require("awful")
 local update_interval = 15
 local temp_script = [[
   sh -c "
-  sensors | grep Package | awk '{print $4}' | cut -c 2-3
+  echo $(($(</sys/class/thermal/thermal_zone10/temp) / 1000))
   "]]
 
 -- Periodically get temperature info
