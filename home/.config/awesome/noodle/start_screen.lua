@@ -405,7 +405,7 @@ brightness_icon.forced_width = icon_size
 brightness_icon.forced_height = icon_size
 -- local brightness_icon = wibox.widget.textbox("")
 -- brightness_icon.font = "Material Design Icons 30"
-local brightness_bar = require("noodle.brightness_bar")
+local brightness_bar, brightness_text = require("noodle.brightness_bar")()
 brightness_bar.forced_width = dpi(210)
 
 local brightness = wibox.widget {

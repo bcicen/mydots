@@ -24,21 +24,14 @@ local temperature_bar = wibox.widget{
   widget        = wibox.widget.progressbar,
 }
 
-
-local temperature_bar_text = wibox.widget{
-  forced_height = dpi(10),
-  forced_width  = dpi(20),
-  align = "left",
-  valign = "center",
-  font = "Product Sans 10",
-  text = "0°C",
-  -- markup = helpers.colorize_text(symbol, color),
+local temperature_text = wibox.widget{
+  text = "0",
   widget = wibox.widget.textbox()
 }
 
 awesome.connect_signal("evil::temperature", function(value)
     temperature_bar.value = value
-    temperature_bar_text.text = tostring(value) .. "°C"
+    temperature_text.text = tostring(value)
 end)
 
-return function() return temperature_bar, temperature_bar_text end
+return function() return temperature_bar, temperature_text end

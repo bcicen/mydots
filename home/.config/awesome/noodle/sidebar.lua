@@ -13,37 +13,16 @@ local progress_bar_width = dpi(190)
 local progress_text_width = dpi(30)
 -- local progress_bar_margins = dpi(9)
 
--- Helper function that changes the appearance of progress bars and their icons
--- Create horizontal rounded bars
-local function format_progress_bar(bar, icon)
+local function format_progress_bar(bar, icon, text)
     icon.forced_height = icon_size
     icon.forced_width = icon_size
     icon.resize = true
     bar.forced_width = progress_bar_width
     bar.shape = gears.shape.rounded_bar
     bar.bar_shape = gears.shape.rounded_bar
-
-    local w = wibox.widget{
-        nil,
-        {
-            icon,
-            bar,
-            spacing = dpi(10),
-            layout = wibox.layout.fixed.horizontal
-        },
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-    }
-    return w
-end
-
-local function format_progress_bar2(bar, icon, text)
-    icon.forced_height = icon_size
-    icon.forced_width = icon_size
-    icon.resize = true
-    bar.forced_width = progress_bar_width
-    bar.shape = gears.shape.rounded_bar
-    bar.bar_shape = gears.shape.rounded_bar
+    text.font = "Product Sans 10"
+    text.align = "left"
+    text.valign = "center"
     text.forced_width = progress_text_width
 
     local w = wibox.widget{
@@ -125,7 +104,7 @@ local weather = wibox.widget{
 
 local temperature_icon = wibox.widget.imagebox(icons.temperature)
 local temperature_bar, temperature_text = require("noodle.temperature_bar")()
-local temperature = format_progress_bar2(temperature_bar, temperature_icon, temperature_text)
+local temperature = format_progress_bar(temperature_bar, temperature_icon, temperature_text)
 temperature:buttons(
     gears.table.join(
         awful.button({ }, 1, function ()
@@ -141,12 +120,12 @@ awesome.connect_signal("evil::charger", function(plugged)
         battery_icon.image = icons.battery
     end
 end)
-local battery_bar = require("noodle.battery_bar")
-local battery = format_progress_bar(battery_bar, battery_icon)
+local battery_bar, baterry_text = require("noodle.battery_bar")()
+local battery = format_progress_bar(battery_bar, battery_icon, baterry_text)
 
 local cpu_icon = wibox.widget.imagebox(icons.cpu)
-local cpu_bar = require("noodle.cpu_bar")
-local cpu = format_progress_bar(cpu_bar, cpu_icon)
+local cpu_bar, cpu_text = require("noodle.cpu_bar")()
+local cpu = format_progress_bar(cpu_bar, cpu_icon, cpu_text)
 
 cpu:buttons(
     gears.table.join(
@@ -159,8 +138,8 @@ cpu:buttons(
 ))
 
 local ram_icon = wibox.widget.imagebox(icons.ram)
-local ram_bar = require("noodle.ram_bar")
-local ram = format_progress_bar(ram_bar, ram_icon)
+local ram_bar, ram_text = require("noodle.ram_bar")()
+local ram = format_progress_bar(ram_bar, ram_icon, ram_text)
 
 ram:buttons(
     gears.table.join(
@@ -340,8 +319,8 @@ search:buttons(gears.table.join(
 ))
 
 local volume_icon = wibox.widget.imagebox(icons.volume)
-local volume_bar = require("noodle.volume_bar")
-local volume = format_progress_bar(volume_bar, volume_icon)
+local volume_bar, volume_text = require("noodle.volume_bar")()
+local volume = format_progress_bar(volume_bar, volume_icon, volume_text)
 
 volume:buttons(gears.table.join(
     -- Left click - Mute / Unmute

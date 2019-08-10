@@ -24,8 +24,14 @@ local brightness_bar = wibox.widget{
   widget        = wibox.widget.progressbar,
 }
 
+local brightness_text = wibox.widget{
+  text = "0",
+  widget = wibox.widget.textbox()
+}
+
 awesome.connect_signal("evil::brightness", function (value)
     brightness_bar.value = value
+    brightness_text.text = tostring(value)
 end)
 
-return brightness_bar
+return function() return brightness_bar, brightness_text end

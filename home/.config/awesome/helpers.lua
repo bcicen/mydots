@@ -253,10 +253,17 @@ function helpers.float_and_edge_snap(c, direction)
     end
 end
 
--- Rounds a number to any number of decimals
 function helpers.round(number, decimals)
     local power = 10 ^ decimals
     return math.floor(number * power) / power
+end
+
+function helpers.roundToInt(float)
+    local int, part = math.modf(float)
+    if float == math.abs(float) and part >= .5 then return int+1    -- positive float
+    elseif part <= -.5 then return int-1                            -- negative float
+    end
+    return int
 end
 
 local volume_get_cmd = "pactl list sinks | grep -m 1 'Volume:' | awk '{print $5}' | cut -d '%' -f1 "

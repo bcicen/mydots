@@ -18,7 +18,8 @@ local weather_details_script = [[
     LOC="]]..latlon..[["
     UNITS="]]..units..[["
   
-    weather=$(curl -sf "https://api.darksky.net/forecast/$KEY/$LOC?units=$UNITS")
+    weather=$(cat /home/bradley/Downloads/weather.json)
+    #weather=$(curl -sf "https://api.darksky.net/forecast/$KEY/$LOC?units=$UNITS")
   
     if [ ! -z "$weather" ]; then
         weather_temp=$(echo "$weather" | jq -r ".currently.temperature" | cut -d "." -f1)

@@ -26,6 +26,11 @@ local volume_bar = wibox.widget{
     widget        = wibox.widget.progressbar,
 }
 
+local volume_text = wibox.widget{
+  text = "0",
+  widget = wibox.widget.textbox()
+}
+
 awesome.connect_signal("evil::volume", function(volume, muted)
     local bg_color
     if muted then
@@ -38,6 +43,7 @@ awesome.connect_signal("evil::volume", function(volume, muted)
     volume_bar.value = volume
     volume_bar.color = fill_color
     volume_bar.background_color = bg_color
+    volume_text.text = tostring(volume)
 end)
 
-return volume_bar
+return function() return volume_bar, volume_text end

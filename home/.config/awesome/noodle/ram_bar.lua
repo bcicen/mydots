@@ -1,6 +1,7 @@
 local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local helpers = require("helpers")
 
 -- Set colors
 local active_color = beautiful.ram_bar_active_color or "#5AA3CC"
@@ -24,9 +25,15 @@ local ram_bar = wibox.widget{
     widget        = wibox.widget.progressbar,
 }
 
+local ram_text = wibox.widget{
+  text = "0",
+  widget = wibox.widget.textbox()
+}
+
 awesome.connect_signal("evil::ram", function(used, total)
     local used_ram_percentage = (used / total) * 100
     ram_bar.value = used_ram_percentage
+    ram_text.text = tostring(helpers.roundToInt(used_ram_percentage))
 end)
 
-return ram_bar
+return function() return ram_bar, ram_text end
