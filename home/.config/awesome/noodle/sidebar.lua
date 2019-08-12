@@ -9,8 +9,8 @@ local pad = helpers.pad
 -- Some commonly used variables
 local playerctl_button_size = dpi(48)
 local icon_size = dpi(30)
-local progress_bar_width = dpi(190)
-local progress_text_width = dpi(30)
+local progress_bar_width = dpi(220)
+local progress_text_width = dpi(25)
 -- local progress_bar_margins = dpi(9)
 
 local function format_progress_bar(bar, icon, text)
@@ -31,7 +31,7 @@ local function format_progress_bar(bar, icon, text)
             icon,
             bar,
             text,
-            spacing = dpi(6),
+            spacing = dpi(8),
             layout = wibox.layout.fixed.horizontal
         },
         expand = "none",
