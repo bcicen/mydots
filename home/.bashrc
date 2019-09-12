@@ -86,6 +86,14 @@ function grepnotes() { find $HOME/work/notes/ -type f -exec grep -Hi "$@" {} \; 
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 function isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
 
+function monbrite() {
+  [[ $# -eq 0 ]] && {
+    sudo ddccontrol -r 0x10 dev:/dev/i2c-7 | tail -n +25
+    return
+  }
+  sudo ddccontrol -r 0x10 -w $1 dev:/dev/i2c-7 | tail -n +25
+}
+
 function hex2rgb() {
   input=${1#\#} # strip leading #, if any
   r=${input:0:2} g=${input:2:2} b=${input:4:2}
