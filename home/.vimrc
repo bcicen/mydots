@@ -47,10 +47,10 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'fatih/vim-go'
 Plugin 'pangloss/vim-javascript'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'jasontbradshaw/pigeon.vim'
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'
@@ -63,6 +63,14 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
 Plugin 'junegunn/vim-peekaboo'
+
+" Go
+Plugin 'fatih/vim-go'
+"let g:go_debug = ['lsp']
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+"au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <leader>gr <Plug>(go-run)
+
 
 " Yaml
 Plugin 'lmeijvogel/vim-yaml-helper'
@@ -102,6 +110,7 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 " Custom filetype extensions
 au BufNewFile,BufRead *.geojson,*.jsonl set filetype=json
 au BufNewFile,BufRead Dockerfile* set filetype=dockerfile
+au BufRead,BufNewFile *.peg set ft=pigeon
 
 " Theme
 set termguicolors
@@ -127,6 +136,7 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>n :n<CR>
 nnoremap gb :ls<CR>:b<Space>
 nnoremap gv :ls<CR>:vert belowright sb<Space>
+nnoremap <Leader>; :noh<CR>
 
 " search for matches of current visual selection
 vnoremap // y/<C-R>"<CR>
@@ -140,10 +150,6 @@ imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p %Z")<CR>
 
 "clear 80 char overlength highlighting:
 nmap <F4> :match OverLength /\%79v.\+/<CR>
-
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-"au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-au FileType go nmap <leader>gr <Plug>(go-run)
 
 " gitv/fugitive mappings
 nnoremap <F5> g:nf_map_next <CR>
