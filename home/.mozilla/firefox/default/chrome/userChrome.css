@@ -1,0 +1,153 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* #tabbrowser-tabs, #navigator-toolbox, menuitem, menu, ... */
+* {
+  font-size: 14px !important;
+}
+
+.tabmail-tabs *|tab {
+ font-size: 18px !important;
+ height:    25px !important;
+}
+
+/* exception for badge on adblocker */
+.toolbarbutton-badge {
+    font-size: 8px !important;
+}
+
+/*
+ * Compact findbar at the top of the window
+ *
+ * Contributor(s): Madis0
+ */
+
+.browserContainer > findbar {
+  -moz-box-ordinal-group: 0;
+  position: fixed !important;
+  right: 1em;
+  border: 1px solid threedshadow !important;
+
+  /* Hide the "border" at the top by removing the box-shadow and background-image */
+  border: 2px solid threedshadow !important;
+  border-top: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  background-color: #202020ff !important;
+  color: #FF55B0 !important;
+  font-weight: 600;
+
+  /* Uncomment to add a transition from the top */
+  transition: 400ms !important;
+  z-index: 0 !important;
+}
+
+.findbar-button {
+  outline: none !important;
+  text-transform: lowercase;
+  font-variant:small-caps;
+}
+
+.findbar-button:not([disabled="true"]):-moz-any([checked="false"], :hover) {
+  background-color: #202020ff !important;
+  outline: 2px #ddddddfef solid !important;
+  -moz-outline-radius: 5px;
+}
+
+.findbar-button:not([disabled="true"]):-moz-any([checked="true"], :hover:active) {
+  background-color: #202020ff !important;
+  outline: 2px #ffffffef solid !important;
+  -moz-outline-radius: 5px;
+}
+
+.browserContainer > findbar textbox {
+  background-color: #202020ff !important;
+  color: #FF55B0 !important;
+}
+
+.findbar-textbox {
+  border: 2px solid var(--lwt-toolbar-field-border-color, ThreeDShadow) !important;
+}
+
+.findbar-find-status {
+  display: none;
+}
+
+.findbar-find-status, .found-matches {
+    color: GrayText;
+    margin-top: 10px !important;
+    padding-bottom: 10px !important;
+    margin-inline-start: 6px !important;
+}
+
+/* Margin from top when hidden (necessary for the transition to work) */
+/*findbar[hidden]{ margin-top: -2em !important; }*/
+
+/* Aligns the close button to the center */
+.findbar-closebutton {
+  margin-inline-start: 0.5em !important;
+  vertical-align: middle !important;
+  margin-bottom: 0.25em !important;
+  height: inherit !important;
+}
+
+/* Prevent tab overflow as long as possible without making them hard to click */
+.tabbrowser-tab {
+  min-width: 1em !important;
+  clip-width: 1em !important;
+}
+
+.tabbrowser-tab[visuallyselected="true"] {
+  color: inherit !important; /* Use background tab text color for foreground tabs */
+}
+
+.tab-background[selected=true] {
+  background-color: transparent !important; /* Make selected tab bg transparent */
+}
+
+.tab-line {
+  -moz-box-ordinal-group: 2; /* Move the line to the bottom */
+}
+
+.tab-line[selected=true] {
+  background-color: white !important; /* Make the line white, remove this for default color */
+}
+
+.tabbrowser-tab .tab-close-button {
+  display: none !important;
+}
+
+[uidensity="compact"]:root {
+  --tab-min-height: 22px !important;
+  --newtab-margin: -3px 0 -3px -3px !important;
+  --toolbarbutton-inner-padding: 4px !important;
+}
+
+:root[uidensity="compact"] #tabbrowser-tabs {
+  --tab-min-height: var(--tab-min-height) !important;
+}
+
+.tabbrowser-tab {
+  max-height: var(--tab-min-height) !important;
+}
+
+.tabs-newtab-button{
+  margin: var(--newtab-margin) !important;
+}
+
+.tab-throbber:not([pinned]), .tab-sharing-icon-overlay:not([pinned]), .tab-icon-pending:not([pinned]), .tab-icon-image:not([pinned]) {
+    margin-inline-end: 6px !important;
+}
+
+.tab-throbber, .tab-throbber-tabslist, .tab-icon-pending, .tab-icon-image, .tab-sharing-icon-overlay {
+    height: 14px !important;
+    width: 14px !important;
+}
+
+/*tab .tab-icon, .tab-icon-image {
+  filter: grayscale(1) brightness(0.7) contrast(1); /* Remove invert(1) to make it dark */
+}*/
+
+/*  url bar */
+.urlbar-history-dropmarker, #pageActionButton, .share-more-button {
+  display: none !important;
+}
