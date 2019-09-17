@@ -16,18 +16,23 @@ source "/home/bradley/.fzf/shell/key-bindings.bash"
 # ------------
 
 # git commit browser
-glog() {
-  local out sha q
-  while out=$(
-    git log --graph --color=always \
-      --date="format:%b %e %H:%M:%S" \
-      --format="%C(auto)%h%d %s %C(black)%C(bold)%cd (%cr)" "$@" |
-    fzf --ansi --multi --no-sort --reverse --query="$q" --print-query -e); do
-    q=$(head -1 <<< "$out")
-    while read sha; do
-      git show --color=always $sha | less -R
-    done < <(sed '1d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
-  done
+__fzf() {
+  branch=$(git status 2> /dev/null | sed 's/On branch //;q')
+  opts=( +s -e -i --reverse --cycle --prompt="${branch}> " )
+  [[ -v FZMP_FZF_OPTIONS ]] && opts=( $FZMP_FZF_OPTIONS )
+  command fzf "${opts[@]}" \
+    --inline-info \
+    --ansi \
+    "$@"
+}
+
+glog() { 
+  local show="git show --color=always \"\$(grep -m1 -o \"[a-f0-9]\{7\}\" <<< {})\""
+  __fzf -e --no-sort --tiebreak=index \
+    --bind="enter:execute:$show | less -R" \
+    --preview="$show" \
+  < <(git log --graph --color=always \
+    --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@")
 }
 
 __reldate() {
