@@ -18,7 +18,7 @@ local weather_details_script = [[
     LOC="]]..latlon..[["
     UNITS="]]..units..[["
   
-    weather=$(cat /home/bradley/Downloads/weather.json)
+    weather=$(cat /home/bradley/work/bcicen/notebooks/forecast/weather.json)
     #weather=$(curl -sf "https://api.darksky.net/forecast/$KEY/$LOC?units=$UNITS")
   
     if [ ! -z "$weather" ]; then

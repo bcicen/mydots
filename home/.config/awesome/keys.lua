@@ -2,8 +2,8 @@ local awful = require("awful")
 local naughty = require("naughty")
 local gears = require("gears")
 local beautiful = require("beautiful")
-
 local helpers = require("helpers")
+local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 local keys = {}
 
@@ -33,9 +33,6 @@ keys.desktopbuttons = gears.table.join(
 
     -- Right click - Show app drawer
     awful.button({ }, 3, function () mymainmenu:toggle() end),
-    --awful.button({ }, 3, function ()
-        --app_drawer_show()
-    --end),
 
     -- Middle button - Toggle start scren
     awful.button({ }, 2, function ()
@@ -69,8 +66,7 @@ keys.desktopbuttons = gears.table.join(
 
 -- {{{ Key bindings
 keys.globalkeys = gears.table.join(
-    --awful.key({ superkey,           }, "s",      hotkeys_popup.show_help,
-    --{description="show help", group="awesome"}),
+    awful.key({ altkey }, "h", hotkeys_popup.show_help, {description="show help", group="awesome"}),
     --awful.key({ superkey,           }, "comma",   awful.tag.viewprev,
     --{description = "view previous", group = "tag"}),
     --awful.key({ superkey,           }, "period",  awful.tag.viewnext,
@@ -103,25 +99,25 @@ keys.globalkeys = gears.table.join(
         {description = "focus right", group = "client"}),
 
     -- Focus client by direction (arrow keys)
-    awful.key({ superkey }, "Down",
+    awful.key({ altkey }, "Down",
         function()
             awful.client.focus.bydirection("down")
             if client.focus then client.focus:raise() end
         end,
         {description = "focus down", group = "client"}),
-    awful.key({ superkey }, "Up",
+    awful.key({ altkey }, "Up",
         function()
             awful.client.focus.bydirection("up")
             if client.focus then client.focus:raise() end
         end,
         {description = "focus up", group = "client"}),
-    awful.key({ superkey }, "Left",
+    awful.key({ altkey }, "Left",
         function()
             awful.client.focus.bydirection("left")
             if client.focus then client.focus:raise() end
         end,
         {description = "focus left", group = "client"}),
-    awful.key({ superkey }, "Right",
+    awful.key({ altkey }, "Right",
         function()
             awful.client.focus.bydirection("right")
             if client.focus then client.focus:raise() end
@@ -130,13 +126,13 @@ keys.globalkeys = gears.table.join(
 
     -- Focus client by index (cycle through clients)
     -- Double tap: choose client with rofi
-    awful.key({ superkey }, "Tab",
+    awful.key({ altkey }, "Tab",
         function ()
             awful.client.focus.byidx( 1)
         end,
         {description = "focus next by index", group = "client"}
     ),
-    awful.key({ superkey, shiftkey }, "Tab",
+    awful.key({ altkey, shiftkey }, "Tab",
         function ()
             awful.client.focus.byidx(-1)
         end,
