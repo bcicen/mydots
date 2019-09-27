@@ -273,7 +273,7 @@ function pbar() {
   else
     args="-q"
     [[ "$1" == "debug" ]] && args="-r -l info"
-    (xrandr | grep -q '^DP1') && mon="DP1"
+    (xrandr | grep -q '^DP1 connected') && mon="DP1"
     MONITOR=$mon polybar $args main &
     MONITOR=$mon nohup polybar $args -c ~/.config/polybar/net net &
     MONITOR=$mon nohup polybar $args -c ~/.config/polybar/aux aux &
@@ -298,6 +298,21 @@ function stash() {
     echo "cp -Rvi $path ${spath}/${sfile}-${ts}"
     cp -Rvi $path ${spath}/${sfile}-${ts}
   done
+}
+
+function tgz() {
+  [[ $# -le 1 ]] && {
+    echo "usage: tgz <archive.tgz> [<path>...]"
+    return
+  }
+  local target=$1
+  local -i total
+  shift
+  echo "calculating..."
+  for path in $@; do
+    total+=$(du -sb $path | awk '{print $1}')
+  done
+  tar cf - $@ -P | pv -s $total | gzip > $target
 }
 
 # exif aliases
