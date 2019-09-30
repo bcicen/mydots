@@ -315,6 +315,29 @@ function tgz() {
   tar cf - $@ -P | pv -s $total | gzip > $target
 }
 
+function kill-tabs() {
+  kill -9 $(cpids $(pgrep firefox))
+  /bin/kill-tabs
+}
+
+function cpids() {
+  local -A cids
+
+  while read pid ppid;do
+    cids[$ppid]+=" $pid"
+  done < <(ps -e -o pid= -o ppid=)
+
+  walk() {
+    for i in ${cids[$1]};do
+      echo $i; walk $i
+    done
+  }
+
+  for i in "$@";do
+    walk $i
+  done
+}
+
 # exif aliases
 alias exift-erase="exiftool -all= -comment='0'"
 alias exift-json="exiftool -struct -j"
