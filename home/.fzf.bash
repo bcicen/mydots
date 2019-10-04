@@ -26,11 +26,19 @@ __fzf() {
     "$@"
 }
 
+gpreview() {
+  local showfmt='%C(auto)%H [%C(cyan)%G?%C(auto)] %n%an <%ae> %n%ad %C(black)%C(bold)| %cr%C(auto) %n%n %B'
+  git show --color=always -q --format="${showfmt}" $@
+  git diff --stat "$@^!"
+}
+
 glog() { 
-  local show="git show --color=always \"\$(grep -m1 -o \"[a-f0-9]\{7\}\" <<< {})\""
-  __fzf -e --no-sort --tiebreak=index \
+  local show="~/.bin/gshow.sh -f \"\$(grep -m1 -o \"[a-f0-9]\{7\}\" <<< {})\""
+  local prev="~/.bin/gshow.sh \"\$(grep -m1 -o \"[a-f0-9]\{7\}\" <<< {})\""
+  __fzf -e --no-sort --no-mouse --tiebreak=index \
     --bind="enter:execute:$show | less -R" \
-    --preview="$show" \
+    --preview="$prev" \
+    --preview-window=down \
   < <(git log --graph --color=always \
     --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@")
 }
