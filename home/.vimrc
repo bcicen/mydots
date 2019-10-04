@@ -137,6 +137,7 @@ nnoremap <Leader>n :n<CR>
 nnoremap gb :ls<CR>:b<Space>
 nnoremap gv :ls<CR>:vert belowright sb<Space>
 nnoremap <Leader>; :noh<CR>
+nnoremap <Leader>' :set ic!<CR>
 
 " search for matches of current visual selection
 vnoremap // y/<C-R>"<CR>

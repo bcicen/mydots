@@ -36,7 +36,7 @@
 [profiles]
   [[default]]
     allow_bold = False
-    background_color = "#2b2a2a"
+    background_color = "#2e2e2d"
     cursor_color = "#25C3DC"
     font = Inconsolata Medium 9
     foreground_color = "#f2f2f2"
@@ -46,7 +46,7 @@
     show_titlebar = False
     use_system_font = False
   [[material-dark]]
-    background_color = "#2e2e2d"
+    background_color = "#1a1a1a"
     cursor_color = "#25C3DC"
     foreground_color = "#f2f2f2"
     palette = "#2c2c2c:#c62828:#73d216:#f9a825:#1565c1:#6a1e9a:#00838f:#ffffff:#969694:#f15250:#86bd47:#f8e63a:#77b2f6:#b963c8:#25c3dc:#ffffff"
