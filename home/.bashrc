@@ -63,6 +63,7 @@ alias docker-cleanup='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "
 alias stripws="sed -i.bak 's/[[:blank:]]*$//'"
 alias pbcopy='xsel --clipboard --input'
 alias drun='docker run --rm -ti'
+dbuild() { docker build -t ${1-test} .; }
 
 #vim aliases
 alias flog="vim ${HOME}/work/notes/$(date +%m-%d-%Y).log"
