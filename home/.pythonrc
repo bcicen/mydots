@@ -158,6 +158,11 @@ def truncate(n, decimals=0):
     multiplier = 10 ** decimals
     return int(n * multiplier) / multiplier
 
+def yread(path):
+    import yaml
+    with open(path) as of:
+        return yaml.load(of.read(), Loader=yaml.FullLoader)
+
 def yaml2json(path):
     import yaml
     with open(path) as of:
