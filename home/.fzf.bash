@@ -144,7 +144,7 @@ function __bm_rm__() {
 }
 
 function __bm_search__() {
-  cat $BM_PATH | fzf --ansi --multi --reverse -e
+  cat $BM_PATH | sed "s/${HOME//\//\\\/}/~/g" | fzf --ansi --multi --reverse -e
 }
 
 function __bm_short_path() { echo ${@//$HOME/\~} ; }
@@ -164,7 +164,7 @@ function bm() {
   }
 
   out=$(__bm_search__)
-  [[ ! -z "$out" ]] && cd $out
+  [[ ! -z "$out" ]] && cd ${out//\~/$HOME}
 }
 
 bind '"\C-b": " `__bm_search__`\e\C-e\e^\er"'
