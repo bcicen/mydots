@@ -20,6 +20,12 @@ export PYTHONPATH=~/.mypy/
 export AMQP_URL=amqp://127.0.0.1:5672
 export KUBE_EDITOR=vim
 export KUBECONFIG=~/.kube/config:~/.kube/kind-config-kind
+
+export NPM_PACKAGES="$HOME/.npm-packages"
+_pathadd ${NPM_PACKAGES}/bin
+export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
 _pathadd ${HOME}/go/bin
 _pathadd ${HOME}/.local/bin
 _pathadd ${HOME}/.yarn/bin
@@ -118,6 +124,13 @@ function pypi-publish() {
   twine upload dist/*
 }
 
+# open working repo ci jobs in browser
+function glab-ci() {
+  local group=$(dirname $(git remote get-url origin) | cut -f2 -d\:)
+  local rname=$(basename $(git remote get-url origin) | sed 's/\.git//g')
+  firefox "https://gitlab.com/${group}/${rname}/-/jobs"
+}
+
 # open working gh repo in browser
 function ghopen() {
   arg=$1
@@ -168,10 +181,23 @@ function rclone() {
 function _parse_reponame() { python -c 'import sys; print(sys.argv[1].split("/")[-1].replace(".git",""))' $@; }
 
 function gdiff() { git diff --color $@ | diff-so-fancy; }
-
 function groot() { cd $(git rev-parse --show-toplevel); }
-
 function gstashi() { git stash push -- $@; }
+function gbranch() {
+  local opts
+  [[ -z "$1" ]] && { echo "no branch provided"; return; }
+
+  (__gbranches | grep -q -x $1) || {
+    (__confirm "create new branch?") || return
+    opts+="-b"
+  }
+
+  git checkout $opts $1;
+}
+
+#function __gbranches() { git branch -a --no-color | sed 's/\*//g;s/\ //g'; }
+
+#complete -W "$(__gbranches)" gbranch
 
 function gcommit() {
   commit_msg=$@
