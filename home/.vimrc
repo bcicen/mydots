@@ -102,6 +102,42 @@ let g:slackcat_default_channel = "nam"
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-unimpaired'
 
+" TERRAFORM
+Plugin 'hashivim/vim-terraform'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'juliosueiras/vim-terraform-completion'
+
+" Syntastic Config
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:go_fmt_fail_silently = 0
+let g:go_list_type = "quickfix"
+let g:syntastic_quiet_messages = { "level": "warnings" }
+let g:pymode_lint_on_write = 1
+
+" (Optional)Remove Info(Preview) window
+set completeopt-=preview
+
+" (Optional)Hide Info(Preview) window after completions
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" (Optional) Enable terraform plan to be include in filter
+let g:syntastic_terraform_tffilter_plan = 1
+
+" (Optional) Default: 0, enable(1)/disable(0) plugin's keymapping
+let g:terraform_completion_keys = 1
+
+" (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
+let g:terraform_registry_module_completion = 0
+
+
 call vundle#end()
 filetype plugin indent on
 syntax on
@@ -167,6 +203,8 @@ nnoremap qw :silent! normal mpea"<Esc>bi"<Esc>`pl
 
 " ctrl+t for new tab
 nmap <C-t> :tabnew<CR>
+" ctrl+d close tab
+nmap <C-d> :q<CR>
 " ctrl+l/h to switch tabs
 nmap <C-l> :tabn<CR>
 nmap <C-h> :tabp<CR>
