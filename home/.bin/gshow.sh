@@ -1,15 +1,18 @@
 #!/bin/bash
 
-gshow() {
-  local full
+__gshow_header() {
   local showfmt='%C(auto)%H [%C(cyan)%G?%C(auto)] %n%an <%ae> %n%ad %C(black)%C(bold)| %cr%C(auto) %n%n %B'
-  local opts=(--color=always)
+  local opts=("--color=always" "-q")
+  git show ${opts[@]} --format="${showfmt}" $1
+}
 
-  [[ $1 == "-f" ]] && { full=1; shift; } || opts+=("-q")
+gshow() {
+  local opts=("--color=always" "--format=")
 
-  git show ${opts[@]} --format="${showfmt}" $@
+  [[ $1 == "-f" ]] && shift || opts+=("--stat")
 
-  [[ -z "$full" ]] && git diff --color=always --stat "$@^!"
+  __gshow_header $@
+  git show ${opts[@]} $@
 }
 
 [[ $# -lt 1 ]] && {
