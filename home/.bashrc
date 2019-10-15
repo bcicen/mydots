@@ -24,7 +24,7 @@ export KUBECONFIG=~/.kube/config:~/.kube/kind-config-kind
 export NPM_PACKAGES="$HOME/.npm-packages"
 _pathadd ${NPM_PACKAGES}/bin
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath -q)"
 
 _pathadd ${HOME}/go/bin
 _pathadd ${HOME}/.local/bin
@@ -77,7 +77,7 @@ alias vundle_install="vim +PluginInstall +qall"
 function vimp() { /usr/bin/vim -p $@; }
 function vimgo() { /usr/bin/vim -p $(find $@ -maxdepth 1 -iname "*.go" ! -iname "*_test.go"); }
 function vimdir() {
-  files=$(find ${@:-.} -maxdepth 5 -type f)
+  files=$(find ${@:-.} -type f)
   fileno=$(wc -w <<< $files)
   [[ $fileno -ge 12 ]] && {
     (__confirm "open $fileno files?") || return
@@ -193,6 +193,23 @@ function gbranch() {
   }
 
   git checkout $opts $1;
+}
+
+gclean() {
+  #local n=$(__guntracked | wc -l)
+  #(__confirm "remove $n files?") || return
+  basename $(pwd)
+  tree --fromfile <(__guntracked) | grep -v '/dev/fd'
+  (__confirm "clean all?") || return
+  git clean -dxf
+}
+
+__guntracked() {
+  local IFS=$(echo -en "\n\b")
+  for i in $(git clean -ndxf | sed 's/Would\ remove\ //g'); do
+    find "$i" -type f
+    #find "$i" -type f | sort | tee >(cat 1>&2)
+  done
 }
 
 #function __gbranches() { git branch -a --no-color | sed 's/\*//g;s/\ //g'; }
