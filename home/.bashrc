@@ -12,6 +12,8 @@ function _echoout() { echo "$(clr_cyan "stdout:") $@" > /dev/stdout; }
 function _echoerr() { echo "$(clr_red "stderr:") $@" > /dev/stderr; }
 # idempotent add path helper
 function _pathadd() { [[ ! "$PATH" == *${1}* ]] && export PATH="$PATH:${1}"; }
+# source-if-exists helper
+function _source() { [[ -f "$1" ]] && . $1; }
 
 export GOPATH=~/go
 export VISUAL=vim
@@ -25,6 +27,11 @@ export NPM_PACKAGES="$HOME/.npm-packages"
 _pathadd ${NPM_PACKAGES}/bin
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath -q)"
+
+# gcloud / Google Cloud SDK.
+GCLOUDSDK_INSTALL_DIR="${HOME}/google-cloud-sdk"
+_source ${GCLOUDSDK_INSTALL_DIR}/path.bash.inc
+_source ${GCLOUDSDK_INSTALL_DIR}/completion.bash.inc
 
 _pathadd ${HOME}/go/bin
 _pathadd ${HOME}/.local/bin
@@ -89,7 +96,7 @@ function vimdir() {
 function ctof() { echo "scale=1; ($1*9) / 5 + 32" | bc; }
 function ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
 function dusort() { path=$@; du -hs ${path:=.}/* | sort -h; }
-function grepnotes() { find $HOME/work/notes/ -type f -exec grep -Hi "$@" {} \; ; }
+function grepnotes() { find $HOME/work/notes/ -maxdepth 1 -type f -exec grep -Hi "$@" {} \; ; }
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 function isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
 
