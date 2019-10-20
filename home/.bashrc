@@ -185,6 +185,16 @@ function rclone() {
   git clone $url $repo_dir && cd $repo_dir
 }
 
+# return url for remote origin
+function _parse_repourl() {
+  url=$(git remote get-url origin)
+  url=${url##git@}
+  url=${url##http://}
+  url=${url##https://}
+  url=${url%%.git}
+  echo ${url//:/\/}
+}
+
 function _parse_reponame() { python -c 'import sys; print(sys.argv[1].split("/")[-1].replace(".git",""))' $@; }
 
 function gdiff() { git diff --color $@ | diff-so-fancy; }
