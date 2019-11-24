@@ -92,11 +92,13 @@ function vimdir() {
   vim -p $files
 }
 
+pylint-import() { pylint --disable=all -e W0411,W0611 $@; }
+
 # functions
 function ctof() { echo "scale=1; ($1*9) / 5 + 32" | bc; }
 function ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
 function dusort() { path=$@; du -hs ${path:=.}/* | sort -h; }
-function grepnotes() { find $HOME/work/notes/ -maxdepth 1 -type f -exec grep -Hi "$@" {} \; ; }
+function grepnotes() { find $HOME/work/notes/ -maxdepth 2 -type f -exec grep -Hi "$@" {} \; ; }
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 function isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
 
