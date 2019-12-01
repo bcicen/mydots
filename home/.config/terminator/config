@@ -1,6 +1,6 @@
 [global_config]
   borderless = True
-  custom_url_handler = google-chrome-stable
+  custom_url_handler = firefox
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler
   inactive_color_offset = 0.89
   tab_position = bottom
@@ -36,9 +36,9 @@
 [profiles]
   [[default]]
     allow_bold = False
-    background_color = "#2e2e2d"
+    background_color = "#252524"
     cursor_color = "#25C3DC"
-    font = Inconsolata Medium 9
+    font = Inconsolata Medium 12
     foreground_color = "#f2f2f2"
     palette = "#88adb4:#c62828:#558b2e:#f9a825:#1565c1:#b851e3:#00838f:#ffffff:#969694:#f15250:#86bd47:#f8e63a:#77b2f6:#b963c8:#25c3dc:#ffffff"
     scrollback_lines = 20000
