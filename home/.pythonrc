@@ -161,13 +161,16 @@ def truncate(n, decimals=0):
 def yread(path):
     import yaml
     with open(path) as of:
-        return yaml.load(of.read(), Loader=yaml.FullLoader)
+        d = list(yaml.load_all(of.read(), Loader=yaml.FullLoader))
+    if len(d) == 1:
+        return d[0]
+    return d
 
 def yaml2json(path):
     import yaml
     with open(path) as of:
-        d = yaml.load(of.read(), Loader=yaml.FullLoader)
-    jprint(d)
+        d = yaml.load_all(of.read(), Loader=yaml.FullLoader)
+    jprint(list(d))
 
 def pivot(items, key):
     from collections import defaultdict
@@ -201,6 +204,17 @@ def column(items, spacing=2):
         ret.append(''.join([ f'{txt: <{w}}' for w, txt in zip(col_w, line) ]))
 
     return '\n'.join(ret)
+
+def md2html(path):
+    from markdown2 import markdown, markdown_path
+    extras = {
+      'fenced-code-blocks': {'linenos': True},
+      'highlightjs-lang': {}
+    }
+
+    # with open(path) as of:
+        # text = of.read()
+    markdown_path(path, extras)
 
 class DictStats(dict):
 
