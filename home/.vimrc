@@ -14,6 +14,7 @@ set tabpagemax=30
 set nocompatible
 set foldmethod=manual
 set foldlevel=99
+set iskeyword+=-
 "set foldmarker={,} foldlevel=0 foldmethod=manual
 set laststatus=2
 let statusbase="%F%m%r%h%w[%L][%p%%][%04l,%04v]-%{fugitive#statusline()}"
@@ -119,7 +120,11 @@ let g:syntastic_check_on_wq = 0
 let g:go_fmt_fail_silently = 0
 let g:go_list_type = "quickfix"
 let g:syntastic_quiet_messages = { "level": "warnings" }
-let g:pymode_lint_on_write = 1
+let g:pymode_lint_on_write = 0
+
+let g:syntastic_mode_map = {
+    \ "mode": "passive",
+    \ "active_filetypes": ["go"] }
 
 " (Optional)Remove Info(Preview) window
 set completeopt-=preview
@@ -173,7 +178,7 @@ nnoremap <Leader>n :n<CR>
 nnoremap gb :ls<CR>:b<Space>
 nnoremap gv :ls<CR>:vert belowright sb<Space>
 nnoremap <Leader>; :noh<CR>
-nnoremap <Leader>' :set ic!<CR>
+nnoremap <Leader>' :SyntasticCheck<CR>
 
 " search for matches of current visual selection
 vnoremap // y/<C-R>"<CR>
