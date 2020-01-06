@@ -83,6 +83,7 @@ alias flog="vim ${HOME}/work/notes/$(date +%m-%d-%Y).log"
 alias vundle_install="vim +PluginInstall +qall"
 function vimp() { /usr/bin/vim -p $@; }
 function vimgo() { /usr/bin/vim -p $(find $@ -maxdepth 1 -iname "*.go" ! -iname "*_test.go"); }
+function rgvim() { vim -p $(rgrep $@ | cut -f1 -d\: | uniq); }
 function vimdir() {
   files=$(find ${@:-.} -type f)
   fileno=$(wc -w <<< $files)
