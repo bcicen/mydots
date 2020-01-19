@@ -1,0 +1,17 @@
+! Swap caps lock and escape
+!remove Lock = Caps_Lock
+!keysym Escape = Caps_Lock
+!keysym Caps_Lock = Escape
+!add Lock = Caps_Lock
+keycode 121 = F1
+keycode 122 = F2
+keycode 123 = F3
+keycode 173 = F4
+keycode 172 = F5
+keycode 171 = F6
+keycode 166 = F7
+keycode 180 = F8
+keycode 135 = F9
+keycode 225 = F10
+keycode 161 = F11
+keycode 124 = F12
