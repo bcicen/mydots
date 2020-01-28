@@ -7,6 +7,7 @@
 [push]
 	default = simple
 [alias]
+	br = branch -r --sort=-committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 	recommit = commit --amend -C HEAD
 	pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
 	statusall = "submodule status --recursive"
