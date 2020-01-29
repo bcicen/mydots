@@ -103,6 +103,12 @@ function grepnotes() { find $HOME/work/notes/ -maxdepth 2 -type f -exec grep -Hi
 function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 function isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
 
+function ragel2png() {
+  local t="$(mktemp -u).dot" out=${1//rl/png}
+  [[ -z "$1" ]] && { _echoerr "no path provided"; return; }
+  ragel -Vp -M main $1 -o $t && dot $t -Tpng -o $out && _echoout "wrote $out"
+}
+
 function monbrite() {
   [[ $# -eq 0 ]] && {
     sudo ddccontrol -r 0x10 dev:/dev/i2c-7 | tail -n +25
@@ -438,3 +444,5 @@ source ~/.gcloudrc
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 export GTK_IM_MODULE=ibus
+
+source /home/bradley/.config/broot/launcher/bash/br
