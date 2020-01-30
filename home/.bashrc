@@ -432,7 +432,12 @@ __ssh_hosts() {
   echo $hosts
 }
 
-#autocomplete
+# completion
+
+__copy_complete() {
+  local cmd=$(complete -p $1 | sed -E "s/(.*)$1/\1$2/") || return 1 && $cmd
+}
+
 complete -W "$(__ssh_hosts)" ssh
 complete -W "$(__ssh_hosts)" scp
 (command -v vault &> /dev/null) && complete -C $(command -v vault) vault
