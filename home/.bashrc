@@ -1,6 +1,7 @@
 # homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+for p in ${HOME}/.bashrcd/0-*; do source $p; done
 
 source "$HOME/.bash_colors"
 [ -e "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
@@ -44,6 +45,8 @@ export HISTCONTROL=ignoredups:erasedups
 # export histchars='@^#'
 
 bind "set completion-ignore-case on"
+#bind "set colored-stats on" # colorize complete options by filetype
+#bind "set show-all-if-unmodified on" # complete show all opts on ambiguous
 
 # prompt
 export PS1_CONCAT=0
