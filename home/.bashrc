@@ -3,7 +3,6 @@ source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 for p in ${HOME}/.bashrcd/0-*; do source $p; done
 
-source "$HOME/.bash_colors"
 [ -e "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
 source /usr/share/git/completion/git-prompt.sh
 source $HOME/.kubectl_completion
@@ -88,7 +87,7 @@ function vimp() { /usr/bin/vim -p $@; }
 function vimgo() { /usr/bin/vim -p $(find $@ -maxdepth 1 -iname "*.go" ! -iname "*_test.go"); }
 function rgvim() { vim -p $(rgrep $@ | cut -f1 -d\: | uniq); }
 function vimdir() {
-  files=$(find ${@:-.} -type f)
+  files=$(find ${@:-.} -type f ! -path "*.git/*")
   fileno=$(wc -w <<< $files)
   [[ $fileno -ge 12 ]] && {
     (__confirm "open $fileno files?") || return
@@ -444,6 +443,7 @@ __copy_complete() {
 complete -W "$(__ssh_hosts)" ssh
 complete -W "$(__ssh_hosts)" scp
 (command -v vault &> /dev/null) && complete -C $(command -v vault) vault
+complete -F _complete_alias drun
 
 source ~/.bashrcx
 source ~/.tptrc
