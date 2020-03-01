@@ -213,25 +213,31 @@ function tm() {
   tmux attach -t $id
 }
 
+function __k8s_ctx_color_active() {
+  echo -ne "\033[38;2;006;235;082m${@}\033[0;00m"
+}
+
+function __k8s_ctx_color_inactive() {
+  echo -ne "\033[38;2;242;242;242m${@}\033[0;00m"
+}
+
 function __k8s_contexts() {
   local -i n=0
   cur=$(kubectl config current-context)
-  for x in $@; do
-    if [[ "$x" == "$cur" ]]; then
-      echo -e "${n} \033[32m${x}\033[0m"
+  kubectl config get-contexts | sed 's/*//g;1d' | while read name cluster auth ns; do
+    if [[ "$name" == "$cur" ]]; then
+      echo -e "${n},$(__k8s_ctx_color_active "${name},${cluster},${ns}")"
     else
-      echo "${n} ${x}"
+      echo -e "${n},$(__k8s_ctx_color_inactive "${name},${cluster},${ns}")"
     fi
     n+=1
-  done
+  done | column -t -s,
 }
 
 function k8s-context() {
-  local ctx=($(kubectl config get-contexts -o='name'))
-  local out=$(__k8s_contexts "${ctx[@]}" | fzf --ansi --cycle --reverse -e)
+  local out=$(__k8s_contexts | fzf --ansi --cycle --reverse -e)
   [[ -z "$out" ]] && return
-  local idx=$(echo $out | awk '{print $1}')
-  kubectl config use-context ${ctx[$idx]}
+  kubectl config use-context $(awk '{print $2}' <<< $out)
 }
 
 function __gcp_configs_csv() {
