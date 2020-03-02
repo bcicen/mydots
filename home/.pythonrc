@@ -213,8 +213,11 @@ def md2html(path):
     }
 
     # with open(path) as of:
-        # text = of.read()
-    markdown_path(path, extras)
+        # return markdown(of.read(), extras=extras)
+    target = path.replace('.md', '.html')
+    with open(target, 'w') as of:
+        n = of.write(markdown_path(path, extras=extras))
+        print(f'wrote {n}b to {target}')
 
 class DictStats(dict):
 
