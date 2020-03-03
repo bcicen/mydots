@@ -106,9 +106,10 @@ function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness
 function isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
 
 function ragel2png() {
-  local t="$(mktemp -u).dot" out=${1//rl/png}
-  [[ -z "$1" ]] && { _echoerr "no path provided"; return; }
-  ragel -Vp -M main $1 -o $t && dot $t -Tpng -o $out && _echoout "wrote $out"
+  [[ -z "$1" ]] && { _echoerr "usage: ragel2png <path> [<module name>]"; return; }
+  local t="$(mktemp -u).dot" out=${1//rl/png} fn="main"
+  [[ -z "$2" ]] || fn=$2
+  ragel -Vp -M $fn $1 -o $t && dot $t -Tpng -o $out && _echoout "wrote $out"
 }
 
 function monbrite() {
