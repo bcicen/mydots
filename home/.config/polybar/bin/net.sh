@@ -11,7 +11,7 @@ iface=$1
 interval=$2
 last_bytes=(0 0)
 
-_fmt() { echo "$@" | numfmt --to=iec --suffix=b/s --format='%3f'; }
+_fmt() { echo "$@" | numfmt --to=iec --suffix=b/s --format='%03f'; }
 
 _output() {
   rx=${1:-0} tx=${2:-0}

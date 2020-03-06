@@ -1,6 +1,7 @@
 [user]
 	email = bradley@vektor.nyc
 	name = Bradley Cicenas
+	signingKey = AF579ED4B93CBB5C
 [core]
 	editor = vim
 	pager = cat

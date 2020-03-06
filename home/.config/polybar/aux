@@ -11,13 +11,14 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/aux]
-monitor = ${env:MONITOR:eDP1}
-width = 5.8%
-height = 40
-offset-x = 94.1%
-offset-y = 0.2%
+monitor = ${env:MONITOR:eDP-1}
+width = 5.7%
+height = 60
+offset-x = 94.2%
+offset-y = 0.1%
 radius = 2.0
 fixed-center = false
+bottom = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}

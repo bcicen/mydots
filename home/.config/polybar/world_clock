@@ -10,13 +10,14 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/worldclock]
-monitor = ${env:MONITOR:eDP1}
-width = 25%
-height = 40
-offset-x = 68.95%
-offset-y = 0.2%
+monitor = ${env:MONITOR:eDP-1}
+width = 22.7%
+height = 60
+offset-x = 71.3%
+offset-y = 0.1%
 radius = 2.0
 fixed-center = false
+bottom = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -30,8 +31,8 @@ padding-right = 2
 border-bottom-size = 1
 border-color = ${colors.background}
 
-font-0 = "GE Inspira:pixelsize=16;2"
-font-1 = "Symbola:pixelsize=21;2"
+font-0 = "GE Inspira:pixelsize=21;2"
+font-1 = "Symbola:pixelsize=30;2"
 
 modules-left = globe
 modules-center = lax sp nyc sp lon sp sel
@@ -41,12 +42,12 @@ type = custom/script
 interval = 86400
 exec = echo " "
 ;format-underline = #e3ecf2
-format-margin = 3
+format-margin = 2
 
 [module/globe]
 type = custom/script
 exec = echo " "
-format-prefix = "🌐 "
+format-prefix = "🌐"
 format-prefix-foreground = #c2fff9
 interval = 86400
 format-prefix-font = 2
