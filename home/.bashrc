@@ -22,6 +22,7 @@ export PYTHONPATH=~/.mypy/
 export AMQP_URL=amqp://127.0.0.1:5672
 export KUBE_EDITOR=vim
 export KUBECONFIG=~/.kube/config:~/.kube/kind-config-kind
+export GPG_TTY=$(tty)
 
 export NPM_PACKAGES="$HOME/.npm-packages"
 _pathadd ${NPM_PACKAGES}/bin
@@ -37,6 +38,7 @@ _pathadd ${HOME}/go/bin
 _pathadd ${HOME}/.local/bin
 _pathadd ${HOME}/.yarn/bin
 _pathadd /usr/local/kubebuilder/bin
+_pathadd /opt/bin
 
 # history
 export HISTFILESIZE=100000
@@ -453,5 +455,3 @@ source ~/.gcloudrc
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 export GTK_IM_MODULE=ibus
-
-source /home/bradley/.config/broot/launcher/bash/br
