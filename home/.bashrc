@@ -348,7 +348,7 @@ function pbar() {
   else
     args="-q"
     [[ "$1" == "debug" ]] && args="-r -l info"
-    (xrandr | grep -q '^DP1 connected') && mon="DP1"
+    (xrandr | grep -q '^DP-3 connected') && mon="DP-3"
     MONITOR=$mon polybar $args main &
     MONITOR=$mon nohup polybar $args -c ~/.config/polybar/net net &
     MONITOR=$mon nohup polybar $args -c ~/.config/polybar/aux aux &
