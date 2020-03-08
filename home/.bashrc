@@ -62,7 +62,7 @@ function ps1t() {
   if (($PS1_CONCAT % 2)); then
     PS1='›'
     PS1+='$(_clrbrkt \t)$(_clrbrkt $(__ps1clr2 \W))$(__git_ps1 " $(_clrbrkt $(__ps1clr3 %s))")'
-    PS1+='\n \[$PS1_COLOR\]〢\[$CLR_RST\] '
+    PS1+='\n \[$PS1_COLOR\]❭\[$CLR_RST\] '
   else
     PS1='›'
     PS1+='$(_clrbrkt $(__ps1clr2 \W))$(__git_ps1 " $(_clrbrkt $(__ps1clr3 %s))") '
