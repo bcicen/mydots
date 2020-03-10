@@ -51,7 +51,7 @@ bind "set completion-ignore-case on"
 
 # prompt
 export PS1_CONCAT=0
-PS1_COLOR=$(_rgb 194 255 249)
+PS1_COLOR=$(_rgb 121 162 158)
 function __ps1clr1 { _clrRGB 194 255 249 $@; }
 function __ps1clr2 { _clrRGB 020 130 110 $@; }
 function __ps1clr3 { _clrRGB 000 240 120 $@; }
@@ -120,7 +120,7 @@ function monbrite() {
     sudo ddccontrol -r 0x10 dev:/dev/i2c-13 | tail -n +25
     return
   }
-  sudo ddccontrol -r 0x10 -w $1 dev:/dev/i2c-13 | tail -n +25
+ sudo ddccontrol -r 0x10 -w $1 dev:/dev/i2c-13 | tail -n +25
 }
 
 function hex2rgb() {
@@ -175,7 +175,7 @@ function golnsrc() {
   url=$(git config --get remote.origin.url)
   path=$(echo $url | sed 's/\.git//;s/https:\/\///;s/:/\//g' | cut -f2 -d@)
   tgt=${GOPATH}/src/${path}
-  [[ -d "$(dirname $tgt)" ]] || mkdir -v "$(dirname $tgt)"
+  [[ -d "$(dirname $tgt)" ]] || mkdir -pv "$(dirname $tgt)"
   [[ -e "${tgt}" ]] && { _echoerr "${tgt} exists"; return; }
   ln -sv $(git rev-parse --show-toplevel) ${tgt}
 }
@@ -343,18 +343,13 @@ function cbar() {
 }
 
 function pbar() {
-  local args mon
-  if (pgrep -x polybar); then
-    killall polybar
-  else
-    args="-q"
-    [[ "$1" == "debug" ]] && args="-r -l info"
-    (xrandr | grep -q '^DP-3 connected') && mon="DP-3"
-    MONITOR=$mon polybar $args main &
-    MONITOR=$mon nohup polybar $args -c ~/.config/polybar/net net &
-    MONITOR=$mon nohup polybar $args -c ~/.config/polybar/aux aux &
-    MONITOR=$mon nohup polybar $args -c ~/.config/polybar/world_clock worldclock &
-  fi
+  (pgrep -x polybar) && { killall polybar; return; }
+  local args mon=$(xrandr | grep -e '^DP.* connected' | tail -1 | awk '{print $1}')
+  [[ "$1" == "debug" ]] && args="-r -l info"
+  MONITOR=$mon polybar $args main &
+  MONITOR=$mon nohup polybar $args -c ~/.config/polybar/net net &
+  MONITOR=$mon nohup polybar $args -c ~/.config/polybar/aux aux &
+  MONITOR=$mon nohup polybar $args -c ~/.config/polybar/world_clock worldclock &
 }
 
 function stash() {
