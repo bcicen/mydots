@@ -116,11 +116,13 @@ function ragel2png() {
 }
 
 function monbrite() {
+  local id=$(sudo ddccontrol -p | grep -B2 'LG Standard' | head -1 | cut -f3 -d\/ 2> /dev/null)
+  _echoout "found id: $id"
   [[ $# -eq 0 ]] && {
-    sudo ddccontrol -r 0x10 dev:/dev/i2c-13 | tail -n +25
+    sudo ddccontrol -r 0x10 dev:/dev/${id} | tail -n +25
     return
   }
- sudo ddccontrol -r 0x10 -w $1 dev:/dev/i2c-13 | tail -n +25
+  sudo ddccontrol -r 0x10 -w $1 dev:/dev/${id} | tail -n +25
 }
 
 function hex2rgb() {
