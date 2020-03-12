@@ -119,6 +119,8 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:go_fmt_fail_silently = 0
 let g:go_list_type = "quickfix"
+let g:go_highlight_diagnostic_errors = 0
+let g:go_highlight_diagnostic_warnings = 0
 let g:syntastic_quiet_messages = { "level": "warnings" }
 let g:pymode_lint_on_write = 0
 
@@ -147,6 +149,7 @@ call vundle#end()
 filetype plugin indent on
 syntax on
 let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_show_diagnostics_ui = 0
 
 " Custom filetype extensions
 au BufNewFile,BufRead *.geojson,*.jsonl set filetype=json
