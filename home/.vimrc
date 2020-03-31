@@ -16,8 +16,16 @@ set foldmethod=manual
 set foldlevel=99
 set iskeyword+=-
 "set foldmarker={,} foldlevel=0 foldmethod=manual
+
+function! Percent()
+  let byte = line2byte( line( "." ) ) + col( "." ) - 1
+  let size = (line2byte( line( "$" ) + 1 ) - 1)
+  " return byte . " " . size . " " . (byte * 100) / size
+  return (byte * 100) / size
+endfunction
+
 set laststatus=2
-let statusbase="%F%m%r%h%w[%L][%p%%][%04l,%04v]-%{fugitive#statusline()}"
+let statusbase="%F%m%r%h%w[%L][%p%%][%{Percent()}%%][%04l,%04v]-%{fugitive#statusline()}"
 execute "set statusline=".statusbase
 "              | | | | |  |   |     |    |       |
 "              | | | | |  |   |     |    |       + current git branch
@@ -38,6 +46,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+set splitbelow
 
 set directory=~/.vim/swap
 set cm=blowfish2
@@ -249,3 +258,28 @@ command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>),
 let g:UltiSnipsExpandTrigger="<c-\\>"
 
 command! RegFlush for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
+
+function! Flt_term_win(cmd, width, height, border_highlight) abort
+    let width = float2nr(&columns * a:width)
+    let height = float2nr(&lines * a:height)
+    let bufnr = term_start(a:cmd, {'hidden': 1, 'term_finish': 'close'})
+
+    let winid = popup_create(bufnr, {
+            \ 'minwidth': width,
+            \ 'maxwidth': width,
+            \ 'minheight': height,
+            \ 'maxheight': height,
+            \ 'border': [],
+            \ 'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
+            \ 'borderhighlight': [a:border_highlight],
+            \ 'padding': [0,1,0,1],
+            \ 'highlight': a:border_highlight
+            \ })
+
+    " Optionally set the 'Normal' color for the terminal buffer
+    " call setwinvar(winid, '&wincolor', 'Special')
+
+    return winid
+endfunction
+
+nnoremap <silent> <leader>gz :call Flt_term_win('lazygit',0.9,0.6,'Todo')<CR>
