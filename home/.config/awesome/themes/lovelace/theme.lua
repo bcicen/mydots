@@ -56,6 +56,7 @@ theme.xcolor12 = xrdb.color12 or  "#ff5495"
 theme.xcolor13 = xrdb.color13 or  "#B043D1"
 theme.xcolor14 = xrdb.color14 or  "#3FDCEE"
 theme.xcolor15 = xrdb.color15 or  "#BEBEC1"
+theme.xcolor16 = xrdb.color16 or  "#93949A"
 
 -- Set some colors that are used frequently as local variables
 local accent_color = theme.xcolor14
@@ -213,8 +214,7 @@ theme.sidebar_bg_alt = theme.xcolor0
 theme.sidebar_fg = theme.xcolor7
 theme.sidebar_opacity = 0.90
 theme.sidebar_position = "right" -- left or right
-theme.sidebar_width = dpi(300)
-theme.sidebar_height = screen_height - dpi(8)
+theme.sidebar_height = dpi(60)
 theme.sidebar_border_radius = dpi(10)
 
 -- Dim screen

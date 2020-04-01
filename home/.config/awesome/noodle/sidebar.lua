@@ -85,9 +85,9 @@ dimmode:buttons(gears.table.join(
 -- Weather widget with text icons
 local weather_widget = require("noodle.weather")
 local weather_widget_icon = weather_widget:get_all_children()[2]
-weather_widget_icon.font = "Typicons 48"
+weather_widget_icon.font = "Typicons 18"
 local weather_widget_temp = weather_widget:get_all_children()[4]
-weather_widget_temp.font = "Product Sans 32"
+weather_widget_temp.font = "Product Sans 14"
 local weatherf_widget_temp = weather_widget:get_all_children()[5]
 weatherf_widget_temp.font = "Product Sans 12"
 local weather_widget_text = weather_widget:get_all_children()[6]
@@ -211,7 +211,7 @@ local playerctl_buttons = wibox.widget {
 }
 
 local time = wibox.widget.textclock("%H%M")
-time.font = "Product Sans 75"
+time.font = "Product Sans 30"
 time.align = "center"
 time.valign = "center"
 time.markup = time.text:sub(1,2) .. "<span foreground='" .. beautiful.xcolor12 .."'> " .. time.text:sub(3,4) .. "</span>"
@@ -219,26 +219,77 @@ time:connect_signal("widget::redraw_needed", function ()
   time.markup = time.text:sub(1,2) .. "<span foreground='" .. beautiful.xcolor12 .."'> " .. time.text:sub(3,4) .. "</span>"
 end)
 
-local date = wibox.widget.textclock("%B %d")
--- local date = wibox.widget.textclock("%A, %B %d")
--- local date = wibox.widget.textclock("%A, %B %d, %Y")
-date.align = "center"
-date.valign = "top"
-date.font = "Product Sans 16"
-
 local fancy_time_decoration = wibox.widget.textbox()
-local decoration_string = "────── 시간 ──────"
+local decoration_string = "─ 시간 ─"
 fancy_time_decoration.markup = "<span foreground='" .. beautiful.xcolor12 .."'>"..decoration_string.."</span>"
 fancy_time_decoration.font = "sans 18"
 fancy_time_decoration.align = "center"
 fancy_time_decoration.valign = "bottom"
 
+local function time_box(tzname, label)
+  local t = wibox.widget.textclock("%H:%M", 15, tzname)
+  t.font = "Product Sans 25"
+  t.align = "center"
+  t.valign = "bottom"
+  t.markup = "<span foreground='" .. beautiful.xcolor16 .."'> " .. t.text .. "</span>"
+  t:connect_signal("widget::redraw_needed", function ()
+    t.markup = "<span foreground='" .. beautiful.xcolor16 .."'> " .. t.text .. "</span>"
+  end)
+
+  local d = wibox.widget.textbox()
+  d.markup = "<span foreground='" .. beautiful.xcolor6 .."'>"..label.."</span>"
+  d.font = "Product Sans 14"
+  d.align = "left"
+  d.valign = "bottom"
+
+  return wibox.widget{
+    d,
+    t,
+    top = dpi(20),
+    --bottom = dpi(10),
+    --forced_width  = dpi(200),
+    forced_height = dpi(50),
+    widget        = wibox.widget.base,
+    layout        = wibox.layout.fixed.vertical,
+  }
+end
+
+local date = wibox.widget.textclock("%B %d")
+-- local date = wibox.widget.textclock("%A, %B %d")
+-- local date = wibox.widget.textclock("%A, %B %d, %Y")
+date.align = "center"
+date.valign = "bottom"
+date.font = "Product Sans 12"
+
+local fancy_time_decoration = wibox.widget.textbox()
+local decoration_string = "─ 시간 ─"
+fancy_time_decoration.markup = "<span foreground='" .. beautiful.xcolor12 .."'>"..decoration_string.."</span>"
+fancy_time_decoration.font = "sans 18"
+fancy_time_decoration.align = "center"
+fancy_time_decoration.valign = "bottom"
+
+local lax_tb = time_box("America/Los_Angeles", "LAX")
+local nyc_tb = time_box("America/New_York", "NYC")
+local lon_tb = time_box("Europe/London", "LON")
+local sel_tb = time_box("Asia/Seoul", "SEL")
+
 local fancy_time = {
     time,
-    date,
+    pad(2),
+    lax_tb,
+    pad(2),
+    nyc_tb,
+    pad(2),
+    lon_tb,
+    pad(2),
+    sel_tb,
+    pad(2),
+    layout = wibox.layout.fixed.horizontal,
+}
+
+local fancy_date = {
     pad(1),
-    fancy_time_decoration,
-    --spacing = dpi(1),
+    date,
     layout = wibox.layout.fixed.vertical,
 }
 
@@ -347,13 +398,12 @@ helpers.add_hover_cursor(temperature, "hand1")
 helpers.add_hover_cursor(volume, "hand1")
 
 -- Create the sidebar
-sidebar = awful.wibar({screen = s, visible = false, ontop = true, type = "desktop", position = "right", stretch = false})
+sidebar = awful.wibar({screen = s, visible = false, ontop = true, type = "desktop", position = "top", stretch = true, height = beautiful.sidebar_height})
 sidebar.bg = beautiful.sidebar_bg or beautiful.wibar_bg or "#111111"
 sidebar.fg = beautiful.sidebar_fg or beautiful.wibar_fg or "#FFFFFF"
 sidebar.opacity = beautiful.sidebar_opacity or 1
-sidebar.height = beautiful.sidebar_height or awful.screen.focused().geometry.height
---sidebar.forced_height = beautiful.sidebar_height or awful.screen.focused().geometry.height
-sidebar.width = beautiful.sidebar_width or dpi(300)
+sidebar.height = beautiful.sidebar_height
+sidebar.width = awful.screen.focused().geometry.width
 sidebar.y = beautiful.sidebar_y or 0
 
 local radius = beautiful.sidebar_border_radius or 0
@@ -412,15 +462,13 @@ systray.forced_height = beautiful.wibar_height/1.5
 sidebar:setup {
     { ----------- TOP GROUP -----------
         pad(1),
-        pad(1),
         fancy_time,
-        --time,
-        --date,
+        pad(1),
+        fancy_date,
         pad(1),
         weather,
         pad(1),
-        pad(1),
-        layout = wibox.layout.fixed.vertical
+        layout = wibox.layout.fixed.horizontal
     },
     { ----------- MIDDLE GROUP -----------
         playerctl_buttons,
@@ -464,7 +512,7 @@ sidebar:setup {
           right  = sidebar.width/6,
           widget = wibox.container.margin,
         },
-      layout = wibox.layout.fixed.vertical
+      layout = wibox.layout.fixed.horizontal
     },
     { ----------- BOTTOM GROUP -----------
         nil,
@@ -483,6 +531,6 @@ sidebar:setup {
         layout = wibox.layout.align.horizontal,
         expand = "none"
     },
-    layout = wibox.layout.align.vertical,
+    layout = wibox.layout.align.horizontal,
     -- expand = "none"
 }

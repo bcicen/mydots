@@ -5,20 +5,20 @@ background = #363737
 background-alt = #11aaaaaa
 foreground = #dfdfdf
 foreground-alt = #87ffff
-foreground-alt2 = #c2fff9
+foreground-alt2 = #23d9ba
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
 [bar/aux]
 monitor = ${env:MONITOR:eDP-1}
-width = 5.7%
-height = 60
-offset-x = 94.2%
+width = .1%
+height = 35
+offset-x = 95.8%
 offset-y = 0.1%
 radius = 2.0
 fixed-center = false
-bottom = true
+bottom = false
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -37,10 +37,10 @@ font-1 = "Symbola:pixelsize=12;2"
 
 modules-left = sp
 
-tray-position = right
-tray-padding = 2
-tray-detached = false
-tray-maxsize = 20
+tray-position = center
+tray-padding = 0
+tray-detached = true
+tray-maxsize = 16
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -70,7 +70,6 @@ format-underline = #e3ecf2
 screenchange-reload = true
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
-
+margin-top = 2
+margin-bottom = 2
 ; vim:ft=dosini
