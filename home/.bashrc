@@ -390,7 +390,6 @@ function tgz() {
 
 function kill-tabs() {
   kill -9 $(cpids $(pgrep firefox))
-  /bin/kill-tabs
 }
 
 function cpids() {
@@ -448,7 +447,6 @@ complete -F _complete_alias drun
 
 source ~/.bashrcx
 source ~/.tptrc
-source ~/.gcloudrc
 
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus

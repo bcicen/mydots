@@ -36,7 +36,7 @@
 [profiles]
   [[default]]
     allow_bold = False
-    background_color = "#252524"
+    background_color = "#212226"
     cursor_color = "#25C3DC"
     font = Inconsolata Medium 12
     foreground_color = "#f2f2f2"
