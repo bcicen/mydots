@@ -346,7 +346,7 @@ function cbar() {
 
 function pbar() {
   (pgrep -x polybar) && { killall polybar; return; }
-  local args mon=$(xrandr | grep -e '^DP.* connected' | tail -1 | awk '{print $1}')
+  #local args mon=$(xrandr | grep -e '^DP.* connected' | tail -1 | awk '{print $1}')
   [[ "$1" == "debug" ]] && args="-r -l info"
   MONITOR=$mon polybar $args main &
   MONITOR=$mon nohup polybar $args -c ~/.config/polybar/net net &
@@ -408,6 +408,12 @@ function cpids() {
   for i in "$@";do
     walk $i
   done
+}
+
+qr() {
+  local f="$(mktemp -u).png"
+  qrencode -s 25 -l H -o "$f" $@
+  timeout 30s feh -g 800x800 --zoom fill $f
 }
 
 # exif aliases
