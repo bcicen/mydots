@@ -217,6 +217,10 @@ function _parse_reponame() { python -c 'import sys; print(sys.argv[1].split("/")
 function gdiff() { git diff --color $@ | diff-so-fancy; }
 function groot() { cd $(git rev-parse --show-toplevel); }
 function gstashi() { git stash push -- $@; }
+function gtaga() {
+  local tag=$1; shift
+  git tag -a -m "$tag" $tag $@
+}
 function gbranch() {
   local opts
   [[ -z "$1" ]] && { echo "no branch provided"; return; }
@@ -346,7 +350,7 @@ function cbar() {
 
 function pbar() {
   (pgrep -x polybar) && { killall polybar; return; }
-  #local args mon=$(xrandr | grep -e '^DP.* connected' | tail -1 | awk '{print $1}')
+  local args mon=$(xrandr | grep -e '^DP.* connected' | tail -1 | awk '{print $1}')
   [[ "$1" == "debug" ]] && args="-r -l info"
   MONITOR=$mon polybar $args main &
   MONITOR=$mon nohup polybar $args -c ~/.config/polybar/net net &
@@ -415,6 +419,8 @@ qr() {
   qrencode -s 25 -l H -o "$f" $@
   timeout 30s feh -g 800x800 --zoom fill $f
 }
+
+jless() { jq -C . < $1 | less -r; }
 
 # exif aliases
 alias exift-erase="exiftool -all= -comment='0'"
