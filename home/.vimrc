@@ -46,7 +46,6 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set splitbelow
 
 set directory=~/.vim/swap
 set cm=blowfish2
@@ -137,12 +136,9 @@ let g:syntastic_mode_map = {
     \ "mode": "passive",
     \ "active_filetypes": ["go"] }
 
-" (Optional)Remove Info(Preview) window
-set completeopt-=preview
-
 " (Optional)Hide Info(Preview) window after completions
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " (Optional) Enable terraform plan to be include in filter
 let g:syntastic_terraform_tffilter_plan = 1
@@ -265,6 +261,8 @@ function! Flt_term_win(cmd, width, height, border_highlight) abort
     let bufnr = term_start(a:cmd, {'hidden': 1, 'term_finish': 'close'})
 
     let winid = popup_create(bufnr, {
+            \ 'line': 1,
+            \ 'col': float2nr(&columns * 0.5),
             \ 'minwidth': width,
             \ 'maxwidth': width,
             \ 'minheight': height,
