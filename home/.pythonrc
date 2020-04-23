@@ -16,14 +16,17 @@ __jlogfmt = {
 
 if os.getenv('PYDEBUG'):
     import logging
-    from tempfile import mkstemp
+    from logging.handlers import SocketHandler
+    from uuid import uuid4
 
-    path = mkstemp(prefix='pylog-')[1]
+    # path = 'unix:///tmp/pylog-' + str(uuid4()).split('-')[0]
+    path = f'/tmp/pylog-{os.getenv("PYDEBUG")}'
+    print(f'sock path: {path}')
     logging.basicConfig(
         level=logging.DEBUG,
         format=json.dumps(__jlogfmt),
         handlers=[
-            logging.FileHandler(path),
+            SocketHandler(path, None),
             logging.StreamHandler(sys.stdout)
         ])
     logging.getLogger("parso").setLevel(logging.ERROR)
@@ -47,12 +50,12 @@ class CustomJSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 def jdump(d, **kwargs):
-    return json.dumps(d, cls=CustomJSONEncoder, **kwargs)
-
-def jwrite(d, path):
     import json
     if isinstance(d, str):
         d = json.loads(d)
+    return json.dumps(d, cls=CustomJSONEncoder, **kwargs)
+
+def jwrite(d, path):
     with open(path, 'w') as of:
         of.write(jdump(d, indent=2, sort_keys=True))
 
@@ -218,6 +221,46 @@ def md2html(path):
     with open(target, 'w') as of:
         n = of.write(markdown_path(path, extras=extras))
         print(f'wrote {n}b to {target}')
+
+def _walkfiles(path):
+    for root, _, files in os.walk(path):
+        for f in files: yield os.path.abspath(os.path.join(root, f))
+
+def _pyfiles(path):
+    return filter(lambda x: x.endswith('.py'), _walkfiles(path))
+
+def ast_imports(path):
+    import os
+
+    if os.path.isdir(path):
+        for fp in _pyfiles(path):
+            yield from __ast_imports(fp)
+    else:
+        yield from __ast_imports(path)
+
+def __ast_imports(path):
+    import ast
+    from collections import namedtuple
+
+    Import = namedtuple("Import", ["module", "name", "alias", "file"])
+
+    try:
+        with open(path) as fh:
+           root = ast.parse(fh.read(), path)
+    except Exception as ex:
+        print(f'failed to parse {path}: {ex}')
+        return
+
+    for node in ast.iter_child_nodes(root):
+        if isinstance(node, ast.Import):
+            module = ''
+        elif isinstance(node, ast.ImportFrom):
+            module = node.module
+        else:
+            continue
+
+        for n in node.names:
+            yield Import(module, n.name, n.asname, path)
 
 class DictStats(dict):
 
