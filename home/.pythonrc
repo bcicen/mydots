@@ -285,6 +285,15 @@ class DictStats(dict):
                 self[k] = defaultdict(int)
             self[k][v] += 1
 
+def epoch2dt(ts):
+    # parse and return a datetime.datetime from a
+    # unix timestamp
+    from datetime import datetime
+    if not isinstance(ts, int):
+        ts = int(ts)
+    if ts > 16000000000:
+        ts = ts / 1000
+    return datetime.utcfromtimestamp(ts)
 
 if sys.argv[0].split('/')[-1] == '.pythonrc':
     if len(sys.argv) < 2:
