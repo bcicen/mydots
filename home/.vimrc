@@ -72,6 +72,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
 Plugin 'junegunn/vim-peekaboo'
+Plugin 'jparise/vim-graphql'
 
 " Go
 Plugin 'fatih/vim-go'
