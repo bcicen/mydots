@@ -26,8 +26,7 @@ if os.getenv('PYDEBUG'):
         level=logging.DEBUG,
         format=json.dumps(__jlogfmt),
         handlers=[
-            SocketHandler(path, None),
-            logging.StreamHandler(sys.stdout)
+            SocketHandler(path, None)
         ])
     logging.getLogger("parso").setLevel(logging.ERROR)
     logging.getLogger(__name__).debug(f'debug logging enabled ({path})')
@@ -45,6 +44,8 @@ class CustomJSONEncoder(json.JSONEncoder):
         from datetime import datetime
         if isinstance(obj, (UUID, datetime)):
             return str(obj)
+        if isinstance(obj, set):
+            return list(obj)
         if hasattr(obj, '__json__'):
             return obj.__json__()
         return json.JSONEncoder.default(self, obj)
