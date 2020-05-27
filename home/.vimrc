@@ -189,6 +189,12 @@ nnoremap gv :ls<CR>:vert belowright sb<Space>
 nnoremap <Leader>; :noh<CR>
 nnoremap <Leader>' :SyntasticCheck<CR>
 
+" shift + HJKL
+nnoremap H ^
+nnoremap L $
+"nnoremap J <C-d>
+"nnoremap K <C-u>
+
 " search for matches of current visual selection
 vnoremap // y/<C-R>"<CR>
 
@@ -214,6 +220,8 @@ nmap <F9> :TagbarOpenAutoClose<CR>
 
 "quote single word
 nnoremap qw :silent! normal mpea"<Esc>bi"<Esc>`pl
+" substitute word under cursor
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " ctrl+t for new tab
 nmap <C-t> :tabnew<CR>
