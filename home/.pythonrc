@@ -209,18 +209,33 @@ def column(items, spacing=2):
 
     return '\n'.join(ret)
 
-def md2html(path):
+def md2html(path, target=None):
     from markdown2 import markdown, markdown_path
+
+    if not target:
+        target = path.replace('.md', '.html')
+
     extras = {
-      'fenced-code-blocks': {'linenos': True},
-      'highlightjs-lang': {}
+      'fenced-code-blocks': {'linenos': False},
+      # 'highlightjs-lang': {},
+      'tables': {},
+      # 'code-friendly': None,
+      'html-classes': {
+          'pre': 'quote',
+          'code': 'ocode',
+          'table': 'pretty-table'
+      },
     }
 
+    body = ''
+    # with open(ssheet) as of:
+        # body += '<style>\n' + of.read() + '\n</style>\n'
+
+    body += '<div class="container">\n' + markdown_path(path, extras=extras) + '\n</div>'
     # with open(path) as of:
         # return markdown(of.read(), extras=extras)
-    target = path.replace('.md', '.html')
     with open(target, 'w') as of:
-        n = of.write(markdown_path(path, extras=extras))
+        n = of.write(body)
         print(f'wrote {n}b to {target}')
 
 def _walkfiles(path):
