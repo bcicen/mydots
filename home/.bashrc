@@ -125,6 +125,8 @@ function monbrite() {
   sudo ddccontrol -r 0x10 -w $1 dev:/dev/${id} | tail -n +25
 }
 
+function monoff() { sleep 1; xset dpms force off; }
+
 function hex2rgb() {
   input=${1#\#} # strip leading #, if any
   r=${input:0:2} g=${input:2:2} b=${input:4:2}
