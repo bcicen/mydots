@@ -8,12 +8,12 @@ source /usr/share/git/completion/git-prompt.sh
 source $HOME/.kubectl_completion
 
 # internal helper fn
-function _echoout() { echo "$(clr_cyan "stdout:") $@" > /dev/stdout; }
-function _echoerr() { echo "$(clr_red "stderr:") $@" > /dev/stderr; }
+_echoout() { echo "$(clr_cyan "stdout:") $@" > /dev/stdout; }
+_echoerr() { echo "$(clr_red "stderr:") $@" > /dev/stderr; }
 # idempotent add path helper
-function _pathadd() { [[ ! "$PATH" == *${1}* ]] && export PATH="$PATH:${1}"; }
+_pathadd() { [[ ! "$PATH" == *${1}* ]] && export PATH="$PATH:${1}"; }
 # source-if-exists helper
-function _source() { [[ -f "$1" ]] && . $1; }
+_source() { [[ -f "$1" ]] && . $1; }
 
 export GOPATH=~/go
 export VISUAL=vim
@@ -52,12 +52,12 @@ bind "set completion-ignore-case on"
 # prompt
 export PS1_CONCAT=0
 PS1_COLOR=$(_rgb 121 162 158)
-function __ps1clr1 { _clrRGB 194 255 249 $@; }
-function __ps1clr2 { _clrRGB 020 130 110 $@; }
-function __ps1clr3 { _clrRGB 000 240 120 $@; }
-function _clrbrkt() { echo " $@ $(__ps1clr1 '›')"; }
+__ps1clr1() { _clrRGB 194 255 249 $@; }
+__ps1clr2() { _clrRGB 020 130 110 $@; }
+__ps1clr3() { _clrRGB 000 240 120 $@; }
+_clrbrkt() { echo " $@ $(__ps1clr1 '›')"; }
 
-function ps1t() {
+ps1t() {
   let PS1_CONCAT++
   if (($PS1_CONCAT % 2)); then
     PS1='›'
@@ -86,10 +86,10 @@ dbuild() { docker build -t ${1-test} .; }
 #vim aliases
 alias flog="vim ${HOME}/work/notes/$(date +%m-%d-%Y).log"
 alias vundle_install="vim +PluginInstall +qall"
-function vimp() { /usr/bin/vim -p $@; }
-function vimgo() { /usr/bin/vim -p $(find $@ -maxdepth 1 -iname "*.go" ! -iname "*_test.go"); }
-function rgvim() { vim -p $(rgrep $@ | cut -f1 -d\: | uniq); }
-function vimdir() {
+vimp() { /usr/bin/vim -p $@; }
+vimgo() { /usr/bin/vim -p $(find $@ -maxdepth 1 -iname "*.go" ! -iname "*_test.go"); }
+rgvim() { vim -p $(rgrep $@ | cut -f1 -d\: | uniq); }
+vimdir() {
   files=$(find ${@:-.} -type f ! -path "*.git/*")
   fileno=$(wc -w <<< $files)
   [[ $fileno -ge 12 ]] && {
@@ -101,21 +101,21 @@ function vimdir() {
 pylint-import() { pylint --disable=all -e W0411,W0611 $@; }
 
 # functions
-function ctof() { echo "scale=1; ($1*9) / 5 + 32" | bc; }
-function ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
-function dusort() { path=$@; du -hs ${path:=.}/* | sort -h; }
-function grepnotes() { find $HOME/work/notes/ -maxdepth 2 -type f -exec grep -Hi "$@" {} \; ; }
-function litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
-function isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
+ctof() { echo "scale=1; ($1*9) / 5 + 32" | bc; }
+ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
+dusort() { path=$@; du -hs ${path:=.}/* | sort -h; }
+grepnotes() { find $HOME/work/notes/ -maxdepth 2 -type f -exec grep -Hi "$@" {} \; ; }
+litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
+isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
 
-function ragel2png() {
+ragel2png() {
   [[ -z "$1" ]] && { _echoerr "usage: ragel2png <path> [<module name>]"; return; }
   local t="$(mktemp -u).dot" out=${1//rl/png} fn="main"
   [[ -z "$2" ]] || fn=$2
   ragel -Vp -M $fn $1 -o $t && dot $t -Tpng -o $out && _echoout "wrote $out"
 }
 
-function monbrite() {
+monbrite() {
   local id=$(sudo ddccontrol -p | grep -B2 'LG Standard' | head -1 | cut -f3 -d\/ 2> /dev/null)
   _echoout "found id: $id"
   [[ $# -eq 0 ]] && {
@@ -125,25 +125,25 @@ function monbrite() {
   sudo ddccontrol -r 0x10 -w $1 dev:/dev/${id} | tail -n +25
 }
 
-function monoff() { sleep 1; xset dpms force off; }
+monoff() { sleep 1; xset dpms force off; }
 
-function hex2rgb() {
+hex2rgb() {
   input=${1#\#} # strip leading #, if any
   r=${input:0:2} g=${input:2:2} b=${input:4:2}
   echo "$((16#$r)) $((16#$g)) $((16#$b))"
 }
 
-function rgb2hex() { printf '%x' $1 $2 $3; }
+rgb2hex() { printf '%x' $1 $2 $3; }
 
-function __is_int() { [[ "$1" =~ ^[0-9]+$ ]] && return 0 || return 1; }
-function __is_float() { [[ "$1" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]] && return 0 || return 1; }
+__is_int() { [[ "$1" =~ ^[0-9]+$ ]] && return 0 || return 1; }
+__is_float() { [[ "$1" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]] && return 0 || return 1; }
 
-function gh-gosearch() {
+gh-gosearch() {
   q=$@
   xdg-open "https://github.com/search?l=go&q=${q// /+}&type=Repositories&utf8=✓" 1> /dev/null
 }
 
-function pypi-publish() {
+pypi-publish() {
   pandoc README.md -o README.rst && \
   python setup.py sdist && \
   python setup.py bdist_wheel --universal && \
@@ -151,14 +151,14 @@ function pypi-publish() {
 }
 
 # open working repo ci jobs in browser
-function glab-ci() {
+glab-ci() {
   local group=$(dirname $(git remote get-url origin) | cut -f2 -d\:)
   local rname=$(basename $(git remote get-url origin) | sed 's/\.git//g')
   firefox "https://gitlab.com/${group}/${rname}/-/jobs"
 }
 
 # open working gh repo in browser
-function ghopen() {
+ghopen() {
   arg=$1
   remote=$(git remote get-url ${arg:=origin})
   [[ $? -eq 0 ]] && {
@@ -168,14 +168,14 @@ function ghopen() {
 }
 
 # add new remote for forked gh repo
-function ghfork() {
+ghfork() {
   #local branch=$(git rev-parse --abbrev-ref HEAD)
   local reponame=$(git remote -v | grep fetch  | awk '{print $2}' | cut -f5 -d\/)
   git remote add bcicen git@github.com:bcicen/$reponame
   git remote -v
 }
 
-function golnsrc() {
+golnsrc() {
   url=$(git config --get remote.origin.url)
   path=$(echo $url | sed 's/\.git//;s/https:\/\///;s/:/\//g' | cut -f2 -d@)
   tgt=${GOPATH}/src/${path}
@@ -184,7 +184,7 @@ function golnsrc() {
   ln -sv $(git rev-parse --show-toplevel) ${tgt}
 }
 
-function rclone() {
+rclone() {
   local base_dir=${HOME}/repos
   [ $# != 1 ] && {
     echo "usage: rclone <url>"
@@ -205,7 +205,7 @@ function rclone() {
 }
 
 # return url for remote origin
-function _parse_repourl() {
+_parse_repourl() {
   url=$(git remote get-url origin)
   url=${url##git@}
   url=${url##http://}
@@ -214,16 +214,16 @@ function _parse_repourl() {
   echo ${url//:/\/}
 }
 
-function _parse_reponame() { python -c 'import sys; print(sys.argv[1].split("/")[-1].replace(".git",""))' $@; }
+_parse_reponame() { python -c 'import sys; print(sys.argv[1].split("/")[-1].replace(".git",""))' $@; }
 
-function gdiff() { git diff --color $@ | diff-so-fancy; }
-function groot() { cd $(git rev-parse --show-toplevel); }
-function gstashi() { git stash push -- $@; }
-function gtaga() {
+gdiff() { git diff --color $@ | diff-so-fancy; }
+groot() { cd $(git rev-parse --show-toplevel); }
+gstashi() { git stash push -- $@; }
+gtaga() {
   local tag=$1; shift
   git tag -a -m "$tag" $tag $@
 }
-function gbranch() {
+gbranch() {
   local opts
   [[ -z "$1" ]] && { echo "no branch provided"; return; }
 
@@ -256,7 +256,7 @@ __guntracked() {
 
 #complete -W "$(__gbranches)" gbranch
 
-function gcommit() {
+gcommit() {
   commit_msg=$@
   git status -s
 
@@ -269,7 +269,7 @@ function gcommit() {
   __gcommit "$commit_msg"
 }
 
-function gcommiti() {
+gcommiti() {
   local commit_msg
   files=$@
   git diff --stat $files
@@ -281,7 +281,7 @@ function gcommiti() {
   __gcommit "$commit_msg" $files
 }
 
-function __gcommit() {
+__gcommit() {
   msg=$1; shift
   files=$@
 
@@ -298,7 +298,7 @@ function __gcommit() {
   git push
 }
 
-function __confirm() {
+__confirm() {
   local x
   prompt=$(clr_green "$@(y/N)")
   read -n1 -p "$prompt" x; echo
@@ -306,7 +306,7 @@ function __confirm() {
   return 1
 }
 
-function rgrep() {
+rgrep() {
   local opts args
 
   for a in $@; do
@@ -323,24 +323,24 @@ function rgrep() {
   rg ${opts} --no-ignore-vcs -g '!vendor/*' -g '!.git/*' "${args}"
 }
 
-function pyclean() {
+pyclean() {
   count=$(wc -l <(find . -type f -iname "*.pyc" -exec rm -vf {} \;) | awk '{print $1}')
   let count+=$(wc -l <(find . -type d -name "__pycache__" -exec rmdir -v {} +;) | awk '{print $1}')
   _echoout "removed ${count} pycache files"
 }
 
-function pyclean2() {
+pyclean2() {
   sudo chown -Rcf ${USER}. .
   pyclean
   rm -Rf build/ dist/ *.egg-info
 }
 
 # clipboard functions/aliases
-function clip-parse-email() {
+clip-parse-email() {
   clipit $(echo $@ | grep -o "[[:alnum:][:graph:]]*@[[:alnum:][:graph:]]*" | sed 's/mailto://g')
 }
 
-function cbar() {
+cbar() {
   if (pgrep -x conky); then
     killall conky
   else
@@ -350,7 +350,7 @@ function cbar() {
   fi
 }
 
-function pbar() {
+pbar() {
   (pgrep -x polybar) && { killall polybar; return; }
   local args mon=$(xrandr | grep -e '^DP.* connected' | tail -1 | awk '{print $1}')
   [[ "$1" == "debug" ]] && args="-r -l info"
@@ -360,7 +360,7 @@ function pbar() {
   MONITOR=$mon nohup polybar $args -c ~/.config/polybar/world_clock worldclock &
 }
 
-function stash() {
+stash() {
   local sroot=~/.stash ts=$(date +%Y.%M.%d-%H.%m.%S)
   local sfile spath abspath
   mkdir -p $sroot
@@ -379,7 +379,7 @@ function stash() {
   done
 }
 
-function tgz() {
+tgz() {
   [[ $# -le 1 ]] && {
     echo "usage: tgz <archive.tgz> [<path>...]"
     return
@@ -394,11 +394,11 @@ function tgz() {
   tar cf - $@ -P | pv -s $total | gzip > $target
 }
 
-function kill-tabs() {
+kill-tabs() {
   kill -9 $(cpids $(pgrep firefox))
 }
 
-function cpids() {
+cpids() {
   local -A cids
 
   while read pid ppid;do
@@ -429,7 +429,7 @@ alias exift-erase="exiftool -all= -comment='0'"
 alias exift-json="exiftool -struct -j"
 alias exift-copyright="exiftool -CopyrightOwnerName='Bradley Cicenas <bradley@vektor.nyc>' -CopyrightOwnerID='bradley@vektor.nyc'"
 
-function gorunloop() {
+gorunloop() {
   target=$1
   while :; do
     go run $target &
