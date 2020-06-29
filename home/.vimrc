@@ -73,6 +73,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
 Plugin 'junegunn/vim-peekaboo'
 Plugin 'jparise/vim-graphql'
+Plugin 'guns/xterm-color-table.vim'
+Plugin 'evanleck/vim-svelte'
 
 " Go
 Plugin 'fatih/vim-go'
