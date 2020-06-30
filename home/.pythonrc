@@ -209,13 +209,56 @@ def column(items, spacing=2):
 
     return '\n'.join(ret)
 
+def __md2html_toc(body):
+    """
+    inject a toc into md-generated html body, if any
+    and return new body string
+    """
+    tags = ('{toc}', '{:toc}')
+
+    if not body.toc_html:
+        return body
+
+    span = [ body.find(tags[0]), body.find(tags[1]) ]
+    if span[0] == -1 and span[1] == -1:
+        toc = f'<div class="toc">\n{body.toc_html}\n</div>\n'
+        return toc + body
+
+    if span[0] == -1:
+        toc = f'<div class="toc">\n{body.toc_html}\n</div>\n'
+        return body.replace(tags[1], toc)
+
+    # extract elements within tags
+    toc_right = body[span[0]+len(tags[0]):span[1]]
+
+    # prepare for mutation
+    span[1] += len(tags[1])
+
+    # strip leading / trailing paragraph, if any
+    if body[span[0] - 3:span[0]] == '<p>':
+        span[0] -= 3
+    if body[span[1]:span[1]+4] == '</p>':
+        span[1] += 4
+
+    return '\n'.join([
+      body[:span[0]],
+      '<div class="toc">',
+      f'<div class="toc-left">\n{body.toc_html}\n</div>',
+      f'<div class="toc-right"><p>{toc_right}</p></div>',
+      '</div>',
+      body[span[1]:],
+    ])
+
 def md2html(path, target=None):
     from markdown2 import markdown, markdown_path
 
     if not target:
         target = path.replace('.md', '.html')
 
+    ssheet = '/home/bradley/repos/pygments-css/friendly.css'
+
     extras = {
+      'toc': {},
       'fenced-code-blocks': {'linenos': False},
       # 'highlightjs-lang': {},
       'tables': {},
@@ -227,15 +270,17 @@ def md2html(path, target=None):
       },
     }
 
-    body = ''
-    # with open(ssheet) as of:
-        # body += '<style>\n' + of.read() + '\n</style>\n'
+    doc = ''
+    with open(ssheet) as of:
+        doc += '<style>\n' + of.read() + '\n</style>\n'
 
-    body += '<div class="container">\n' + markdown_path(path, extras=extras) + '\n</div>'
-    # with open(path) as of:
-        # return markdown(of.read(), extras=extras)
+    body = markdown_path(path, extras=extras)
+    body = __md2html_toc(body)
+
+    doc += f'<div class="container">\n{body}\n</div>'
+
     with open(target, 'w') as of:
-        n = of.write(body)
+        n = of.write(doc)
         print(f'wrote {n}b to {target}')
 
 def _walkfiles(path):
