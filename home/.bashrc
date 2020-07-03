@@ -127,14 +127,6 @@ monbrite() {
 
 monoff() { sleep 1; xset dpms force off; }
 
-hex2rgb() {
-  input=${1#\#} # strip leading #, if any
-  r=${input:0:2} g=${input:2:2} b=${input:4:2}
-  echo "$((16#$r)) $((16#$g)) $((16#$b))"
-}
-
-rgb2hex() { printf '%x' $1 $2 $3; }
-
 __is_int() { [[ "$1" =~ ^[0-9]+$ ]] && return 0 || return 1; }
 __is_float() { [[ "$1" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]] && return 0 || return 1; }
 
