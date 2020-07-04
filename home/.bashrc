@@ -90,12 +90,11 @@ vimp() { /usr/bin/vim -p $@; }
 vimgo() { /usr/bin/vim -p $(find $@ -maxdepth 1 -iname "*.go" ! -iname "*_test.go"); }
 rgvim() { vim -p $(rgrep $@ | cut -f1 -d\: | uniq); }
 vimdir() {
-  files=$(find ${@:-.} -type f ! -path "*.git/*")
-  fileno=$(wc -w <<< $files)
-  [[ $fileno -ge 12 ]] && {
-    (__confirm "open $fileno files?") || return
+  local files=($(find ${@:-.} -type f ! -path "*.git/*"))
+  [[ ${#files[@]} -ge 12 ]] && {
+    (__confirm "open ${#files[@]} files?") || return
   }
-  vim -p $files
+  vim -p ${files[@]}
 }
 
 pylint-import() { pylint --disable=all -e W0411,W0611 $@; }
