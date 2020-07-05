@@ -214,6 +214,11 @@ gtaga() {
   local tag=$1; shift
   git tag -a -m "$tag" $tag $@
 }
+gtagd() {
+  local tag=$1; shift
+  git tag -d $tag
+  git push origin :refs/tags/${tag}
+}
 gbranch() {
   local opts
   [[ -z "$1" ]] && { echo "no branch provided"; return; }
