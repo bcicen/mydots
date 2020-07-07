@@ -20,3 +20,7 @@
 	required = true
 [diff]
 	context = 5
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com/
+[pull]
+	rebase = true
