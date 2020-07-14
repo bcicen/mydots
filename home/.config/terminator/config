@@ -1,49 +1,39 @@
 [global_config]
   borderless = True
-  custom_url_handler = firefox
-  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler
-  inactive_color_offset = 0.89
   tab_position = bottom
-  title_font = InconsolataGo Nerd Font Mono 9
-  title_inactive_bg_color = "#444444"
-  title_inactive_fg_color = "#878787"
-  title_receive_bg_color = "#444444"
-  title_receive_fg_color = "#87ffff"
-  title_transmit_bg_color = "#444444"
-  title_transmit_fg_color = "#afffd7"
-  title_use_system_font = False
   use_custom_url_handler = True
+  custom_url_handler = firefox
+  title_transmit_fg_color = "#afffd7"
+  title_transmit_bg_color = "#444444"
+  title_receive_fg_color = "#87ffff"
+  title_receive_bg_color = "#444444"
+  title_inactive_fg_color = "#878787"
+  title_inactive_bg_color = "#444444"
+  inactive_color_offset = 0.89
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler
+  title_use_system_font = False
+  title_font = InconsolataGo Nerd Font Mono 9
 [keybindings]
-  broadcast_all = None
-  close_term = None
-  close_window = None
-  help = None
-  scaled_zoom = None
   split_horiz = <Primary><Shift>z
   split_vert = <Primary><Shift>a
+  close_term = None
   toggle_scrollbar = None
+  close_window = None
   toggle_zoom = <Primary><Shift>s
-[layouts]
-  [[default]]
-    [[[child1]]]
-      parent = window0
-      profile = default
-      type = Terminal
-    [[[window0]]]
-      parent = ""
-      type = Window
-[plugins]
+  scaled_zoom = None
+  broadcast_all = None
+  help = None
 [profiles]
   [[default]]
     allow_bold = False
     background_color = "#212226"
     cursor_color = "#25C3DC"
-    font = Inconsolata Medium 12
+    font = Inconsolata Medium 10
     foreground_color = "#f2f2f2"
-    palette = "#88adb4:#c62828:#558b2e:#f9a825:#1565c1:#b851e3:#00838f:#ffffff:#969694:#f15250:#86bd47:#f8e63a:#77b2f6:#b963c8:#25c3dc:#ffffff"
-    scrollback_lines = 20000
-    scrollbar_position = hidden
     show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 20000
+    palette = "#88adb4:#c62828:#558b2e:#f9a825:#1565c1:#b851e3:#00838f:#ffffff:#969694:#f15250:#86bd47:#f8e63a:#77b2f6:#b963c8:#25c3dc:#ffffff"
     use_system_font = False
   [[material-dark]]
     background_color = "#1a1a1a"
@@ -55,7 +45,17 @@
     cursor_color = "#25C3DC"
     font = Inconsolata Nerd Font Mono Medium 9
     foreground_color = "#3c3c3b"
-    palette = "#f8f8f8:#d7005f:#718c00:#ff8f01:#005f87:#6a1e9a:#3e999f:#2c2c2c:#2c2c2c:#ef5251:#90c94d:#ffa000:#4271ae:#c774c1:#3e999f:#f5f5f5"
-    scrollbar_position = hidden
     show_titlebar = False
+    scrollbar_position = hidden
+    palette = "#f8f8f8:#d7005f:#718c00:#ff8f01:#005f87:#6a1e9a:#3e999f:#2c2c2c:#2c2c2c:#ef5251:#90c94d:#ffa000:#4271ae:#c774c1:#3e999f:#f5f5f5"
     use_system_font = False
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
