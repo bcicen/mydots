@@ -346,15 +346,21 @@ class DictStats(dict):
                 self[k] = defaultdict(int)
             self[k][v] += 1
 
-def epoch2dt(ts):
+def epoch2dt(ts, tz=None):
     # parse and return a datetime.datetime from a
     # unix timestamp
+    import pytz
     from datetime import datetime
     if not isinstance(ts, int):
         ts = int(ts)
     if ts > 16000000000:
         ts = ts / 1000
-    return datetime.utcfromtimestamp(ts)
+
+    dt = datetime.utcfromtimestamp(ts)
+    dt = dt.astimezone(pytz.timezone('UTC'))
+    if tz:
+        dt = dt.astimezone(tz)
+    return dt
 
 if sys.argv[0].split('/')[-1] == '.pythonrc':
     if len(sys.argv) < 2:
