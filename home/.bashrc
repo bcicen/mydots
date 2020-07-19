@@ -39,6 +39,7 @@ _pathadd ${HOME}/.local/bin
 _pathadd ${HOME}/.yarn/bin
 _pathadd /usr/local/kubebuilder/bin
 _pathadd /opt/bin
+_pathadd ${HOME}/Android/Sdk/platform-tools
 
 # history
 export HISTFILESIZE=100000
@@ -96,6 +97,20 @@ vimdir() {
   }
   vim -p ${files[@]}
 }
+
+# clipboard aliases
+
+alias cxget='xsel -bo'
+alias cxput='xsel -bi'
+
+cxedit () {
+  local p=$(mktemp -u)
+  [[ -z "$1" ]] || p=$(mktemp -u --suffix=".${1}")
+  cxget > $p && vim $p
+  cxput < $p && rm $p
+}
+
+alias vimclip='cxedit'
 
 pylint-import() { pylint --disable=all -e W0411,W0611 $@; }
 
