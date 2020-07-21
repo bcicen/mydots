@@ -18,7 +18,7 @@ indicator = "● "
 [bar/main]
 monitor = ${env:MONITOR:eDP-1}
 width = 37.9%
-height = 35
+height = 40
 offset-x = 0.1%
 offset-y = 0.1%
 radius = 2.0
@@ -37,11 +37,10 @@ padding-right = 2
 border-bottom-size = 1
 border-color = ${colors.background}
 
-font-0 = "GE Inspira:pixelsize=18;1"
+font-0 = "GE Inspira:pixelsize=20;1"
 font-1 = "Symbola:pixelsize=25;2"
 font-2 = "Symbola:pixelsize=12;2"
 font-3 = "Symbola:pixelsize=24;2"
-font-4 = "GE Inspira:pixelsize=18;1"
 
 modules-left = life
 modules-center = cpu sp memory sp wifi wifibar sp battery sp temp tempbar
