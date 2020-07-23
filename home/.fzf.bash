@@ -283,6 +283,8 @@ function gcp-context() {
   out=$(__gcp_contexts | column -t -s$'\t' | fzf --ansi --cycle --reverse -e --header-lines=1)
   [[ -z "$out" ]] && return
   gcloud config configurations activate $(echo $out | awk '{print $1}')
+  ACCOUNT=$(gcloud config get-value core/account)
+  export GOOGLE_APPLICATION_CREDENTIALS="${HOME}/.config/gcloud/legacy_credentials/${ACCOUNT}/adc.json"
 }
 
 function __join_by_tab { local IFS="	"; echo "$*"; }
