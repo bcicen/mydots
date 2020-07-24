@@ -1,5 +1,5 @@
 xkb_keymap {
-xkb_keycodes "evdev_aliases(qwerty)" {
+xkb_keycodes "evdev+aliases(qwerty)" {
     minimum = 8;
     maximum = 255;
      <ESC> = 9;
@@ -389,6 +389,7 @@ xkb_types "complete" {
     };
     type "LOCAL_EIGHT_LEVEL" {
         modifiers= Shift+Lock+Control+LevelThree;
+        map[Shift+Lock]= Level1;
         map[Shift]= Level2;
         map[Lock]= Level2;
         map[LevelThree]= Level3;
@@ -618,6 +619,7 @@ xkb_types "complete" {
     };
     type "FOUR_LEVEL_MIXED_KEYPAD" {
         modifiers= Shift+NumLock+LevelThree;
+        map[Shift+NumLock]= Level1;
         map[NumLock]= Level2;
         map[Shift]= Level2;
         map[LevelThree]= Level3;
@@ -1176,14 +1178,11 @@ xkb_compatibility "complete" {
     };
 };
 
-xkb_symbols "pc_us_inet(evdev)" {
+xkb_symbols "pc+us+inet(evdev)" {
 
     name[group1]="English (US)";
 
-    key  <ESC> {
-        type= "THREE_LEVEL",
-        symbols[Group1]= [          Escape,           grave,      asciitilde ]
-    };
+    key  <ESC> {         [          Escape ] };
     key <AE01> {         [               1,          exclam ] };
     key <AE02> {         [               2,              at ] };
     key <AE03> {         [               3,      numbersign ] };
@@ -1417,18 +1416,12 @@ xkb_symbols "pc_us_inet(evdev)" {
     };
     key <LNFD> {         [        Linefeed ] };
     key <HOME> {         [            Home ] };
-    key   <UP> {
-        type= "THREE_LEVEL",
-        symbols[Group1]= [              Up,              Up,           Prior ]
-    };
+    key   <UP> {         [              Up ] };
     key <PGUP> {         [           Prior ] };
     key <LEFT> {         [            Left ] };
     key <RGHT> {         [           Right ] };
     key  <END> {         [             End ] };
-    key <DOWN> {
-        type= "THREE_LEVEL",
-        symbols[Group1]= [            Down,            Down,            Next ]
-    };
+    key <DOWN> {         [            Down ] };
     key <PGDN> {         [            Next ] };
     key  <INS> {         [          Insert ] };
     key <DELE> {         [          Delete ] };
@@ -1466,7 +1459,7 @@ xkb_symbols "pc_us_inet(evdev)" {
     key <I129> {         [      KP_Decimal,      KP_Decimal ] };
     key <HNGL> {         [          Hangul ] };
     key <HJCV> {         [    Hangul_Hanja ] };
-    key <LWIN> {         [ ISO_Level3_Shift ] };
+    key <LWIN> {         [    ISO_Level3_Shift ] };
     key <RWIN> {         [         Super_R ] };
     key <COMP> {
         symbols[Group1]= [              F9,              F9 ],
@@ -1618,7 +1611,7 @@ xkb_symbols "pc_us_inet(evdev)" {
     modifier_map Mod1 { <LALT> };
     modifier_map Lock { <CAPS> };
     modifier_map Mod2 { <NMLK> };
-    modifier_map Mod5 { <LVL3> };
+    modifier_map Mod5 { ISO_Level3_Shift };
     modifier_map Control { <RCTL> };
     modifier_map Mod1 { <RALT> };
     modifier_map Mod4 { <LWIN> };
@@ -1627,6 +1620,11 @@ xkb_symbols "pc_us_inet(evdev)" {
     modifier_map Mod1 { <META> };
     modifier_map Mod4 { <SUPR> };
     modifier_map Mod4 { <HYPR> };
+
+    key.type = "THREE_LEVEL";
+    key   <UP> { [ Up, Up, Prior ] };
+    key <DOWN> { [ Down, Down, Next ] };
+    key  <ESC> { [ Escape, grave, asciitilde ] };
 };
 
 xkb_geometry "pc(pc105)" {
