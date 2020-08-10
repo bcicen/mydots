@@ -15,7 +15,12 @@ set nocompatible
 set foldmethod=manual
 set foldlevel=99
 set iskeyword+=-
+set splitright
 "set foldmarker={,} foldlevel=0 foldmethod=manual
+
+function! VResize(n)
+  exe 'vertical resize '  . (winwidth(0) * a:n/100)
+endfunction
 
 function! Percent()
   let byte = line2byte( line( "." ) ) + col( "." ) - 1
@@ -222,8 +227,10 @@ nmap <F9> :TagbarOpenAutoClose<CR>
 
 "quote single word
 nnoremap qw :silent! normal mpea"<Esc>bi"<Esc>`pl
-" substitute word under cursor
+" substitute word under cursor global
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+" substitute word under cursor local
+nnoremap <Leader>d :s/\<<C-r><C-w>\>/<C-r><C-w>
 
 " ctrl+t for new tab
 nmap <C-t> :tabnew<CR>
@@ -292,3 +299,4 @@ function! Flt_term_win(cmd, width, height, border_highlight) abort
 endfunction
 
 nnoremap <silent> <leader>gz :call Flt_term_win('lazygit',0.9,0.6,'Todo')<CR>
+nnoremap <buffer> <silent> <C-w>] :<C-u>call go#def#Jump("vsplit", 0)<CR>:<C-u>call VResize(40)<CR>
