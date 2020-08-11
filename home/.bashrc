@@ -127,8 +127,13 @@ ctof() { echo "scale=1; ($1*9) / 5 + 32" | bc; }
 ftoc() { echo "scale=1; ($1 - 32) / 1.8" | bc; }
 dusort() { path=$@; du -hs ${path:=.}/* | sort -h; }
 grepnotes() { find $HOME/work/notes/ -maxdepth 2 -type f -exec grep -Hi "$@" {} \; ; }
-litebrite() { echo $1 > /sys/class/backlight/intel_backlight/brightness; }
 isum() { local s=($@); tr ' ' '+' <<<${s[@]} | bc; }
+
+litebrite() {
+  local -i n=$1 max=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+  [[ -z "$n" ]] && return
+  echo $((max*n/100)) > /sys/class/backlight/intel_backlight/brightness
+}
 
 ragel2png() {
   [[ -z "$1" ]] && { _echoerr "usage: ragel2png <path> [<module name>]"; return; }
