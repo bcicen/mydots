@@ -1182,8 +1182,7 @@ xkb_symbols "pc+us+inet(evdev)" {
 
     name[group1]="English (US)";
 
-    key  <ESC> {         [          Escape ] };
-    key <AE01> {         [               1,          exclam ] };
+    key <AE01> {         [               1,          exclam,   F1 ] };
     key <AE02> {         [               2,              at ] };
     key <AE03> {         [               3,      numbersign ] };
     key <AE04> {         [               4,          dollar ] };
@@ -1416,12 +1415,10 @@ xkb_symbols "pc+us+inet(evdev)" {
     };
     key <LNFD> {         [        Linefeed ] };
     key <HOME> {         [            Home ] };
-    key   <UP> {         [              Up ] };
     key <PGUP> {         [           Prior ] };
     key <LEFT> {         [            Left ] };
     key <RGHT> {         [           Right ] };
     key  <END> {         [             End ] };
-    key <DOWN> {         [            Down ] };
     key <PGDN> {         [            Next ] };
     key  <INS> {         [          Insert ] };
     key <DELE> {         [          Delete ] };
@@ -1622,9 +1619,9 @@ xkb_symbols "pc+us+inet(evdev)" {
     modifier_map Mod4 { <HYPR> };
 
     key.type = "THREE_LEVEL";
-    key   <UP> { [ Up, Up, Prior ] };
-    key <DOWN> { [ Down, Down, Next ] };
-    key  <ESC> { [ Escape, grave, asciitilde ] };
+    key   <UP>    { [ Up, Up, Prior ] };
+    key   <DOWN>  { [ Down, Down, Next ] };
+    key   <ESC>   { [ Escape, grave, asciitilde ] };
 };
 
 xkb_geometry "pc(pc105)" {

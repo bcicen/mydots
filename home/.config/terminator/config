@@ -28,7 +28,7 @@
     allow_bold = False
     background_color = "#212226"
     cursor_color = "#25C3DC"
-    font = Inconsolata Medium 10
+    font = Fira Code 7
     foreground_color = "#f2f2f2"
     show_titlebar = False
     scrollbar_position = hidden

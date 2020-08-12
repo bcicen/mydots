@@ -1,1 +1,1 @@
-test -f ~/.Xkeymap && xkbcomp ~/.Xkeymap $DISPLAY
+# test -f ~/.Xkeymap && xkbcomp ~/.Xkeymap $DISPLAY
