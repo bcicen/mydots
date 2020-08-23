@@ -24,3 +24,13 @@
 	insteadOf = https://gitlab.com/
 [pull]
 	rebase = true
+[color "status"]
+	header = "#E0D985"
+	added = "#7FE9A2"
+	changed = "#FFF06E"
+	untracked = "#6D8073"
+	branch = "#7FE9D0"
+	nobranch = blue
+	localBranch = blue
+	remoteBranch = blue
+	unmerged = blue

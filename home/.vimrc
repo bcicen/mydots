@@ -62,7 +62,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'pangloss/vim-javascript'
-Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'jasontbradshaw/pigeon.vim'
 

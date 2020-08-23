@@ -99,7 +99,7 @@ vimp() { /usr/bin/vim -p $@; }
 vimgo() { /usr/bin/vim -p $(find $@ -maxdepth 1 -iname "*.go" ! -iname "*_test.go"); }
 rgvim() { vim -p $(rgrep $@ | cut -f1 -d\: | uniq); }
 vimdir() {
-  local files=($(find ${@:-.} -type f ! -path "*.git/*"))
+  local files=($(find -L ${@:-.} -type f ! -path "*.git/*"))
   [[ ${#files[@]} -ge 12 ]] && {
     (__confirm "open ${#files[@]} files?") || return
   }
@@ -235,9 +235,50 @@ _parse_repourl() {
 
 _parse_reponame() { python -c 'import sys; print(sys.argv[1].split("/")[-1].replace(".git",""))' $@; }
 
-gdiff() { git diff --color $@ | diff-so-fancy; }
+gdifff() { git diff --color $@ | diff-so-fancy; }
+gdiff() { git diff --color --numstat; git diff --color --numstat --cached; }
 groot() { cd $(git rev-parse --show-toplevel); }
 gstashi() { git stash push -- $@; }
+
+gstat() {
+  local opts="-C ${@:-.}"
+  local add=$(_clrHex "#7FE9A2" " A")
+  local del=$(_clrHex "#FE7FAC" " D")
+  local mod=$(_clrHex "#75DEF1" " M")
+  echo "branch $(git $opts branch --show-current)"
+  git $opts status -s | sed "s/^A\ / ${add}/;s/^\ M/ ${mod}/;s/^\ D/ ${del}/"
+}
+
+gdirs-diff() {
+  local -i n rn
+  gdirs $@ | while read p; do
+    [[ "$(gdiffs | wc -l)" -ne 0 ]] && {
+      echo -e "\n### $(clr_green $p)"
+      gdiffs; echo
+      let rn++ n+=
+    }
+    cd - &> /dev/null
+  done
+}
+
+__gdir-diff() {
+  gdirs | while read p; do
+    cd $p 
+    [[ "$(gdiffs | wc -l)" -ne 0 ]] && {
+      echo -e "### $(clr_green $p)\n"
+      gdiffs; echo
+    }
+    cd - &> /dev/null
+  done
+}
+
+
+gdirs() {
+  for i in $(find ${@:-.} -type d -iname ".git");
+    do echo ${i%%/.git};
+  done
+}
+
 gtaga() {
   local tag=$1; shift
   git tag -a -m "$tag" $tag $@
@@ -344,7 +385,7 @@ rgrep() {
   _echoerr "opts: $opts"
   _echoerr "args: $args"
 
-  rg ${opts} --no-ignore-vcs -g '!vendor/*' -g '!.git/*' "${args}"
+  rg ${opts} --no-ignore-vcs -g '!vendor/*' -g '!.git/*' -g '!node_modules/*' "${args}"
 }
 
 pyclean() {
@@ -484,7 +525,6 @@ complete -W "$(__ssh_hosts)" scp
 complete -F _complete_alias drun
 
 source ~/.bashrcx
-source ~/.tptrc
 
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
