@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{html .Name}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab|Roboto|Lato:300,400,500,700,800,900" rel="stylesheet">
+    <style>
+    * {
+      padding: 0;
+      margin: 0;
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    body {
+      background: #e4e3da;
+      color: #646464;
+      font-family: Lato,sans-serif;
+      text-rendering: optimizespeed;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    a { text-decoration: none; color: inherit}
+
+    th:last-child,
+    td:last-child {
+      width: 5%;
+    }
+
+    header {
+      padding: .5em 2vw;
+      margin-bottom: .5em;
+      background-color: #758384;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: 18px;
+      line-height: 18px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      color: rgba(255, 255, 255, 0.65);
+      padding: 2px 4px;
+      border-radius: 5px;
+      line-height: 22px;
+      margin: 0 2px;
+    }
+
+    .pathlinks {
+      display: flex;
+      align-items: center;
+    }
+
+    .slash {
+      font-size: 22px;
+      font-weight: 700;
+      padding: 0;
+    }
+
+    .hlink {
+      color: rgba(255, 255, 255, 0.85);
+      -webkit-transition: background 50ms linear;
+      -ms-transition: background 50ms linear;
+      transition: background 50ms linear;
+    }
+
+    .hlink:hover {
+      color: #fff;
+      background-color: rgba(29, 29, 29, 0.2);
+    }
+
+    .rootlink {
+      display: flex;
+      align-items: center;
+      height: 1.5em;
+      /*margin: 0 4px;*/
+      padding: 2px 4px;
+      border-radius: 5px;
+    }
+
+    header svg {
+      margin-right: 4px;
+    }
+
+    header svg g {
+      fill: rgba(255, 255, 255, 0.85);
+    }
+
+    header svg circle {
+      fill: #525252;
+    }
+
+    header svg path {
+      stroke: #525252;
+    }
+
+    .dtoggle {
+      width: 2em;
+      height: 2em;
+      background-color: #2a3233;
+      border: 1px #333 solid;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    h1 a:hover {
+      text-decoration: none;
+    }
+
+    h1 a:first-child {
+      margin: 0;
+    }
+
+    main {
+      display: block;
+      width: 95vw;
+      max-width: 95vw;
+      margin: 0 auto;
+    }
+
+    .meta {
+      width: 95vw;
+      max-width: 95vw;
+      font-size: 14px;
+      font-family: Verdana, sans-serif;
+      border-bottom: 1px solid #9C9C9C;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+    }
+
+    .meta-item {
+      padding-right: 1em;
+    }
+
+    #filter {
+      display: none;
+      padding: 4px;
+      border: 1px solid #CCC;
+      width: 20em;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    tr {
+      border-bottom: 2.5px dotted #ffffff26;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 10px 0;
+    }
+
+    th {
+      font-size: 16px;
+      white-space: nowrap;
+      padding: 15px 5px;
+    }
+
+    th a {
+      color: #2d4b51;
+      display: flex;
+      align-items: end;
+    }
+
+    th a svg {
+      margin-left: 5px;
+    }
+
+    #up-arrow, #down-arrow {
+      stroke: #2d4b51d4;
+    }
+
+    td {
+      white-space: nowrap;
+      font-size: 16px;
+      border: 2.5px dotted #ffffff26;
+      padding: 5px;
+      vertical-align: middle;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: dotted 1px #cacaca;
+    }
+
+    td a svg {
+      vertical-align: top;
+      padding: 0 .5em;
+      border-right: 1px #00000029 dotted;
+      margin-right: .5em;
+    }
+
+    td:nth-child(1) {
+      width: 80%;
+    }
+
+    td:nth-child(3),
+    th:nth-child(3) {
+      padding: 0 20px 0 20px;
+    }
+
+    th:nth-child(4),
+    td:nth-child(4) {
+      text-align: right;
+    }
+
+    td:nth-child(2) svg {
+      position: absolute;
+    }
+
+    td .name {
+      color: #2d4b51;
+      word-break: break-all;
+      overflow-wrap: break-word;
+      white-space: pre-wrap;
+    }
+
+    .icon {
+      margin-right: 5px;
+    }
+
+    .icon.sort {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      position: relative;
+      top: .2em;
+    }
+
+    .icon.sort .top {
+      position: absolute;
+      left: 0;
+      top: -1px;
+    }
+
+    .icon.sort .bottom {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+    }
+
+    footer {
+      padding: 40px 20px;
+      font-size: 12px;
+      text-align: center;
+      color: #efefef;
+    }
+
+    @media (max-width: 600px) {
+      .hideable {
+        display: none;
+      }
+
+      td:nth-child(2) {
+        width: auto;
+      }
+
+      th:nth-child(3),
+      td:nth-child(3) {
+        padding-right: 5%;
+        text-align: right;
+      }
+
+      #filter {
+        max-width: 100px;
+      }
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 4px;
+    }
+    tr td:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+    tr td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+
+    #file {
+      stroke: #3f7351;
+    }
+
+    .file:hover {
+      cursor:pointer
+    }
+
+    #file-shortcut {
+      stroke: #6761af;
+    }
+
+    .goup td {
+      background-color: transparent;
+      border: none;
+    }
+
+    .goup td a {
+      padding: 5px 0px 10px 10px;
+      font-size: 24px;
+      line-height: 16px;
+    }
+
+    tbody tr:hover td, .hovered td {
+      background-color: rgba(255, 255, 255, 0.1);
+      background-color: #75838447;
+    }
+    </style>
+    <script>
+      var selectedIdx = -2;
+      var maxIdx = {{- len .Items}} - 1;
+      console.log(maxIdx);
+
+      const unselect = () => {
+        var cur = document.getElementById(`row-${selectedIdx}`);
+        if (cur !== null) {
+          cur.classList.remove('hovered');
+        }
+      }
+
+      const handleKey = (e) => {
+        e = e || window.event;
+
+        if (e.keyCode == '38') {
+          // up arrow
+          console.log('up');
+            if (selectedIdx <= -1) {
+              return
+            }
+            unselect()
+            selectedIdx--
+            console.log(`row-${selectedIdx}`);
+            document.getElementById(`row-${selectedIdx}`).classList.add('hovered');
+          }
+        else if (e.keyCode == '40') {
+          // down arrow
+          console.log('down');
+          if (selectedIdx >= maxIdx) {
+            return
+          }
+          unselect()
+          selectedIdx++
+          document.getElementById(`row-${selectedIdx}`).classList.add('hovered');
+        }
+        else if (e.keyCode == '37') {
+          console.log('left');
+           // left arrow
+        }
+        else if (e.keyCode == '39') {
+          console.log('right');
+           // right arrow
+        }
+        else if (e.keyCode == '13') {
+          // enter
+          console.log(`enter row-${selectedIdx}`);
+          document.getElementById(`row-${selectedIdx}`).click();
+        }
+      }
+
+      var theme = localStorage.getItem('theme');
+      if (theme === null) {
+        theme = 'light';
+      }
+
+      const darkTheme = `
+body {
+  background: #2a3233;
+  color: #efefef;
+}
+
+th a, td { color: #ced4d5; }
+
+td {
+  background-color: rgba(72, 81, 87, 0.32);
+  border-color: #2a3233;
+}
+
+td .name {
+  color: #ced4d5;
+}
+
+td a svg {
+  border-right: 2px #f3f3f321 dotted;
+}
+
+tbody tr:hover td, tbody tr:hover td .name {
+  color: #fff;
+}
+
+#filter {
+  border-color: #2a3233;
+}
+
+#folder g {
+  stroke: #ff69a8;
+}
+
+#file {
+  stroke: #93edb2;
+}
+
+#file-shortcut {
+  stroke: #93cfed;
+}
+
+#up-arrow, #down-arrow {
+  stroke: #7bb5c0d4;
+}
+`
+      
+      const applyTheme = () => {
+        var style;
+        if (theme === 'dark') {
+          style = darkTheme;
+        } else {
+          var sheet = document.getElementById('theme');
+          if (sheet !== null) {
+            sheet.parentNode.removeChild(sheet);
+          }
+          return;
+        } 
+        
+        var sheet = document.createElement('style')
+        sheet.id = 'theme';
+        sheet.innerHTML = style;
+        document.body.appendChild(sheet);
+      }
+
+      const toggleTheme = () => {
+        if (theme === 'light') {
+          theme = 'dark';
+        } else if (theme === 'dark') {
+          theme = 'light';
+        }
+        localStorage.setItem('theme', theme);
+        applyTheme();
+      }
+  </script>
+  </head>
+  <body onload='init()'>
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="0" width="0" style="position: absolute;">
+      <defs>
+        <!-- Folder -->
+        <g id="folder" fill="none" fill-rule="evenodd" stroke="#FF69A8" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 4)">
+          <path d="m.5 1.5v9c0 1.1045695.8954305 2 2 2h10c1.1045695 0 2-.8954305 2-2v-6.00280762c.000802-1.1045695-.8946285-2-1.999198-2-.0002674 0-.0005348.00000006-.0008018.00080218l-5.0000002.00200544-2-2h-4c-.55228475 0-1 .44771525-1 1z"/>
+          <path d="m.5 2.5h7"/>
+        </g>
+
+        <!-- File -->
+        <g id="file" fill="none" fill-rule="evenodd" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 3)">
+          <path d="m12.5 12.5v-7l-5-5h-5c-1.1045695 0-2 .8954305-2 2v10c0 1.1045695.8954305 2 2 2h8c1.1045695 0 2-.8954305 2-2z"/>
+          <path d="m7.5.5v3c0 1.1045695.8954305 2 2 2h3"/>
+        </g>
+        <g id="file-shortcut" fill="none" fill-rule="evenodd" stroke="#2a2e3b" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 4)">
+          <path d="m5.5 7.5c.96940983 1.36718798 3.01111566 1.12727011 4.01111565 0l1.98888435-2c1.1243486-1.22807966 1.1641276-2.81388365 0-4-1.135619-1.15706921-2.86438099-1.15706947-4 0l-2 2"/>
+          <path d="m.64175661 12.3971156c.96940983 1.367188 3 1.1970433 4 .0697732l2-1.9748738c1.12434863-1.22807961 1.16412758-2.83900987 0-4.02512622-1.13561902-1.15706922-2.86438099-1.15706948-4 0l-2 2" transform="matrix(-1 0 0 -1 8.14 18.966)"/>
+        </g>
+
+        <!-- Up arrow -->
+        <g id="up-arrow" fill="none" fill-rule="evenodd" stroke="#2A2E3B" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-90 10.5 8.5)">
+          <circle cx="8.5" cy="8.5" r="8"/>
+          <polyline points="9.621 6.379 9.621 10.621 5.379 10.621" transform="scale(1 -1) rotate(-45 -13.02 0)"/>
+        </g>
+
+        <!-- Down arrow -->
+        <g id="down-arrow" fill="none" fill-rule="evenodd" stroke="#2A2E3B" stroke-linecap="round" stroke-linejoin="round" transform="rotate(90 8.5 10.5)">
+          <circle cx="8.5" cy="8.5" r="8"/>
+          <polyline points="9.563 6.355 9.611 10.645 5.321 10.597" transform="scale(1 -1) rotate(-45 -13.055 0)"/>
+        </g>
+      </defs>
+    </svg>
+
+    <header>
+      <div class="pathlinks">
+        <a class="rootlink hlink" href="/">
+          <svg height="1.5em" width="1.5em" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fill-rule="evenodd" transform="matrix(0 -1 1 0 1.5 18.5)">
+            <path d="m2.5.5h3c1.1045695 0 2 .8954305 2 2v13c0 1.1045695-.8954305 2-2 2h-3c-1.1045695 0-2-.8954305-2-2v-13c0-1.1045695.8954305-2 2-2z" stroke="#2a2e3b" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="4" cy="4" fill="#2a2e3b" r="1"/>
+            <path d="m9.50624332.5000411 2.99999998.00936502c1.1021268.00344048 1.9937567.89785814 1.9937567 1.99999026v12.99057222c0 1.1045695-.8954305 2-2 2-.0020811 0-.0041622-.0000032-.0062433-.0000097l-3.00000002-.009365c-1.10212675-.0034405-1.99375668-.8978582-1.99375668-1.9999903v-12.99057225c0-1.1045695.8954305-2 2-2 .00208111 0 .00416222.00000325.00624332.00000975z" stroke="#2a2e3b" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="11" cy="4" fill="#2a2e3b" r="1"/>
+            </g>
+          </svg>
+          <h1 class="slash">/</h1>
+        </a>
+        {{range $i, $crumb := .Breadcrumbs}}
+          {{if eq $i 0}}
+          {{else}}
+            <a href="{{html $crumb.Link}}">
+              <h1 class="hlink">{{html $crumb.Text}}</h1>
+            </a>
+            <h1 class="slash">/</h1>
+          {{end}}
+        {{end}}
+      </div>
+      <div class="dtoggle" onclick='toggleTheme()'></div>
+    </header>
+    <main>
+      <div class="meta">
+        <div class="filterbar">
+          <span class="meta-item"><input type="text" placeholder="filter" id="filter" onkeyup='filter()'></span>
+        </div>
+        <div id="summary">
+          <span class="meta-item"><b>{{.NumDirs}}</b> director{{if eq 1 .NumDirs}}y{{else}}ies{{end}}</span>
+          <span class="meta-item"><b>{{.NumFiles}}</b> file{{if ne 1 .NumFiles}}s{{end}}</span>
+          {{- if ne 0 .ItemsLimitedTo}}
+          <span class="meta-item">(of which only <b>{{.ItemsLimitedTo}}</b> are displayed)</span>
+          {{- end}}
+        </div>
+      </div>
+      <div class="listing">
+        <table aria-describedby="summary">
+          <thead>
+          <tr>
+            <th>
+              {{- if and (eq .Sort "namedirfirst") (ne .Order "desc")}}
+              <a href="?sort=namedirfirst&order=desc{{if ne 0 .ItemsLimitedTo}}&limit={{.ItemsLimitedTo}}{{end}}" class="icon"><svg width="1.2em" height="1.2em" version="1.1" viewBox="0 0 21 21"><use xlink:href="#up-arrow"></use></svg></a>
+              {{- else if and (eq .Sort "namedirfirst") (ne .Order "asc")}}
+              <a href="?sort=namedirfirst&order=asc{{if ne 0 .ItemsLimitedTo}}&limit={{.ItemsLimitedTo}}{{end}}" class="icon"><svg width="1.2em" height="1.2em" version="1.1" viewBox="0 0 21 21"><use xlink:href="#down-arrow"></use></svg></a>
+              {{- end}}
+              
+              {{- if and (eq .Sort "name") (ne .Order "desc")}}
+              <a href="?sort=name&order=desc{{if ne 0 .ItemsLimitedTo}}&limit={{.ItemsLimitedTo}}{{end}}">Name <svg width="1.2em" height="1.2em" version="1.1" viewBox="0 0 21 21"><use xlink:href="#up-arrow"></use></svg></a>
+              {{- else if and (eq .Sort "name") (ne .Order "asc")}}
+              <a href="?sort=name&order=asc{{if ne 0 .ItemsLimitedTo}}&limit={{.ItemsLimitedTo}}{{end}}">Name <svg width="1.2em" height="1.2em" version="1.1" viewBox="0 0 21 21"><use xlink:href="#down-arrow"></use></svg></a>
+              {{- else}}
+              <a href="?sort=name&order=asc{{if ne 0 .ItemsLimitedTo}}&limit={{.ItemsLimitedTo}}{{end}}">Name</a>
+              {{- end}}
+            </th>
+            <th>
+              {{- if and (eq .Sort "size") (ne .Order "desc")}}
+              <a href="?sort=size&order=desc{{if ne 0 .ItemsLimitedTo}}&limit={{.ItemsLimitedTo}}{{end}}">Size <svg width="1.2em" height="1.2em" version="1.1" viewBox="0 0 21 21"><use xlink:href="#up-arrow"></use></svg></a>
+              {{- else if and (eq .Sort "size") (ne .Order "asc")}}
+              <a href="?sort=size&order=asc{{if ne 0 .ItemsLimitedTo}}&limit={{.ItemsLimitedTo}}{{end}}">Size <svg width="1.2em" height="1.2em" version="1.1" viewBox="0 0 21 21"><use xlink:href="#down-arrow"></use></svg></a>
+              {{- else}}
+              <a href="?sort=size&order=asc{{if ne 0 .ItemsLimitedTo}}&limit={{.ItemsLimitedTo}}{{end}}">Size</a>
+              {{- end}}
+            </th>
+            <th class="hideable">
+              {{- if and (eq .Sort "time") (ne .Order "desc")}}
+              <a href="?sort=time&order=desc{{if ne 0 .ItemsLimitedTo}}&limit={{.ItemsLimitedTo}}{{end}}">Modified <svg width="1.2em" height="1.2em" version="1.1" viewBox="0 0 21 21"><use xlink:href="#up-arrow"></use></svg></a>
+              {{- else if and (eq .Sort "time") (ne .Order "asc")}}
+              <a href="?sort=time&order=asc{{if ne 0 .ItemsLimitedTo}}&limit={{.ItemsLimitedTo}}{{end}}">Modified <svg width="1.2em" height="1.2em" version="1.1" viewBox="0 0 21 21"><use xlink:href="#down-arrow"></use></svg></a>
+              {{- else}}
+              <a href="?sort=time&order=asc{{if ne 0 .ItemsLimitedTo}}&limit={{.ItemsLimitedTo}}{{end}}">Modified</a>
+              {{- end}}
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          {{- if ne .Path "/" }}
+          <tr id="row--1" class="goup" onclick="javascript:location.href='..'">
+            <td class="goup">
+              <a href="..">··</a>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          {{- end}}
+          {{- range $idx, $x := .Items}}
+          <tr id="row-{{$idx}}" class="file" onclick="javascript:location.href='{{html $x.URL}}'">
+            <td>
+              <a href="{{html .URL}}">
+                {{- if .IsDir}}
+                <svg version="1.1" width="1.5em" height="1.5em" viewBox="0 0 21 21"><use xlink:href="#folder"></use></svg>
+                {{- else}}
+                <svg version="1.1" width="1.5em" height="1.5em" viewBox="0 0 21 21"><use xlink:href="#file{{if $x.IsSymlink}}-shortcut{{end}}"></use></svg>
+                {{- end}}
+                <span class="name">{{html $x.Name}}</span>
+              </a>
+            </td>
+            {{- if $x.IsDir}}
+            <td data-order="-1">&mdash;</td>
+            {{- else}}
+            <td data-order="{{$x.Size}}">{{$x.HumanSize}}</td>
+            {{- end}}
+            <td class="hideable"><time datetime="{{$x.HumanModTime "2006-01-02T15:04:05Z"}}">{{$x.HumanModTime "01/02/2006 03:04:05 PM -07:00"}}</time></td>
+          </tr>
+          {{- end}}
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <footer>
+      beep <a rel="noopener noreferrer" href="#">boop</a>
+    </footer>
+    <script>
+      var filterEl = document.getElementById('filter');
+      filterEl.focus();
+
+      function init() {
+        if (!filterEl.value) {
+          var filterParam = new URL(window.location.href).searchParams.get('filter');
+          if (filterParam) {
+            filterEl.value = filterParam;
+          }
+        }
+        filter();
+        applyTheme();
+        document.onkeydown = handleKey;
+      }
+
+      function filter() {
+        var q = filterEl.value.trim().toLowerCase();
+        var elems = document.querySelectorAll('tr.file');
+        elems.forEach(function(el) {
+          if (!q) {
+            el.style.display = '';
+            return;
+          }
+          var nameEl = el.querySelector('.name');
+          var nameVal = nameEl.textContent.trim().toLowerCase();
+          if (nameVal.indexOf(q) !== -1) {
+            el.style.display = '';
+          } else {
+            el.style.display = 'none';
+          }
+        });
+      }
+
+      function localizeDatetime(e, index, ar) {
+        if (e.textContent === undefined) {
+          return;
+        }
+        var d = new Date(e.getAttribute('datetime'));
+        if (isNaN(d)) {
+          d = new Date(e.textContent);
+          if (isNaN(d)) {
+            return;
+          }
+        }
+        e.textContent = d.toLocaleString([], {day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit"});
+      }
+      var timeList = Array.prototype.slice.call(document.getElementsByTagName("time"));
+      timeList.forEach(localizeDatetime);
+    </script>
+  </body>
+</html>
