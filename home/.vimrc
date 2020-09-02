@@ -78,7 +78,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'junegunn/vim-peekaboo'
 Plugin 'jparise/vim-graphql'
 Plugin 'guns/xterm-color-table.vim'
-Plugin 'evanleck/vim-svelte'
+Plugin 'leafOfTree/vim-svelte-plugin'
 
 " Go
 Plugin 'fatih/vim-go'
@@ -113,8 +113,6 @@ Plugin 'bcicen/vim-vice'
 Plugin 'tpope/vim-fugitive'
 
 " Misc
-Plugin 'vektorlab/slackcat', {'rtp': 'contrib/vim-slackcat' }
-let g:slackcat_default_channel = "nam"
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-unimpaired'
 
