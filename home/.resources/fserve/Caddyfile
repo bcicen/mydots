@@ -1,5 +1,28 @@
-:80
-root * /srv/www
-file_server {
-  browse browse.tmpl
+{
+  http_port 80
+}
+
+(cors) {
+  @preflight method OPTIONS
+
+	header Access-Control-Allow-Origin "{header.origin}"
+	#header Access-Control-Allow-Origin "{args.0}"
+	header Access-Control-Request-Method "GET, POST, PUT, OPTIONS"
+  header Access-Control-Allow-Headers "Authorization, Accept, DNT, Keep-Alive, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type"
+  header Access-Control-Allow-Credentials "true"
+
+  header @preflight Content-Length 0
+  header @preflight Content-Type text/plain
+  respond @preflight 200
+}
+
+
+http://localhost {
+  import cors localhost
+	route /* {
+		root * /srv/www
+		file_server {
+			browse browse.tmpl
+		}
+	}
 }
