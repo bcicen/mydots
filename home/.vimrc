@@ -115,6 +115,7 @@ Plugin 'tpope/vim-fugitive'
 " Misc
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'isobit/vim-caddyfile'
 
 " TERRAFORM
 Plugin 'hashivim/vim-terraform'

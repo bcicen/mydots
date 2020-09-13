@@ -165,9 +165,11 @@ gh-gosearch() {
 pypi-publish() {
   pandoc README.md -o README.rst && \
   python setup.py sdist && \
-  python setup.py bdist_wheel --universal && \
+  python setup.py bdist && \
   twine upload dist/*
 }
+
+alias pyvenv='python -m venv'
 
 # open working repo ci jobs in browser
 glab-ci() {
