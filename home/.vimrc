@@ -81,12 +81,15 @@ Plugin 'guns/xterm-color-table.vim'
 Plugin 'leafOfTree/vim-svelte-plugin'
 
 " Go
+
 Plugin 'fatih/vim-go'
 "let g:go_debug = ['lsp']
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 "au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 au FileType go nmap <leader>gr <Plug>(go-run)
 
+let g:go_addtags_transform = 'snakecase'
+"let g:go_addtags_transform = 'camelcase'
 
 " Yaml
 Plugin 'lmeijvogel/vim-yaml-helper'
@@ -162,6 +165,16 @@ filetype plugin indent on
 syntax on
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 0
+let g:ycm_goto_buffer_command = 'split'
+let g:ycm_disable_for_files_larger_than_kb = 1400
+
+function! s:CustomizeYcmQuickFixWindow()
+  5wincmd _ " set quickfix window height
+endfunction
+
+autocmd User YcmQuickFixOpened call s:CustomizeYcmQuickFixWindow()
 
 " Custom filetype extensions
 au BufNewFile,BufRead *.geojson,*.jsonl set filetype=json
@@ -186,7 +199,6 @@ map <c-Down> <c-w>j
 map <c-Up> <c-w>k
 map <c-Right> <c-w>l
 map <c-Left> <c-w>h
-map <leader>j :RopeGotoDefinition<CR>
 map <Leader>w <Esc>:w<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>n :n<CR>
@@ -285,7 +297,7 @@ function! Flt_term_win(cmd, width, height, border_highlight) abort
             \ 'minheight': height,
             \ 'maxheight': height,
             \ 'border': [],
-            \ 'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
+            \ 'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰'],
             \ 'borderhighlight': [a:border_highlight],
             \ 'padding': [0,1,0,1],
             \ 'highlight': a:border_highlight
@@ -297,5 +309,4 @@ function! Flt_term_win(cmd, width, height, border_highlight) abort
     return winid
 endfunction
 
-nnoremap <silent> <leader>gz :call Flt_term_win('lazygit',0.9,0.6,'Todo')<CR>
-nnoremap <buffer> <silent> <C-w>] :<C-u>call go#def#Jump("vsplit", 0)<CR>:<C-u>call VResize(40)<CR>
+nnoremap <silent> <leader>gz :call Flt_term_win('lazygit',0.9,0.6,'clear')<CR>
