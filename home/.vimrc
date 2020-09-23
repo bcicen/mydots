@@ -310,3 +310,10 @@ function! Flt_term_win(cmd, width, height, border_highlight) abort
 endfunction
 
 nnoremap <silent> <leader>gz :call Flt_term_win('lazygit',0.9,0.6,'clear')<CR>
+
+nnoremap <leader>jd :rightbelow vertical YcmCompleter GoTo<CR>
+nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
+
+set previewpopup=highlight:PMenuSbar
+set completeopt+=popup
+set completepopup=border:on,highlight:PMenuSbar
