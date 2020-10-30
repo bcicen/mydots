@@ -83,17 +83,27 @@ Plugin 'leafOfTree/vim-svelte-plugin'
 " Go
 
 Plugin 'fatih/vim-go'
+
 "let g:go_debug = ['lsp']
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 "au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 au FileType go nmap <leader>gr <Plug>(go-run)
 
+autocmd FileType go let b:go_fmt_options = {
+  \ 'goimports': '-local "' .
+    \ trim(system('cd '. shellescape(expand('%:h')) .' && go list -m 2>/dev/null;')) . '"',
+  \ }
+
 let g:go_addtags_transform = 'snakecase'
 "let g:go_addtags_transform = 'camelcase'
+
 
 " Yaml
 Plugin 'lmeijvogel/vim-yaml-helper'
 let g:vim_yaml_helper#auto_display_path = 1
+
+" Makefile
+au FileType make set noexpandtab
 
 " Snippets
 Plugin 'SirVer/ultisnips'
@@ -169,6 +179,7 @@ let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 0
 let g:ycm_goto_buffer_command = 'split'
 let g:ycm_disable_for_files_larger_than_kb = 1400
+let g:ycm_auto_hover = ''
 
 function! s:CustomizeYcmQuickFixWindow()
   5wincmd _ " set quickfix window height
@@ -317,3 +328,25 @@ nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
 set previewpopup=highlight:PMenuSbar
 set completeopt+=popup
 set completepopup=border:on,highlight:PMenuSbar
+
+function! LabelPop(txt,offset) abort
+  let w = strlen(a:txt)
+  let col = strlen(getline('.')) + float2nr(w) + a:offset
+  let height = 1
+
+  let winid = popup_create(a:txt, {
+          \ 'line': line('.')-1,
+          \ 'col': col,
+          \ 'minwidth': 1,
+          \ 'maxwidth': 50,
+          \ 'minheight': height,
+          \ 'maxheight': height,
+          \ 'border': [],
+          \ 'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰'],
+          \ 'borderhighlight': ['clear'],
+          \ 'padding': [0,1,0,1],
+          \ 'highlight': 'clear'
+          \ })
+
+  return winid
+endfunction
