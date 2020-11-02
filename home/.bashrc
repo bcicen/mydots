@@ -96,6 +96,7 @@ dbuild() { docker build -t ${1-test} .; }
 alias flog="vim ${HOME}/work/notes/$(date +%m-%d-%Y).log"
 alias vundle_install="vim +PluginInstall +qall"
 vimp() { /usr/bin/vim -p $@; }
+vimu() { /usr/bin/vim -u NONE $@; }
 vimgo() { /usr/bin/vim -p $(find $@ -maxdepth 1 -iname "*.go" ! -iname "*_test.go"); }
 rgvim() { vim -p $(rgrep $@ | cut -f1 -d\: | uniq); }
 vimdir() {
@@ -164,8 +165,7 @@ gh-gosearch() {
 
 pypi-publish() {
   pandoc README.md -o README.rst && \
-  python setup.py sdist && \
-  python setup.py bdist && \
+  python setup.py sdist bdist_wheel && \
   twine upload dist/*
 }
 
