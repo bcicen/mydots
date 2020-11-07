@@ -362,6 +362,8 @@ def epoch2dt(ts, tz=None):
         dt = dt.astimezone(tz)
     return dt
 
+unicode2html = lambda s: f'&#{int(s, 16)};'
+
 if sys.argv[0].split('/')[-1] == '.pythonrc':
     if len(sys.argv) < 2:
         print('no function provided')
