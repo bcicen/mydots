@@ -90,6 +90,7 @@ alias docker-cleanup='docker rm -vf $(docker ps -a --format "{{.ID}}" --filter "
 alias stripws="sed -i.bak 's/[[:blank:]]*$//'"
 alias pbcopy='xsel --clipboard --input'
 alias drun='docker run --rm -ti'
+alias yaysss='yay -S --nodiffmenu --nocleanmenu --noeditmenu'
 dbuild() { docker build -t ${1-test} .; }
 
 #vim aliases
@@ -143,14 +144,28 @@ ragel2png() {
   ragel -Vp -M $fn $1 -o $t && dot $t -Tpng -o $out && _echoout "wrote $out"
 }
 
+__monbrite_ids=""
+
+_monbrite_probe() {
+  [[ -z "$__monbrite_ids" ]] || return 0
+  _echoerr "probing devices"
+  local ids=$(sudo ddccontrol -p 2> /dev/null | grep -B2 'LG Standard' | grep Device | cut -f2- -d\: | tr '\n' ' ')
+  local res=$?
+  _echoerr "found ids: $ids"
+  export __monbrite_ids="$ids"
+  return $res
+}
+
 monbrite() {
-  local id=$(sudo ddccontrol -p | grep -B2 'LG Standard' | head -1 | cut -f3 -d\/ 2> /dev/null)
-  _echoout "found id: $id"
-  [[ $# -eq 0 ]] && {
-    sudo ddccontrol -r 0x10 dev:/dev/${id} | tail -n +25
-    return
-  }
-  sudo ddccontrol -r 0x10 -w $1 dev:/dev/${id} | tail -n +25
+  _monbrite_probe || return
+  for id in $__monbrite_ids; do
+    echo -e "\n# $id"
+    [[ $# -eq 0 ]] && {
+      sudo ddccontrol -r 0x10 ${id} | tail -n +25
+    } || {
+      sudo ddccontrol -r 0x10 -w $1 ${id} | tail -n +25
+    }
+  done
 }
 
 monoff() { sleep 1; xset dpms force off; }
