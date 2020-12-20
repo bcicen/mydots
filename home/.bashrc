@@ -157,14 +157,14 @@ _monbrite_probe() {
 }
 
 monbrite() {
+  local opts=""
+  [[ -z "$1" ]] || opts+="-w $1"
+
   _monbrite_probe || return
+
   for id in $__monbrite_ids; do
     echo -e "\n# $id"
-    [[ $# -eq 0 ]] && {
-      sudo ddccontrol -r 0x10 ${id} | tail -n +25
-    } || {
-      sudo ddccontrol -r 0x10 -w $1 ${id} | tail -n +25
-    }
+    sudo ddccontrol -r 0x10 ${opts} ${id} | tail -n +25
   done
 }
 
@@ -434,7 +434,7 @@ cbar() {
 
 pbar() {
   (pgrep -x polybar) && { killall polybar; return; }
-  local args mon=$(xrandr | grep -e '^DP.* connected' | tail -1 | awk '{print $1}')
+  local args mon=$(xrandr | grep -e '^DP-1.* connected' | tail -1 | awk '{print $1}')
   [[ "$1" == "debug" ]] && args="-r -l info"
   MONITOR=$mon polybar $args main &
   MONITOR=$mon nohup polybar $args -c ~/.config/polybar/net net &
@@ -522,6 +522,8 @@ gorunloop() {
     wait
   done
 }
+
+bashman() { man bash | less -p "^       $1 "; }
 
 __ssh_hosts() {
   local hosts
