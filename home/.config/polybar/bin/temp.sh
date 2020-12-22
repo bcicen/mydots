@@ -7,7 +7,8 @@ MAX=80
   exit 1
 }
 
-t=$(($(</sys/class/thermal/thermal_zone${2}/temp) / 1000))
+t=$(($(</sys/class/hwmon/hwmon7/temp1_input) / 1000))
+#t=$(sensors coretemp-isa-0000 -u | grep temp1_input | cut -f2 -d\: | cut -f1 -d\.)
 
 case $1 in
   text) echo "${t}°C" ;;
