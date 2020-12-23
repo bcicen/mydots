@@ -346,6 +346,10 @@ class DictStats(dict):
                 self[k] = defaultdict(int)
             self[k][v] += 1
 
+def utc2local(dt: 'datetime.datetime') -> 'datetime.datetime':
+    import pytz
+    return pytz.utc.localize(dt).astimezone()
+
 def epoch2dt(ts, tz=None):
     # parse and return a datetime.datetime from a
     # unix timestamp

@@ -41,6 +41,11 @@ _clrRGB() {
   echo -ne "$(_rgb $r $g $b)$@${CLR_RST}"
 }
 
+_clrHex() {
+  local h=$1; shift
+  _clrRGB $(_hex2rgb $h) $@
+}
+
 _hex2rgb() {
   local h=${1,,} # lower
   h=${h#\#} # strip leading '#'
@@ -50,11 +55,6 @@ _hex2rgb() {
 }
 
 _rgb2hex() { printf '%x' $1 $2 $3; }
-
-_clrHex() {
-  local h=$1; shift
-  _clrRGB $(_hex2rgb $h) $@
-}
 
 _rgb() { echo -en "\033[38;2;${1};${2};${3}m"; }
 
