@@ -283,4 +283,3 @@ __reldate() {
 
   echo $s
 }
-
