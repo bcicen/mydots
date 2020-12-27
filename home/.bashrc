@@ -21,6 +21,11 @@ export KUBE_EDITOR=vim
 export KUBECONFIG=~/.kube/config:~/.kube/kind-config-kind
 export GPG_TTY=$(tty)
 
+# imibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+export GTK_IM_MODULE=ibus
+
 export NPM_PACKAGES="$HOME/.npm-packages"
 _pathadd ${NPM_PACKAGES}/bin
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
@@ -511,7 +516,3 @@ complete -W "$(__ssh_hosts)" scp
 complete -F _complete_alias drun
 
 source ~/.bashrcx
-
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
-export GTK_IM_MODULE=ibus
